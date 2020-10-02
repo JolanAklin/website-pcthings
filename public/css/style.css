@@ -39,8 +39,6 @@ body {
 	min-height: 100%;
 	margin: 0px;
 	word-break: break-word;
-	
-	/*background: linear-gradient(#004092, #020202, transparent), url("../images/IMG_5275.jpg") no-repeat center;*/
 }
 .can-grow {
 	flex-grow: 1000000000;
@@ -56,10 +54,13 @@ body {
 	height: auto;
 	background-size: cover;
 	background-position: left top;
+	overflow: hidden;
+	max-height: 50vh;
 }
 .background-image > img {
 	width: 100%;
 	height: 100%;
+	max-height: 50vh;
 }
 .page-title {
 	font-size: 3em;
