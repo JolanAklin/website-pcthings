@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | Pages
+PCThings | Blog
 {% endblock %}
 
 {% block pageTitle %}
-Pages
+Blog
 {% endblock %}
 
 {% block bgImage %}
@@ -30,9 +30,9 @@ Pages
 
 <div class="v-container all-width">
     {{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}
-    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a pages", postDescription: "I'm a pages description", postDate: "16.04.2020"}) }}
+    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a blog post", postDescription: "I'm a blog post description", postDate: "16.04.2020"}) }}
     {{ include('template_fragment/_splitter.html.twig', {splitterText: "A week ago"}) }}
-    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a pages", postDescription: "I'm a pages description", postDate: "16.04.2020"}) }}
+    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a blog post", postDescription: "I'm a blog post description", postDate: "16.04.2020"}) }}
     
 </div>
 {{ include('template_fragment/_search.html.twig') }}

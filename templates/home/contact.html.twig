@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | Pages
+PCThings | Contact
 {% endblock %}
 
 {% block pageTitle %}
-Pages
+Contact
 {% endblock %}
 
 {% block bgImage %}
@@ -25,17 +25,7 @@ Pages
 {% endblock %}
 
 {% block mainText %}
-{{ include('template_fragment/_search.html.twig') }}
-{{ include('template_fragment/_tag_filter.html.twig') }}
-
-<div class="v-container all-width">
-    {{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}
-    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a pages", postDescription: "I'm a pages description", postDate: "16.04.2020"}) }}
-    {{ include('template_fragment/_splitter.html.twig', {splitterText: "A week ago"}) }}
-    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a pages", postDescription: "I'm a pages description", postDate: "16.04.2020"}) }}
-    
-</div>
-{{ include('template_fragment/_search.html.twig') }}
+<p>some sort of contact</p>
 {% endblock %}
 
 {% block footer %}

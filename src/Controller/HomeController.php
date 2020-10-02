@@ -20,4 +20,18 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    public function Blog()
+    {
+        return $this->render('home/blog.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
+
+    public function Contact()
+    {
+        return $this->render('home/contact.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

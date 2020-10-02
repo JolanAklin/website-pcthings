@@ -11,6 +11,14 @@ pages:
     path: /pages
     controller: App\Controller\HomeController::pages
 
+blog:
+    path: /blog
+    controller: App\Controller\HomeController::blog
+
+contact:
+    path: /contact
+    controller: App\Controller\HomeController::contact
+
 #--------------------------------------------------
 # End of HomeController's routes
 #--------------------------------------------------

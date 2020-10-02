@@ -16,8 +16,7 @@
 			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
 			<button onclick="window.location.href='/pages';">Pages</button>
 			<button onclick="window.location.href='/blog';">Blog</button>
-			<button>button</button>
-			<button>Contact</button>
+			<button onclick="window.location.href='/contact';">Contact</button>
 		</nav>
 		<div class="background-image" style='background: linear-gradient(transparent, var(--color-lighter)), url({% block bgImage %}{% endblock %}) no-repeat center; background-size: cover; background-position: center;'>
 			<img src="{% block bgImageAff %}{% endblock %}" style="visibility: hidden;" />
