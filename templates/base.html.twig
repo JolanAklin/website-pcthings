@@ -3,10 +3,45 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+		<link rel="stylesheet" href="{{ asset("/css/style.css") }}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="image/png" href="./images/logo_small.png" />
+		<script src="./scripts/menus.js"></script>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+        <nav id="navBar">
+			<div id="website-title" onclick="window.location.href='/';"><img src="./images/logo_white.png"/></div>
+			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
+			<button onclick="window.location.href='/pages';">Post</button>
+			<button onclick="window.location.href='/blog';">Blog</button>
+			<button>button</button>
+			<button>Contact</button>
+		</nav>
+		<div class="background-image" style='background: linear-gradient(transparent, var(--color-lighter)), url({% block bgImage %}{% endblock %}) no-repeat center;'>
+			<img src="{% block bgImageAff %}{% endblock %}" style="visibility: hidden;" />
+		</div>
+		
+		<div class="h-container full-width wrap-reverse can-grow">
+			<div class="v-container w-xs font-medium white border h-auto p-10 m-top-30 child-p-v-5 left-container">
+				{% block sideNav %}{% endblock %}
+			</div>
+			<div class="main_container">
+				<div class="page-title">
+					{% block pageTitle %}{% endblock %}
+				</div>
+				<div class="main-text">
+                    {% block mainText %}{% endblock %}
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="h-container all-width">
+				{% block footer %}{% endblock %}
+			</div>
+		</footer>
+        
         {% block javascripts %}{% endblock %}
     </body>
 </html>

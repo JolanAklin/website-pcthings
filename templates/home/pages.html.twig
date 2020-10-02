@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+CMPTRThings | pages
+{% endblock %}
+
+{% block pageTitle %}
+Pages
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block sideNav %}
+<div class="font-medium font-bold">News</div>
+<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>fhéaséihe éabsédhféienéasasgfas fiohes</div><div>»</div></div>
+<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>Bring your old laptop back to life</div><div>»</div></div>
+<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>hello</div><div>»</div></div>
+<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>hello</div><div>»</div></div>
+<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>hello</div><div>»</div></div>
+{% endblock %}
+
+{% block mainText %}
+{{ include('template_fragment/_search.html.twig') }}
+{{ include('template_fragment/_tag_filter.html.twig') }}
+
+<div class="v-container all-width">
+    {{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}
+    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a post", postDescription: "I'm a post description", postDate: "16.04.2020"}) }}
+    {{ include('template_fragment/_splitter.html.twig', {splitterText: "A week ago"}) }}
+    {{ include('template_fragment/_post.html.twig', {postTitle: "I'm a post", postDescription: "I'm a post description", postDate: "16.04.2020"}) }}
+    
+</div>
+{{ include('template_fragment/_search.html.twig') }}
+{% endblock %}
+
+{% block footer %}
+<div class="v-container w-xl">
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+</div>
+<div class="v-container w-m">
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+</div>
+<div class="v-container w-m">
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+{% endblock %}
