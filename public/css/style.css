@@ -484,11 +484,14 @@ footer {
 .splitter :first-child {
 	width: auto;
 	color: var(--color-accent-darker);
+	white-space: nowrap;
 	word-break: keep-all;
 }
 .splitter :last-child {
 	height: 0px;
-	border-top: solid 1px var(--color-accent-darker);
+	padding-top: 3px;
+	display: inline;
+	border-bottom: solid 1px var(--color-accent-darker);
 	margin-left: 10px;
 }
 
