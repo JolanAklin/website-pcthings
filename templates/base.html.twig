@@ -5,14 +5,14 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 		<link rel="stylesheet" href="{{ asset("/css/style.css") }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="icon" type="image/png" href="./images/logo_small.png" />
+		<link rel="icon" type="image/png" href="{{ asset("images/logos/logo_pcthings_small.png") }}" />
 		<script src="{{ asset("scripts/menus.js") }}"></script>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
 
         <nav id="navBar">
-			<div id="website-title" onclick="window.location.href='/';"><img src="./images/logo_white.png"/></div>
+			<div id="website-title" onclick="window.location.href='/';"><img src="{{ asset("images/logos/logo_pcthings.png")}}"/></div>
 			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
 			<button onclick="window.location.href='/pages';">Pages</button>
 			<button onclick="window.location.href='/blog';">Blog</button>
