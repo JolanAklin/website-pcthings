@@ -1,3 +1,8 @@
+
+#--------------------------------------------------
+# Start of HomeController's routes
+#--------------------------------------------------
+
 index:
     path: /
     controller: App\Controller\HomeController::index
@@ -5,3 +10,7 @@ index:
 pages:
     path: /pages
     controller: App\Controller\HomeController::pages
+
+#--------------------------------------------------
+# End of HomeController's routes
+#--------------------------------------------------

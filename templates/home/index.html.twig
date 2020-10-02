@@ -17,11 +17,11 @@ Home
 
 {% block sideNav %}
 <div class="font-medium font-bold">News</div>
-<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>fhéaséihe éabsédhféienéasasgfas fiohes</div><div>»</div></div>
-<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>Bring your old laptop back to life</div><div>»</div></div>
-<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>hello</div><div>»</div></div>
-<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>hello</div><div>»</div></div>
-<div class="animated-link border-b" onclick="window.location.href='https://google.com';"><div>hello</div><div>»</div></div>
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "yaa"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "My super last post"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "Read this"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "symfony goes brrrr"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "yaa"}) }}
 {% endblock %}
 
 {% block mainText %}
