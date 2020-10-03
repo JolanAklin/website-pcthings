@@ -65,6 +65,11 @@ class User implements UserInterface
      */
     private $registrationDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Image::class)
+     */
+    private $blogImage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -211,6 +216,18 @@ class User implements UserInterface
     public function setRegistrationDate(?Date $registrationDate): self
     {
         $this->registrationDate = $registrationDate;
+
+        return $this;
+    }
+
+    public function getBlogImage(): ?Image
+    {
+        return $this->blogImage;
+    }
+
+    public function setBlogImage(?Image $blogImage): self
+    {
+        $this->blogImage = $blogImage;
 
         return $this;
     }
