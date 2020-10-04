@@ -22,3 +22,15 @@ contact:
 #--------------------------------------------------
 # End of HomeController's routes
 #--------------------------------------------------
+
+#--------------------------------------------------
+# Start of BlogController's routes
+#--------------------------------------------------
+
+user_blog:
+    path: /blog/user_blog
+    controller: App\Controller\BlogController::ShowBlog
+
+#--------------------------------------------------
+# End of BlogController's routes
+#--------------------------------------------------
