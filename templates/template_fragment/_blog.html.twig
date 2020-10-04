@@ -1,9 +1,9 @@
 <div class="blog-link" onclick="window.location.href='{{ 'blog/' ~ blogPostLink.getWriter.getUuid }}';">
-        <div class="blog-link-content">
-            <img src={{ asset(blogPostLink.getWriter.getProfilPic) }}>
-            <div>
-                <p>{{ blogPostLink.getWriter.getNickName }}'s blog</p>
-            </div>
+    <div class="blog-link-content">
+        <img src={{ asset(blogPostLink.getWriter.getProfilPic) }}>
+        <div>
+            <p>{{ blogPostLink.getWriter.getNickName }}'s blog</p>
         </div>
-        <div class="arrow">»</div>
     </div>
+    <div class="arrow">»</div>
+</div>
