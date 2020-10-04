@@ -21,14 +21,18 @@ class BlogPostRepository extends ServiceEntityRepository
 
     public function findByWriter($writer)
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.writer = :val')
-            ->setParameter('val', $writer)
-            ->orderBy('b.id', 'DESC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        try {
+            $writer = intval($writer);
+            return $this->createQueryBuilder('b')
+                ->andWhere('b.writer = :val')
+                ->setParameter('val', $writer)
+                ->orderBy('b.id', 'DESC')
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult();
+        } catch (\Throwable $th) {
+            die();
+        }
     }
 
     // /**
