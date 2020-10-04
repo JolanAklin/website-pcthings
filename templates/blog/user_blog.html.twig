@@ -25,14 +25,10 @@ Blog
 {% endblock %}
 
 {% block mainText %}
-{{ include('template_fragment/_search.html.twig') }}
-{{ include('template_fragment/_tag_filter.html.twig') }}
-
 <div class="v-container all-width">
-    {{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}
-    {{ include('template_fragment/_blog.html.twig', {blogLink: path('user_blog'), userProfilPic: asset("images/page_thumbnails/3boxes.jpg"), userNickName: "Jean"}) }}
+    {{ include('template_fragment/_blog_text.html.twig', {blogPostTitle: "wow", blogPostContent: "aisugfliasdlifhasld flksadhfk jahskljdh lsahgdfl asjdfjahdjf hasdhfg kajgkhakdhgkljaglhaslkdjhklsgluah alsg gliaw hgliuhslakd ghlas lghdjg hjdh kljas lg khals gaslgh lakshgli uaghrlau  glaskgh iWUEG LKASAL UHGAUZRIU GHLASKD GASIUL GI I UAHLI AHST U halisr lasuhluah srpithasl uhlaiuh iluat il", blogPostDate: "10.10.2020"}) }}
+    {{ include('template_fragment/_blog_text.html.twig', {blogPostTitle: "wow2", blogPostContent: "aisugfliasdlifhasld flksadhfk jahskljdh lsahgdfl asjdfjahdjf hasdhfg kajgkhakdhgkljaglhaslkdjhklsgluah alsg gliaw hgliuhslakd ghlas lghdjg hjdh kljas lg khals gaslgh lakshgli uaghrlau  glaskgh iWUEG LKASAL UHGAUZRIU GHLASKD GASIUL GI I UAHLI AHST U halisr lasuhluah srpithasl uhlaiuh iluat il", blogPostDate: "10.10.2020"}) }}
 </div>
-{{ include('template_fragment/_search.html.twig') }}
 {% endblock %}
 
 {% block footer %}
