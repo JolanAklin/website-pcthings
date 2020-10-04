@@ -29,8 +29,10 @@ Blog
 {{ include('template_fragment/_tag_filter.html.twig') }}
 
 <div class="v-container all-width">
+    {% for blogPostLink in blogPostLinks %}
+        {{ include('template_fragment/_blog.html.twig', {blogPostLink: blogPostLink}) }}
+    {% endfor %}
     {{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}
-    {{ include('template_fragment/_blog.html.twig', {blogLink: path('user_blog'), userProfilPic: asset("images/page_thumbnails/3boxes.jpg"), userNickName: "Jean"}) }}
 </div>
 {{ include('template_fragment/_search.html.twig') }}
 {% endblock %}

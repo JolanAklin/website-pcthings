@@ -19,6 +19,18 @@ class BlogPostRepository extends ServiceEntityRepository
         parent::__construct($registry, BlogPost::class);
     }
 
+    public function findByWriter($writer)
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.writer = :val')
+            ->setParameter('val', $writer)
+            ->orderBy('b.id', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return BlogPost[] Returns an array of BlogPost objects
     //  */

@@ -5,14 +5,14 @@ PCThings | Blog
 {% endblock %}
 
 {% block pageTitle %}
-Blog
+{{ user.getNickName }}'s Blog
 {% endblock %}
 
 {% block bgImage %}
-{{ asset("images/page_header/home_image_header.jpg")}}
+{{ asset(user.getBlogImage.getPath)}}
 {% endblock %}
 {% block bgImageAff %}
-{{ asset("images/page_header/home_image_header.jpg")}}
+{{ asset(user.getBlogImage.getPath)}}
 {% endblock %}
 
 {% block sideNav %}
@@ -26,8 +26,9 @@ Blog
 
 {% block mainText %}
 <div class="v-container all-width">
-    {{ include('template_fragment/_blog_text.html.twig', {blogPostTitle: "wow", blogPostContent: "aisugfliasdlifhasld flksadhfk jahskljdh lsahgdfl asjdfjahdjf hasdhfg kajgkhakdhgkljaglhaslkdjhklsgluah alsg gliaw hgliuhslakd ghlas lghdjg hjdh kljas lg khals gaslgh lakshgli uaghrlau  glaskgh iWUEG LKASAL UHGAUZRIU GHLASKD GASIUL GI I UAHLI AHST U halisr lasuhluah srpithasl uhlaiuh iluat il", blogPostDate: "10.10.2020"}) }}
-    {{ include('template_fragment/_blog_text.html.twig', {blogPostTitle: "wow2", blogPostContent: "aisugfliasdlifhasld flksadhfk jahskljdh lsahgdfl asjdfjahdjf hasdhfg kajgkhakdhgkljaglhaslkdjhklsgluah alsg gliaw hgliuhslakd ghlas lghdjg hjdh kljas lg khals gaslgh lakshgli uaghrlau  glaskgh iWUEG LKASAL UHGAUZRIU GHLASKD GASIUL GI I UAHLI AHST U halisr lasuhluah srpithasl uhlaiuh iluat il", blogPostDate: "10.10.2020"}) }}
+    {% for blogPost in blogPosts %}
+        {{ include('template_fragment/_blog_text.html.twig', {blogPost: blogPost}) }}
+    {% endfor %}
 </div>
 {% endblock %}
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BlogPost;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,8 +24,9 @@ class HomeController extends AbstractController
 
     public function Blog()
     {
+        $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findAll();
         return $this->render('home/blog.html.twig', [
-            'controller_name' => 'HomeController',
+            'blogPostLinks' => $blogPostLinks,
         ]);
     }
 
