@@ -425,6 +425,10 @@ footer {
 	cursor: default;
 	
 }
+.blog-link {
+	border: none;
+}
+
 .post-link .post-link-content, .blog-link .blog-link-content {
 	display: flex;
 	flex-direction: row;

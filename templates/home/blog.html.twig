@@ -29,10 +29,15 @@ Blog
 {{ include('template_fragment/_tag_filter.html.twig') }}
 
 <div class="v-container all-width">
-    {% for blogPostLink in blogPostLinks %}
-        {{ include('template_fragment/_blog.html.twig', {blogPostLink: blogPostLink}) }}
-    {% endfor %}
-    {{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}
+    {% if blogPostLinks|length > 0 %}
+        {% for blogPostLink in blogPostLinks %}
+            {{ include('template_fragment/_blog.html.twig', {blogPostLink: blogPostLink}) }}
+        {% endfor %}
+    {% else %}
+        <p>Nothing to show here.</p>
+    {% endif %}
+
+    {#{{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}#}
 </div>
 {{ include('template_fragment/_search.html.twig') }}
 {% endblock %}

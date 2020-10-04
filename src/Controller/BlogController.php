@@ -20,20 +20,25 @@ class BlogController extends AbstractController
 
     public function ShowBlog($useruuid)
     {
-        if($useruuid != -1)
-        {
-            $user = $this->getDoctrine()->getRepository(User::class)->findOneByUuid($useruuid);
-            if($user !== null)
+        try {
+            $useruuid = intval($useruuid);
+            if($useruuid != -1)
             {
-                $blogPosts = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriter($user->getId());
-                return $this->render('blog/user_blog.html.twig', [
-                    'user' => $user,
-                    'blogPosts' => $blogPosts,
-                ]);
-            }else
-            {
-                throw $this->createNotFoundException('The user does not exist');
+                $user = $this->getDoctrine()->getRepository(User::class)->findOneByUuid($useruuid);
+                if($user !== null)
+                {
+                    $blogPosts = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriter($user->getId());
+                    return $this->render('blog/user_blog.html.twig', [
+                        'user' => $user,
+                        'blogPosts' => $blogPosts,
+                    ]);
+                }else
+                {
+                    throw $this->createNotFoundException('The user does not exist');
+                }
             }
+        } catch (\Throwable $th) {
+            throw $this->createNotFoundException('The user does not exist');
         }
     }
 }
