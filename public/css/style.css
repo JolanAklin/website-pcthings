@@ -440,6 +440,7 @@ footer {
 .blog-link .blog-link-content > img {
 	height: 50px !important;
 	width: auto !important;
+	border-radius: 100%;
 }
 .post-link .post-link-content div, .blog-link .blog-link-content div {
 	padding-left: 10px;

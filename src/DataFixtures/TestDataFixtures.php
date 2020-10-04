@@ -31,7 +31,7 @@ class TestDataFixtures extends Fixture
         $image = new Image();
         $image->setTitle("a nice image");
         $image->setAlt("alt of a nice image");
-        $image->setPath("/images/pages_header/home_image_header.jpg");
+        $image->setPath("/images/page_header/_MG_9008-1.jpg");
 
         $manager->persist($image);
         
@@ -48,7 +48,7 @@ class TestDataFixtures extends Fixture
         $user->setUuid("10");
         $user->setBlogImage($image);
         $user->setRegistrationDate($date);
-        $user->setProfilPic("/images/profile_pictures/profile_pic_jean");
+        $user->setProfilPic("/images/profile_pictures/profile_pic_jean.jpg");
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
