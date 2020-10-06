@@ -56,11 +56,29 @@ class TestDataFixtures extends Fixture
 
         $manager->persist($user);
 
+        $user1 = new User();
+        $user1->setFirstName("Jack");
+        $user1->setLastName("Skdj");
+        $user1->setUsername("Jacky");
+        $user1->setEmail("jack@skdj.com");
+        $user1->setBlogImage($image);
+        $user1->setRegistrationDate($date);
+        $user1->setProfilPic("/images/profile_pictures/jack_profile_pic.jpg");
+        $user1->setRoles(['ROLE_USER']);
+        $user1->setPassword($this->passwordEncoder->encodePassword(
+            $user1,
+            'abcd'
+        ));
+
+        $manager->persist($user1);
+
 
         $category = new Category();
         $category->setName("dev");
-
         $manager->persist($category);
+        $category1 = new Category();
+        $category1->setName("web");
+        $manager->persist($category1);
 
         $article = new Article();
         $article->setTitle("FileTeleport");
@@ -78,6 +96,24 @@ class TestDataFixtures extends Fixture
         $blogPost->setContent("saudfhésahdflsah lkjahslfk ghaskljdhhflkasfhas lgklasjhf kljashdkjkldfksdgkas hk jhsakldgfl hgaslkjdhiu lsa HDGJAHSG AJSDHGKSHF LK FHALIUSDGLASHDLFGASLIUHGLU lsaudfg liazsdfiu salifdh iuasdfilus aliuahsghlsiau hkjldsahgl uhsag kjashdg lukhasidlfia8ztrh ashglizas uhlksadfklu");
         $blogPost->setWriter($user);
         $blogPost->setCategory($category);
+        $blogPost->setPublicationDate($date);
+
+        $manager->persist($blogPost);
+
+        $blogPost = new BlogPost();
+        $blogPost->setTitle("talking about web");
+        $blogPost->setContent("uahslfh lasjdhf lkajhdgkl askjldhlka f ljadfasgd flasjhdfjgsjfgadfhasdf kbsdblkas gb safd jahsd kjsaf ajskdfh luuash iuhaéhgaslkghlasuh gljasdjfshfgjlsdldfg lkdsj lkaslasj glas ghlask hah");
+        $blogPost->setWriter($user);
+        $blogPost->setCategory($category1);
+        $blogPost->setPublicationDate($date);
+
+        $manager->persist($blogPost);
+
+        $blogPost = new BlogPost();
+        $blogPost->setTitle("web");
+        $blogPost->setContent("asdfgasgf asdf sadf as fasgasdg adsg uahslfh lasjdhf lkajhdgkl askjldhlka f ljadfasgd flasjhdfjgsjfgadfhasdf kbsdblkas gb safd jahsd kjsaf ajskdfh luuash iuhaéhgaslkghlasuh gljasdjfshfgjlsdldfg lkdsj lkaslasj glas ghlask hah");
+        $blogPost->setWriter($user1);
+        $blogPost->setCategory($category1);
         $blogPost->setPublicationDate($date);
 
         $manager->persist($blogPost);
