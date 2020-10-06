@@ -43,9 +43,8 @@ class TestDataFixtures extends Fixture
         $user = new User();
         $user->setFirstName("Jean");
         $user->setLastName("DuPont");
-        $user->setNickName("jeanDu");
+        $user->setUsername("jeanDu");
         $user->setEmail("jean@mail.com");
-        $user->setUuid("10");
         $user->setBlogImage($image);
         $user->setRegistrationDate($date);
         $user->setProfilPic("/images/profile_pictures/profile_pic_jean.jpg");

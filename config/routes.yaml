@@ -28,12 +28,10 @@ contact:
 #--------------------------------------------------
 
 user_blog:
-    path: /blog/{useruuid}
+    path: /blog/{username}
     controller: App\Controller\BlogController::ShowBlog
     defaults:
-        useruuid: -1
-    requirements:
-        useruuid: '\d+'
+        username: ""
 
 #--------------------------------------------------
 # End of BlogController's routes
