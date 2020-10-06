@@ -21,7 +21,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $uuid;
+    private $username;
 
     /**
      * @ORM\Column(type="json")
@@ -35,17 +35,17 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=100)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=100)
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=255)
      */
     private $email;
 
@@ -55,11 +55,6 @@ class User implements UserInterface
     private $profilPic;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $nickName;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Date::class)
      * @ORM\JoinColumn(nullable=false)
      */
@@ -67,24 +62,13 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Image::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $blogImage;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUuid(): ?string
-    {
-        return $this->uuid;
-    }
-
-    public function setUuid(string $uuid): self
-    {
-        $this->uuid = $uuid;
-
-        return $this;
     }
 
     /**
@@ -94,7 +78,14 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->uuid;
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -192,18 +183,6 @@ class User implements UserInterface
     public function setProfilPic(string $profilPic): self
     {
         $this->profilPic = $profilPic;
-
-        return $this;
-    }
-
-    public function getNickName(): ?string
-    {
-        return $this->nickName;
-    }
-
-    public function setNickName(string $nickName): self
-    {
-        $this->nickName = $nickName;
 
         return $this;
     }

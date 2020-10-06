@@ -18,13 +18,13 @@ class BlogController extends AbstractController
         ]);
     }
 
-    public function ShowBlog($useruuid)
+    public function ShowBlog($username)
     {
         try {
-            $useruuid = intval($useruuid);
-            if($useruuid != -1)
+            $username = filter_var($username, FILTER_SANITIZE_STRING);
+            if($username != "")
             {
-                $user = $this->getDoctrine()->getRepository(User::class)->findOneByUuid($useruuid);
+                $user = $this->getDoctrine()->getRepository(User::class)->findOneByUserName($username);
                 if($user !== null)
                 {
                     $blogPosts = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriter($user->getId());
