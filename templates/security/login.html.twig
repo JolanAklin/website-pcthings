@@ -33,7 +33,10 @@ Log in!
         </div>
     {% else %}
         <h1>Please sign in</h1>
-        <div class="h-container justify-start">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <div class="h-container">
             <div class="v-container w-xl">
                 <label for="inputUsername">Username</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="input" required autofocus>
@@ -54,8 +57,12 @@ Log in!
             See https://symfony.com/doc/current/security/remember_me.html
         #}
             <div class="">
-                <label>
+                <!--<label>
                     <input type="checkbox" name="_remember_me"> Remember me
+                </label>-->
+                <label class="toggle">Remember me
+                    <input type="checkbox" checked="checked" name="_remember_me">
+                    <span class="checkmark"></span>
                 </label>
             </div>
         
@@ -65,11 +72,9 @@ Log in!
         </button>
     {% endif %}
 
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
 </form>
+
 {% endblock %}
 
 {% block footer %}
