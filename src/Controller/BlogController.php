@@ -22,7 +22,7 @@ class BlogController extends AbstractController
     {
         try {
             $username = filter_var($username, FILTER_SANITIZE_STRING);
-            if($username != "")
+            if($username != "" && $username !== null && $username !== false)
             {
                 $user = $this->getDoctrine()->getRepository(User::class)->findOneByUserName($username);
                 if($user !== null)

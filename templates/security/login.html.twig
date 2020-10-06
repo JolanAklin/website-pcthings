@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Log in
+{% endblock %}
+
+{% block pageTitle %}
+Log in!
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block sideNav %}
+<div class="font-medium font-bold">News</div>
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "yaa"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "My super last post"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "Read this"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "symfony goes brrrr"}) }}
+{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "yaa"}) }}
+{% endblock %}
+
+{% block mainText %}
+<form method="post">
+
+    {% if app.user %}
+        <div>
+            <p>You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a></p>
+        </div>
+    {% else %}
+        <h1>Please sign in</h1>
+        <div class="h-container justify-start">
+            <div class="v-container w-xl">
+                <label for="inputUsername">Username</label>
+                <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="input" required autofocus>
+            </div>
+            <div class="v-container w-xl">
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="input" required>
+            </div>
+        </div>
+
+
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+        #}
+            <div class="">
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
+            </div>
+        
+
+        <button class="btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+</form>
+{% endblock %}
+
+{% block footer %}
+<div class="v-container w-xl">
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+</div>
+<div class="v-container w-m">
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+</div>
+<div class="v-container w-m">
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+    <div>hi</div>
+{% endblock %}

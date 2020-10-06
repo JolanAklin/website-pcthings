@@ -17,6 +17,9 @@
 			<button onclick="window.location.href='/pages';">Pages</button>
 			<button onclick="window.location.href='/blog';">Blog</button>
 			<button onclick="window.location.href='/contact';">Contact</button>
+			{% if app.user %}
+				<img src="{{ asset(app.user.getProfilPic) }}" class="profile-button" onclick="window.location.href='/login';"></img>
+			{% endif %}
 		</nav>
 		<div class="background-image" style='background: linear-gradient(transparent, var(--color-lighter)), url({% block bgImage %}{% endblock %}) no-repeat center; background-size: cover; background-position: center;'>
 			<img src="{% block bgImageAff %}{% endblock %}" style="visibility: hidden;" />
