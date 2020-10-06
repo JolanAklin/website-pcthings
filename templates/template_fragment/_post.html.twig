@@ -1,11 +1,11 @@
-<div class="post-link" onclick="window.location.href='{{ postLink}}';">
+<div class="post-link" onclick="window.location.href='/pages/{{page.getId}}';">
         <div class="post-link-content">
-            <img src={{ postImage }}>
+            <img src={{ page.getHeaderImage.getPath }} alt={{page.getHeaderImage.getAlt}}>
             <div>
-                <p>{{ postTitle }}</p>
-                <p>{{ postDescription }}</p>
+                <p>{{ page.getTitle }}</p>
+                <p>{{ page.getDescription }}</p>
             </div>
-            <p>{{ postDate }}</p>
+            <p>{{ page.getPublicationDate.getDate|date("d/m/Y")}}</p>
         </div>
         <div class="arrow">»</div>
     </div>

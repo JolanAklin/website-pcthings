@@ -1,8 +1,7 @@
+--- #--------------------------------------------------
 
 #--------------------------------------------------
 # Start of HomeController's routes
-#--------------------------------------------------
-
 index:
     path: /
     controller: App\Controller\HomeController::index
@@ -32,7 +31,20 @@ user_blog:
     controller: App\Controller\BlogController::ShowBlog
     defaults:
         username: ""
-
 #--------------------------------------------------
 # End of BlogController's routes
+#--------------------------------------------------
+
+#--------------------------------------------------
+# Start of ArticleController's routes
+#--------------------------------------------------
+page:
+    path: /pages/{id}
+    controller: App\Controller\ArticleController::showPage
+    defaults:
+        id: 0
+    requirements:
+        id: '\d+'
+#--------------------------------------------------
+# End of ArticleControllers routes
 #--------------------------------------------------

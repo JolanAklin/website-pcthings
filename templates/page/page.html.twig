@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | Pages
+PCThings | Page
 {% endblock %}
 
-{% block pageTitle %}
-Pages
+{# {% block pageTitle %}
+{{ user.getUsername }}'s Blog
 {% endblock %}
 
 {% block bgImage %}
-{{ asset("images/page_header/home_image_header.jpg")}}
+{{ asset(user.getBlogImage.getPath)}}
 {% endblock %}
 {% block bgImageAff %}
-{{ asset("images/page_header/home_image_header.jpg")}}
-{% endblock %}
+{{ asset(user.getBlogImage.getPath)}}
+{% endblock %} #}
 
 {% block sideNav %}
 <div class="font-medium font-bold">News</div>
@@ -25,20 +25,9 @@ Pages
 {% endblock %}
 
 {% block mainText %}
-{{ include('template_fragment/_search.html.twig') }}
-{{ include('template_fragment/_tag_filter.html.twig') }}
-
 <div class="v-container all-width">
-    {% if pages|length > 0 %}
-        {% for page in pages %}
-            {{ include('template_fragment/_post.html.twig', {'page': page}) }}
-        {% endfor %}
-    {% else %}
-        <p>Nothing to show here.</p>
-    {% endif %}
-    
+        {{ include('template_fragment/_page_text.html.twig', {post: page}) }}
 </div>
-{{ include('template_fragment/_search.html.twig') }}
 {% endblock %}
 
 {% block footer %}

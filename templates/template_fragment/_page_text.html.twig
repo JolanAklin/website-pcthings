@@ -1,0 +1,13 @@
+<div class="blog-post">
+    <div>
+        <div class="blog-post-title">
+            {{ post.getTitle}}
+        </div>
+        <div class="blog-post-content">
+            {{ post.getContent }}
+        </div>
+        <div class="blog-post-date">
+            {{ post.getPublicationDate.getDate|date("d/m/Y") }}
+        </div>
+    </div>
+</div>
