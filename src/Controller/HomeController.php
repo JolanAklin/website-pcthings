@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\BlogPost;
-use App\Entity\User;
+use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,8 +18,9 @@ class HomeController extends AbstractController
 
     public function Pages()
     {
+        $pages = $this->getDoctrine()->getRepository(Article::class)->findAll();
         return $this->render('home/pages.html.twig', [
-            'controller_name' => 'HomeController',
+            'pages' => $pages,
         ]);
     }
 

@@ -83,11 +83,12 @@ class TestDataFixtures extends Fixture
         $article = new Article();
         $article->setTitle("FileTeleport");
         $article->setDescription("a super file transfer app");
-        $article->setContent("éoasirfhasuhilah ilhasli hliuahgl hdklfghlka shglkahrgéuhaiuhg filuahlt guhahligéuaegirué hailuhgkashdlk ahigrhkajhl haliutziahgfiuahsdkfljat liueaiuas liutwililashl ghaliu rt gliasgluashlti uéoi aligliuaséitz alghliueargliushdgkhsep8rtzh egrhlise rt");
+        $article->setContent("<h1>New Update</h1><p>éoasirfhasuhilah ilhasli hliuahgl hdklfghlka shglkahrgéuhaiuhg filuahlt guhahligéuaegiruésa hkjahskljg haklsjdhgklasjd fég hklahd klhaséjgh éaerh édjfhj ahkl hakjgh lahgiwhrpiu airghaskljgh lka gasfg fégo iargh lkdjsghoezgoiàser géodsfgeshé jghsgkhésjhgg éjsdfhgkljshroptz hjfglduertusdfglkjsdfklgjbsldkfghiuhtéph eurtp98t hliuer gsdg jsrlti hsldifis r0ehgoisdfgohsdig lirgihsdf hglksjrg iushdg sdh</p><p>hailuhgkashdlk ahigrhkajhl haliutziahgfiuahsdkfljat liueaiuas liutwililashl ghaliu rt</p><a href='https://github.com/JolanAklin/FileTeleporter' target='_blank'>fileteport</a><p>gliasgluashlti uéoi aligliuaséitz alghliueargliushdgkhsep8rtzh egrhlise rt</p>");
         $article->setHeaderImage($image);
         $article->setPublicationDate($date);
         $article->setCategory($category);
         $article->setWriter($user);
+        $article->setThumbnail($image);
 
         $manager->persist($article);
 

@@ -11,13 +11,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends AbstractController
 {
-    public function index()
-    {
-        return $this->render('blog/index.html.twig', [
-            'controller_name' => 'BlogController',
-        ]);
-    }
-
     public function ShowBlog($username)
     {
         try {

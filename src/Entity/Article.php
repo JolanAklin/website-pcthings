@@ -56,6 +56,12 @@ class Article
      */
     private $writer;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Image::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $thumbnail;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -141,6 +147,18 @@ class Article
     public function setWriter(?User $writer): self
     {
         $this->writer = $writer;
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?Image
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?Image $thumbnail): self
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

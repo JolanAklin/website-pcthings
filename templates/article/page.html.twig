@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | Pages
+PCThings | {{ page.getTitle }}
 {% endblock %}
 
 {% block pageTitle %}
-Pages
+{{ page.getTitle }}
 {% endblock %}
 
 {% block bgImage %}
-{{ asset("images/page_header/home_image_header.jpg")}}
+{{ asset(page.getHeaderImage.getPath)}}
 {% endblock %}
 {% block bgImageAff %}
-{{ asset("images/page_header/home_image_header.jpg")}}
-{% endblock %}
+{{ asset(page.getHeaderImage.getPath)}}
+{% endblock %} 
 
 {% block sideNav %}
 <div class="font-medium font-bold">News</div>
@@ -25,20 +25,15 @@ Pages
 {% endblock %}
 
 {% block mainText %}
-{{ include('template_fragment/_search.html.twig') }}
-{{ include('template_fragment/_tag_filter.html.twig') }}
-
-<div class="v-container all-width">
-    {% if pages|length > 0 %}
-        {% for page in pages %}
-            {{ include('template_fragment/_post.html.twig', {'page': page}) }}
-        {% endfor %}
-    {% else %}
-        <p>Nothing to show here.</p>
-    {% endif %}
-    
+<div class="info">
+    <div class="writer">
+        <img src="{{ page.getWriter.getProfilPic }}">
+        <div>{{ page.getWriter.getUsername }}</div>
+    </div>
+    <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>
+    <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
 </div>
-{{ include('template_fragment/_search.html.twig') }}
+{{ page.getContent|raw }}
 {% endblock %}
 
 {% block footer %}
@@ -62,4 +57,5 @@ Pages
     <div>hi</div>
     <div>hi</div>
     <div>hi</div>
+</div>
 {% endblock %}

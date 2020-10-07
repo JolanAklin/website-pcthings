@@ -719,13 +719,38 @@ form {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+.info {
+	display: flex;
+	flex-direction: row;
+	word-break: normal;
+	width: auto;
+	justify-content: flex-end;
+	align-items: center;
+}
+.info *:not(img):not(a):not(.writer) {
+	width: auto !important;
+	padding-right: 10px;
+	font-size: 0.7em;
+}
+.info > .writer {
+	display: flex;
+	flex-direction: row;
+	word-break: normal;
+	width: auto;
+	justify-content: flex-end;
+	align-items: center;
+	margin-right: auto;
+}
+.info > .writer > img {
+	height: 2.2em;
+	margin-right: 10px;
+	border-radius: 50%;
+	width: auto;
+}
 
 .blog-post>div :nth-child(3) {
 	padding-left: 10px;
 	align-self: flex-end;
-	font-size: 0.7em;
-	word-break: normal;
-	width: auto;
 }
 
 .splitter {

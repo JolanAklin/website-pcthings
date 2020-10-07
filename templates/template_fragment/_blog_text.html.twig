@@ -6,8 +6,9 @@
         <div class="blog-post-content">
             {{ blogPost.getContent }}
         </div>
-        <div class="blog-post-date">
-            {{ blogPost.getPublicationDate.getDate|date("d/m/Y") }}
+        <div class="info">
+            <div>Category: <a src="#">{{ blogPost.getCategory.getName}}</a></div>
+            <div>{{ blogPost.getPublicationDate.getDate|date("d/m/Y") }}</div>
         </div>
     </div>
 </div>
