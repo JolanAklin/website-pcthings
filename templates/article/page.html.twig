@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | Page
+PCThings | {{ page.getTitle }}
 {% endblock %}
 
-{# {% block pageTitle %}
-{{ user.getUsername }}'s Blog
+{% block pageTitle %}
+{{ page.getTitle }}
 {% endblock %}
 
 {% block bgImage %}
-{{ asset(user.getBlogImage.getPath)}}
+{{ asset(page.getHeaderImage.getPath)}}
 {% endblock %}
 {% block bgImageAff %}
-{{ asset(user.getBlogImage.getPath)}}
-{% endblock %} #}
+{{ asset(page.getHeaderImage.getPath)}}
+{% endblock %} 
 
 {% block sideNav %}
 <div class="font-medium font-bold">News</div>
@@ -25,8 +25,10 @@ PCThings | Page
 {% endblock %}
 
 {% block mainText %}
-<div class="v-container all-width">
-        {{ include('template_fragment/_page_text.html.twig', {post: page}) }}
+{{ page.getContent|raw }}
+<div class="info">
+    <a src="#">{{ page.getCategory.getName }}</a>
+    <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
 </div>
 {% endblock %}
 
@@ -51,4 +53,5 @@ PCThings | Page
     <div>hi</div>
     <div>hi</div>
     <div>hi</div>
+</div>
 {% endblock %}

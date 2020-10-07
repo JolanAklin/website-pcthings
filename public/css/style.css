@@ -719,13 +719,21 @@ form {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-
-.blog-post>div :nth-child(3) {
-	padding-left: 10px;
-	align-self: flex-end;
+.info {
+	display: flex;
+	flex-direction: row;
 	font-size: 0.7em;
 	word-break: normal;
 	width: auto;
+	justify-content: flex-end;
+}
+.info * {
+	width: auto !important;
+	padding-right: 10px;
+}
+.blog-post>div :nth-child(3) {
+	padding-left: 10px;
+	align-self: flex-end;
 }
 
 .splitter {
