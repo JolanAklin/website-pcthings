@@ -19,6 +19,24 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function findOneByPathTitle($value): ?Article
+    {
+        try {
+            $value = filter_var($value, FILTER_SANITIZE_STRING);
+            if($value != "" && $value !== null && $value !== false)
+            {
+                return $this->createQueryBuilder('a')
+                    ->andWhere('a.pathTitle = :val')
+                    ->setParameter('val', $value)
+                    ->getQuery()
+                    ->getOneOrNullResult()
+                ;
+            }
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

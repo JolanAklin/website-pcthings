@@ -8,12 +8,12 @@ use App\Entity\Article;
 
 class ArticleController extends AbstractController
 {
-    public function showPage($id)
+    public function showPage($pathTitle)
     {
         try {
-            $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
-            if ($id != 0 && $id !== null && $id !== false) {
-                $page = $this->getDoctrine()->getRepository(Article::class)->find($id);
+            $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
+            if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
+                $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
                 if ($page !== null) {
                     return $this->render('article/page.html.twig', [
                         'page' => $page
