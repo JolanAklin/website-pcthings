@@ -1,8 +1,8 @@
-<div class="blog-link" onclick="window.location.href='{{ 'blog/' ~ blogPostLink.getWriter.getUsername }}';">
+<div class="blog-link" onclick="window.location.href='{{ 'blog/' ~ blogPostLink.username }}';">
     <div class="blog-link-content">
-        <img src={{ asset(blogPostLink.getWriter.getProfilPic) }}>
+        <img src={{ asset(blogPostLink.profilPic) }}>
         <div>
-            <p>{{ blogPostLink.getWriter.getUsername }}'s blog</p>
+            <p>{{ blogPostLink.username }}'s blog</p>
         </div>
     </div>
     <div class="arrow">»</div>

@@ -34,6 +34,23 @@ class BlogPostRepository extends ServiceEntityRepository
             die();
         }
     }
+    
+    public function findByWriterJoined()
+    {
+        try {
+            $entityManager = $this->getEntityManager();
+            $query = $entityManager->createQueryBuilder()
+                ->select('u.username, u.profilPic')
+                ->from('App\Entity\BlogPost','b')
+                ->innerJoin('App\Entity\User', 'u')
+                ->groupBy('u.id')
+                ->orderBy('u.username','ASC')
+                ->getQuery();
+            return $query->getResult();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
 
     // /**
     //  * @return BlogPost[] Returns an array of BlogPost objects
