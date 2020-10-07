@@ -26,7 +26,7 @@ class HomeController extends AbstractController
 
     public function Blog()
     {
-        $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findAll();
+        $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriterJoined();
         return $this->render('home/blog.html.twig', [
             'blogPostLinks' => $blogPostLinks,
         ]);
