@@ -34,6 +34,13 @@ class TestDataFixtures extends Fixture
         $image->setPath("/images/page_header/_MG_9008-1.jpg");
 
         $manager->persist($image);
+
+        $image1 = new Image();
+        $image1->setTitle("a nice image");
+        $image1->setAlt("alt of a nice image");
+        $image1->setPath("/images/page_thumbnails/3boxes.jpg");
+
+        $manager->persist($image1);
         
         $date = new Date();
         $date->setDate(new \DateTime());
@@ -88,7 +95,7 @@ class TestDataFixtures extends Fixture
         $article->setPublicationDate($date);
         $article->setCategory($category);
         $article->setWriter($user);
-        $article->setThumbnail($image);
+        $article->setThumbnail($image1);
 
         $manager->persist($article);
 
