@@ -62,6 +62,11 @@ class Article
      */
     private $thumbnail;
 
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $pathTitle;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -159,6 +164,18 @@ class Article
     public function setThumbnail(?Image $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getPathTitle(): ?string
+    {
+        return $this->pathTitle;
+    }
+
+    public function setPathTitle(string $pathTitle): self
+    {
+        $this->pathTitle = $pathTitle;
 
         return $this;
     }

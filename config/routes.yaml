@@ -39,12 +39,8 @@ user_blog:
 # Start of ArticleController's routes
 #--------------------------------------------------
 page:
-    path: /pages/{id}
+    path: /pages/{pathTitle}
     controller: App\Controller\ArticleController::showPage
-    defaults:
-        id: 0
-    requirements:
-        id: '\d+'
 #--------------------------------------------------
 # End of ArticleControllers routes
 #--------------------------------------------------

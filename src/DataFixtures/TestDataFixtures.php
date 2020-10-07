@@ -96,6 +96,7 @@ class TestDataFixtures extends Fixture
         $article->setCategory($category);
         $article->setWriter($user);
         $article->setThumbnail($image1);
+        $article->setPathTitle("new-fileteleport-update");
 
         $manager->persist($article);
 

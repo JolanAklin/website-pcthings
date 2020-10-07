@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20201007073633 extends AbstractMigration
+final class Version20201007090252 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,7 +20,7 @@ final class Version20201007073633 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE article (id INT AUTO_INCREMENT NOT NULL, publication_date_id INT NOT NULL, category_id INT NOT NULL, header_image_id INT NOT NULL, writer_id INT NOT NULL, thumbnail_id INT NOT NULL, title VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, INDEX IDX_23A0E66B01EE057 (publication_date_id), INDEX IDX_23A0E6612469DE2 (category_id), INDEX IDX_23A0E668C782417 (header_image_id), INDEX IDX_23A0E661BC7E6B6 (writer_id), INDEX IDX_23A0E66FDFF2E92 (thumbnail_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE article (id INT AUTO_INCREMENT NOT NULL, publication_date_id INT NOT NULL, category_id INT NOT NULL, header_image_id INT NOT NULL, writer_id INT NOT NULL, thumbnail_id INT NOT NULL, title VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, path_title VARCHAR(180) NOT NULL, UNIQUE INDEX UNIQ_23A0E66DE54D0B5 (path_title), INDEX IDX_23A0E66B01EE057 (publication_date_id), INDEX IDX_23A0E6612469DE2 (category_id), INDEX IDX_23A0E668C782417 (header_image_id), INDEX IDX_23A0E661BC7E6B6 (writer_id), INDEX IDX_23A0E66FDFF2E92 (thumbnail_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE blog_post (id INT AUTO_INCREMENT NOT NULL, publication_date_id INT NOT NULL, category_id INT NOT NULL, writer_id INT NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, INDEX IDX_BA5AE01DB01EE057 (publication_date_id), INDEX IDX_BA5AE01D12469DE2 (category_id), INDEX IDX_BA5AE01D1BC7E6B6 (writer_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE date (id INT AUTO_INCREMENT NOT NULL, date DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
