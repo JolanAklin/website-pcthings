@@ -25,11 +25,15 @@ PCThings | {{ page.getTitle }}
 {% endblock %}
 
 {% block mainText %}
-{{ page.getContent|raw }}
 <div class="info">
-    <a src="#">{{ page.getCategory.getName }}</a>
+    <div class="writer">
+        <img src="{{ page.getWriter.getProfilPic }}">
+        <div>{{ page.getWriter.getUsername }}</div>
+    </div>
+    <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>
     <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
 </div>
+{{ page.getContent|raw }}
 {% endblock %}
 
 {% block footer %}
