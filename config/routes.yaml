@@ -1,7 +1,7 @@
---- #--------------------------------------------------
 
 #--------------------------------------------------
 # Start of HomeController's routes
+#--------------------------------------------------
 index:
     path: /
     controller: App\Controller\HomeController::index
