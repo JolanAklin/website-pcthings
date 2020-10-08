@@ -61,7 +61,7 @@ class BlogPostRepository extends ServiceEntityRepository
                 INNER JOIN date ON date.id = publication_date_id
                 INNER JOIN user ON user.id = writer_id
                 ORDER BY date.date DESC
-                LIMIT 10
+                LIMIT 5
                 ';
             $stmt = $conn->prepare($sql);
             $stmt->execute([]);

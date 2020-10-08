@@ -14,6 +14,7 @@ class HomeController extends AbstractController
     {
         return $this->render('home/index.html.twig', [
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 
