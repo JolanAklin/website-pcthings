@@ -15,15 +15,6 @@ Pages
 {{ asset("images/page_header/home_image_header.jpg")}}
 {% endblock %}
 
-{% block sideNav %}
-<div class="font-medium font-bold">News</div>
-{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "yaa"}) }}
-{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "My super last post"}) }}
-{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "Read this"}) }}
-{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "symfony goes brrrr"}) }}
-{{ include('template_fragment/_side_nav_entry.html.twig', {destination: "https://symfony.com/", linkName: "yaa"}) }}
-{% endblock %}
-
 {% block mainText %}
 {{ include('template_fragment/_search.html.twig') }}
 {{ include('template_fragment/_tag_filter.html.twig') }}

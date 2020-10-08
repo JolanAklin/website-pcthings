@@ -24,6 +24,7 @@ class BlogController extends AbstractController
                     return $this->render('blog/user_blog.html.twig', [
                         'user' => $user,
                         'blogPosts' => $blogPosts,
+                        'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
                     ]);
                 }else
                 {

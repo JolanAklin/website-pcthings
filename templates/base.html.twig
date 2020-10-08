@@ -26,7 +26,12 @@
 		</div>
 		<div class="h-container full-width wrap-reverse can-grow padding-nav">
 			<div class="v-container w-xs font-medium white border h-auto p-10 m-top-30 child-p-v-5 left-container">
-				{% block sideNav %}{% endblock %}
+				<div class="font-medium font-bold">Blog's latest</div>
+
+				{% for blogs_latest_link in blogs_latest %}
+					{{ include('template_fragment/_side_nav_entry.html.twig', {blogs_latest_link: blogs_latest_link }) }}
+				{% endfor %}
+
 			</div>
 			<div class="main_container">
 				<div class="page-title">
