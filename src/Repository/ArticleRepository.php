@@ -37,6 +37,24 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function findArticleByDate()
+    {
+        try {
+            $conn = $this->getEntityManager()->getConnection();
+            $sql = '
+                SELECT title, path_title FROM article a
+                INNER JOIN date ON date.id = publication_date_id
+                ORDER BY date.date DESC
+                LIMIT 5
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([]);
+            return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

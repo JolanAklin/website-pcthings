@@ -52,6 +52,25 @@ class BlogPostRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBlogByDate()
+    {
+        try {
+            $conn = $this->getEntityManager()->getConnection();
+            $sql = '
+                SELECT title, username FROM blog_post b
+                INNER JOIN date ON date.id = publication_date_id
+                INNER JOIN user ON user.id = writer_id
+                ORDER BY date.date DESC
+                LIMIT 5
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([]);
+            return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
     // /**
     //  * @return BlogPost[] Returns an array of BlogPost objects
     //  */

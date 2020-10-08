@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\BlogPost;
-use App\Entity\Date;
+use App\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,6 +24,8 @@ class BlogController extends AbstractController
                     return $this->render('blog/user_blog.html.twig', [
                         'user' => $user,
                         'blogPosts' => $blogPosts,
+                        'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+                        'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                     ]);
                 }else
                 {

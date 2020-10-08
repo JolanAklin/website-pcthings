@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
+use App\Entity\BlogPost;
 
 class ArticleController extends AbstractController
 {
@@ -16,7 +17,9 @@ class ArticleController extends AbstractController
                 $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
                 if ($page !== null) {
                     return $this->render('article/page.html.twig', [
-                        'page' => $page
+                        'page' => $page,
+                        'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+                        'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                     ]);
                 } else {
                     throw $this->createNotFoundException('The page does not exist');
