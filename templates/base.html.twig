@@ -29,7 +29,7 @@
 
 				<div class="font-medium font-bold">Atricle's latest</div>
 				{% for articles_latest_link in articles_latest %}
-					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/blog/" ~ articles_latest_link.path_title, title:  articles_latest_link.title}) }}
+					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/pages/" ~ articles_latest_link.path_title, title:  articles_latest_link.title}) }}
 				{% endfor %}
 
 				<div class="font-medium font-bold">Blog's latest</div>

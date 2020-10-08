@@ -19,6 +19,7 @@ class ArticleController extends AbstractController
                     return $this->render('article/page.html.twig', [
                         'page' => $page,
                         'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+                        'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                     ]);
                 } else {
                     throw $this->createNotFoundException('The page does not exist');

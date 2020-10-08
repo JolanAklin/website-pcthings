@@ -24,6 +24,7 @@ class HomeController extends AbstractController
         return $this->render('home/pages.html.twig', [
             'pages' => $pages,
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 
@@ -33,6 +34,7 @@ class HomeController extends AbstractController
         return $this->render('home/blog.html.twig', [
             'blogPostLinks' => $blogPostLinks,
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 
@@ -41,6 +43,7 @@ class HomeController extends AbstractController
         return $this->render('home/contact.html.twig', [
             'controller_name' => 'HomeController',
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 }
