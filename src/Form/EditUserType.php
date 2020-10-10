@@ -15,13 +15,22 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Email;
 
 class EditUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class)
+            ->add('username', TextType::class, [
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\s/',
+                        'match' => false,
+                        'message' => 'Your username mustn\'t contain a white space',
+                    ])
+                ]
+            ])
             ->add('password', PasswordType::class, [
                 'mapped' => false, 
                 'required' => false,
@@ -36,9 +45,31 @@ class EditUserType extends AbstractType
                     ])
                 ]
             ])
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('email', TextType::class)
+            ->add('firstName', TextType::class, [
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\s/',
+                        'match' => false,
+                        'message' => 'Your username mustn\'t contain a white space',
+                    ])
+                ]
+            ])
+            ->add('lastName', TextType::class, [
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/\s/',
+                        'match' => false,
+                        'message' => 'Your username mustn\'t contain a white space',
+                    ])
+                ]
+            ])
+            ->add('email', TextType::class, [
+                'constraints' => [
+                    new Email([
+                        'message' => 'The email "{{ value }}" is not a valid email.',
+                    ])
+                ]
+            ])
             ->add('profilPic', FileType::class, [
                 'mapped' => false,
                 'required' => false,
