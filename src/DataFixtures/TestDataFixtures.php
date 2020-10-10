@@ -54,6 +54,7 @@ class TestDataFixtures extends Fixture
         $user->setEmail("jean@mail.com");
         $user->setBlogImage($image);
         $user->setRegistrationDate($date);
+        $user->setRoles(['ROLE_ADMIN']);
         $user->setProfilPic("/images/profile_pictures/profile_pic_jean.jpg");
         $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordEncoder->encodePassword(
@@ -69,6 +70,7 @@ class TestDataFixtures extends Fixture
         $user1->setUsername("Jacky");
         $user1->setEmail("jack@skdj.com");
         $user1->setBlogImage($image);
+        $user->setRoles(['ROLE_USER']);
         $user1->setRegistrationDate($date);
         $user1->setProfilPic("/images/profile_pictures/jack_profile_pic.jpg");
         $user1->setRoles(['ROLE_USER']);
