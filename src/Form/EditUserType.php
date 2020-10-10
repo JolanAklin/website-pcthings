@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
+use Symfony\Component\Validator\Constraints\Image;
+
 class EditUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -22,7 +24,15 @@ class EditUserType extends AbstractType
             ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
             ->add('email', TextType::class)
-            ->add('profilPic', FileType::class, ['mapped' => false])
+            ->add('profilPic', FileType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new Image([
+                        'maxHeight' => '512',
+                        'maxWidth' => '512'
+                    ])
+                ]
+            ])
             //->add('blogImage')
             ->add('save', SubmitType::class)
         ;

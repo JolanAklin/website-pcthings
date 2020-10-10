@@ -13,10 +13,10 @@ use App\Entity\EditUserType;
 use App\Form\EditUserType as FormEditUserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class SecurityController extends AbstractController
 {
-
     private $passwordEncoder;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
         $error = null;
         $user = $this->getUser();
         $form = $this->get('form.factory')->createNamed('my_name', FormEditUserType::class, $user);
-        try {
+        //try {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
     
@@ -63,6 +63,12 @@ class SecurityController extends AbstractController
                     $user,
                     $form->get('password')->getData()
                 ));
+
+                if($form->get('profilPic') !== null)
+                {
+                    $userProfilPic = $form->get('profilPic')->getData();
+                    $userProfilPic->move($this->getParameter('profil_pic_dir'), $user->getProfilPic());
+                }
     
                 //persist the user entity
                 $entityManager = $this->getDoctrine()->getManager();
@@ -71,11 +77,11 @@ class SecurityController extends AbstractController
 
                 $this->addFlash('success', 'Your account has been successfully updates');
     
-                return $this->redirectToRoute('edit_user');
+                return $this->redirectToRoute('edit_user', $request->query->all());
             }
-        } catch (\Throwable $th) {
+        /*} catch (\Throwable $th) {
             $error = "Something bad happened, try again";
-        }
+        }*/
 
         return $this->render('security/edit_user.html.twig', 
         ['error' => $error,
