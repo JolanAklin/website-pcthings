@@ -51,7 +51,7 @@ class SecurityController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $error = null;
         $user = $this->getUser();
-        $form = $this->get('form.factory')->createNamed('my_name', FormEditUserType::class, $user);
+        $form = $this->get('form.factory')->createNamed('editUserForm', FormEditUserType::class, $user);
         //try {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {

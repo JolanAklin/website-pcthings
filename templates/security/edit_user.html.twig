@@ -29,5 +29,6 @@ Log in!
         {{ message }}
     </div>
 {% endfor %}
-{{ form(form) }}
+
+{{ form(form, { 'attr': {'class': 'editUserForm'} }) }}
 {% endblock %}

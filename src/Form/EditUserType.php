@@ -23,6 +23,7 @@ class EditUserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
+                'attr'=> ['class'=>'input'],
                 'constraints' => [
                     new Regex([
                         'pattern' => '/\s/',
@@ -32,6 +33,7 @@ class EditUserType extends AbstractType
                 ]
             ])
             ->add('password', PasswordType::class, [
+                'attr'=> ['class'=>'input'],
                 'mapped' => false, 
                 'required' => false,
                 'constraints' => [
@@ -46,6 +48,7 @@ class EditUserType extends AbstractType
                 ]
             ])
             ->add('firstName', TextType::class, [
+                'attr'=> ['class'=>'input'],
                 'constraints' => [
                     new Regex([
                         'pattern' => '/\s/',
@@ -55,6 +58,7 @@ class EditUserType extends AbstractType
                 ]
             ])
             ->add('lastName', TextType::class, [
+                'attr'=> ['class'=>'input'],
                 'constraints' => [
                     new Regex([
                         'pattern' => '/\s/',
@@ -64,6 +68,7 @@ class EditUserType extends AbstractType
                 ]
             ])
             ->add('email', TextType::class, [
+                'attr'=> ['class'=>'input'],
                 'constraints' => [
                     new Email([
                         'message' => 'The email "{{ value }}" is not a valid email.',
@@ -81,7 +86,7 @@ class EditUserType extends AbstractType
                 ]
             ])
             //->add('blogImage')
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, ['attr'=> ['class'=>'all-width'],])
         ;
     }
 
