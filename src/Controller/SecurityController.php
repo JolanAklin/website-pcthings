@@ -52,7 +52,7 @@ class SecurityController extends AbstractController
         $error = null;
         $user = $this->getUser();
         $form = $this->get('form.factory')->createNamed('editUserForm', FormEditUserType::class, $user);
-        //try {
+        try {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
     
@@ -84,9 +84,9 @@ class SecurityController extends AbstractController
     
                 return $this->redirectToRoute('edit_user', $request->query->all());
             }
-        /*} catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             $error = "Something bad happened, try again";
-        }*/
+        }
 
         return $this->render('security/edit_user.html.twig', 
         ['error' => $error,
