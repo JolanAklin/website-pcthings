@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Log in
+{% endblock %}
+
+{% block pageTitle %}
+Log in!
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block mainText %}
+{% if app.user %}
+<div>
+    <p>You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a></p>
+</div>
+{% endif %}
+{% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{{ form(form, { 'attr': {'class': 'editUserForm'} }) }}
+{% endblock %}

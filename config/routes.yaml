@@ -44,3 +44,13 @@ page:
 #--------------------------------------------------
 # End of ArticleControllers routes
 #--------------------------------------------------
+
+#--------------------------------------------------
+# Start of SecurityController's routes
+#--------------------------------------------------
+edit_user:
+    path: /user-settings
+    controller: App\Controller\SecurityController::editUser
+#--------------------------------------------------
+# End of SecurityController's routes
+#--------------------------------------------------
