@@ -49,8 +49,8 @@ page:
 # Start of SecurityController's routes
 #--------------------------------------------------
 edit_user:
-    path: /user-settings
-    controller: App\Controller\SecurityController::editUser
+    path: /modify-account
+    controller: App\Controller\SecurityController::editUserSelf
 #--------------------------------------------------
 # End of SecurityController's routes
 #--------------------------------------------------

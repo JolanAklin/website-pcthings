@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    public function editUser(Request $request)
+    public function editUserSelf(Request $request)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $error = null;

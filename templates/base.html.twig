@@ -18,7 +18,7 @@
 			<button onclick="window.location.href='/blog';">Blog</button>
 			<button onclick="window.location.href='/contact';">Contact</button>
 			{% if app.user %}
-				<img src="{{ asset(app.user.getProfilPic) }}" class="profile-button" onclick="window.location.href='/user-settings';"></img>
+				<img src="{{ asset(app.user.getProfilPic) }}" class="profile-button" onclick="window.location.href='/modify-account';"></img>
 			{% endif %}
 		</nav>
 		<div class="background-image" style='background: linear-gradient(transparent, var(--color-lighter)), url({% block bgImage %}{% endblock %}) no-repeat center; background-size: cover; background-position: center;'>
@@ -27,7 +27,7 @@
 		<div class="h-container full-width wrap-reverse can-grow padding-nav">
 			<div class="v-container w-xs font-medium white border h-auto p-10 m-top-30 child-p-v-5 left-container">
 
-				<div class="font-medium font-bold">Atricle's latest</div>
+				<div class="font-medium font-bold">Article's latest</div>
 				{% for articles_latest_link in articles_latest %}
 					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/pages/" ~ articles_latest_link.path_title, title:  articles_latest_link.title}) }}
 				{% endfor %}
