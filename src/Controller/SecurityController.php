@@ -58,13 +58,18 @@ class SecurityController extends AbstractController
     
                 //update the password
                 $user = $form->getData();
-                
-                $user->setPassword($this->passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                ));
 
-                if($form->get('profilPic') !== null)
+                $pass = $form->get('password')->getData();
+                if($pass !== null && $pass != "")
+                {
+                    $user->setPassword($this->passwordEncoder->encodePassword(
+                        $user,
+                        $pass
+                    ));
+                }
+                
+
+                if($form->get('profilPic')->getData() !== null)
                 {
                     $userProfilPic = $form->get('profilPic')->getData();
                     $userProfilPic->move($this->getParameter('profil_pic_dir'), $user->getProfilPic());
