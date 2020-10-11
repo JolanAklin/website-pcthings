@@ -27,12 +27,12 @@ Log in!
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <div class="h-container">
-            <div class="v-container w-xl">
+        <div class="h-container h-container-to-vertical">
+            <div class="v-container w-xl all-width-when-small-screen">
                 <label for="inputUsername">Username</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="input" required autofocus>
             </div>
-            <div class="v-container w-xl">
+            <div class="v-container w-xl all-width-when-small-screen">
                 <label for="inputPassword">Password</label>
                 <input type="password" name="password" id="inputPassword" class="input" required>
             </div>

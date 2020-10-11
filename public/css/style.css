@@ -192,13 +192,9 @@ a:hover {
 }
 
 #navBar {
-	/*position: -webkit-sticky;
-	position: sticky;*/
 	position: fixed;
 	top: 0;
 	background-color: var(--color-lighter);
-	/*backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);*/
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
@@ -208,6 +204,7 @@ a:hover {
 	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
 	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
 	width: calc(100% - 20px);
+	z-index: 10000000;
 }
 
 #menu {
@@ -899,6 +896,12 @@ form {
 
 	#navBar button:nth-child(1n+3) {
 		display: none;
+	}
+	.all-width-when-small-screen {
+		width: 100%;
+	}
+	.h-container-to-vertical {
+		flex-direction: column;
 	}
 }
 
