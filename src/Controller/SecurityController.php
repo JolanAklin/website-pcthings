@@ -11,6 +11,7 @@ use App\Entity\Article;
 use App\Entity\Image;
 use App\Entity\EditUserType;
 use App\Form\EditUserType as FormEditUserType;
+use Error;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -53,6 +54,7 @@ class SecurityController extends AbstractController
         $user = $this->getUser();
         $form = $this->get('form.factory')->createNamed('editUserForm', FormEditUserType::class, $user);
         try {
+            $errors = [];
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
     
@@ -84,12 +86,23 @@ class SecurityController extends AbstractController
     
                 return $this->redirectToRoute('edit_user', $request->query->all());
             }
+            if($form->isSubmitted())
+            {
+                //get all the error of the form
+                foreach ($form as $child) {
+                    foreach ($child->getErrors() as $error) {
+                        array_push($errors, $error->getMessage());
+                    }
+                }
+            }
+
         } catch (\Throwable $th) {
             $error = "Something bad happened, try again";
+            array_push($errors, $error);
         }
 
         return $this->render('security/edit_user.html.twig', 
-        ['error' => $error,
+        ['errors' => $errors,
         'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
         'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         'form' => $form->createView(),

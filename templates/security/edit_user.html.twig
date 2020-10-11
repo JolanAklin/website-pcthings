@@ -21,14 +21,30 @@ Edit your profile
     <p>You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a></p>
 </div>
 {% endif %}
-{% if error %}
-    <div class="alert alert-danger">{{ error }}</div>
-{% endif %}
+{% for error in errors %}
+    <div class="alert alert-form alert-danger">{{ error }}</div>
+{% endfor %}
 {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
+    <div class="alert alert-form alert-success">
         {{ message }}
     </div>
 {% endfor %}
 
-{{ form(form, { 'attr': {'class': 'editUserForm'} }) }}
+
+{{ form_start(form, { 'attr': {'class': 'editUserForm'} }) }}
+{{ form_errors(form) }}
+
+<div>
+{% for child in form.children %}
+    {% if child.vars.name != '_token' %}
+        <div>
+            {{ form_label(child) }}
+            {{ form_widget(child) }}
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+{{ form_end(form) }}
+
+ {#{{ form(form, { 'attr': {'class': 'editUserForm'} }) }} #}
 {% endblock %}

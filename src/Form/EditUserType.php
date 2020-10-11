@@ -39,6 +39,7 @@ class EditUserType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 8,
+                        'minMessage' => 'Your password must be at least {{ limit }} characters long'
                     ]),
                     new Regex([
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
@@ -81,7 +82,9 @@ class EditUserType extends AbstractType
                 'constraints' => [
                     new Image([
                         'maxHeight' => '512',
-                        'maxWidth' => '512'
+                        'maxWidth' => '512',
+                        'allowPortrait' => 'false',
+                        'allowLandscape' => 'false'
                     ])
                 ]
             ])
