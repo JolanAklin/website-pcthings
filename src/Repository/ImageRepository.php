@@ -26,9 +26,9 @@ class ImageRepository extends ServiceEntityRepository
         {
             $offset = $page * 10;
             return $this->createQueryBuilder('i')
-                ->orderBy('i.id', 'ASC')
+                ->orderBy('i.id', 'DESC')
                 ->setFirstResult($offset)
-                ->setMaxResults(10)
+                ->setMaxResults(8)
                 ->getQuery()
                 ->getResult()
             ;

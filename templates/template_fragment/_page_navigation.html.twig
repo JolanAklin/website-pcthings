@@ -1,3 +1,4 @@
+{% if pages %}
 <div class="page-navigation">
     {% if currentPage != 1 %}
         <button onclick="window.location.href='/import-picture/{{ currentPage - 1 }}';"><</button>
@@ -13,3 +14,4 @@
     {% endif %}
     
 </div>
+{% endif %}

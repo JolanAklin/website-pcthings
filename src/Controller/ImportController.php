@@ -18,6 +18,8 @@ class ImportController extends AbstractController
 {
     public function importPicture($page, Request $request)
     {
+        $this->denyAccessUnlessGranted("ROLE_IMPORT");
+
         $image = new Image();
         $form = $this->get('form.factory')->createNamed('editUserForm', ImportPictureFormType::class, $image);
         $errors = [];
@@ -51,7 +53,7 @@ class ImportController extends AbstractController
     
                 $this->addFlash('success', 'Your image has been successfully imported');
     
-                return $this->redirectToRoute('import_picture/'.$page, $request->query->all());
+                return $this->redirectToRoute('import_picture', $request->query->all());
             }
             if($form->isSubmitted())
             {
@@ -68,7 +70,7 @@ class ImportController extends AbstractController
 
         $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf10($page-1);
         $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
-        $pagesTot = (count($countImage)+10)/10;
+        $pagesTot = ceil(count($countImage)/8);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 

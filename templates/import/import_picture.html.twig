@@ -25,7 +25,29 @@ Imported picture
     </div>
 {% endfor %}
 
-<button onclick="" style="margin: 5px;">Import</button>
+<!-- import form -->
+<div class="popup-menu">
+    <div id="importPicture">
+        {{ form_start(form, { 'attr': {'class': 'editUserForm form-no-max'} }) }}
+        {{ form_errors(form) }}
+        
+        <div>
+        {% for child in form.children %}
+            {% if child.vars.name != '_token' %}
+                <div>
+                    {{ form_label(child) }}
+                    {{ form_widget(child) }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        {{ form_end(form) }}
+        <button onclick="CloseFilterMenu('importPicture')" class="close-popup-menu"></button>
+    </div>
+</div>
+
+<!-- image display -->
+<button onclick="OpenFilterMenu('importPicture')" style="margin: 5px;">Import</button>
 <div class="image-grid">
     <div class="image-grid-row">
         {% for image in images %}
@@ -36,23 +58,7 @@ Imported picture
         {% endfor %}
     </div>
 </div>
-<button onclick="" style="margin: 5px;">Import</button>
-<!-- import form goes here -->
-
-{{ form_start(form, { 'attr': {'class': 'editUserForm'} }) }}
-{{ form_errors(form) }}
-
-<div>
-{% for child in form.children %}
-    {% if child.vars.name != '_token' %}
-        <div>
-            {{ form_label(child) }}
-            {{ form_widget(child) }}
-        </div>
-    {% endif %}
-{% endfor %}
-</div>
-{{ form_end(form) }}
+<button onclick="OpenFilterMenu('importPicture')" style="margin: 5px;">Import</button>
 
 {{ include('template_fragment/_page_navigation.html.twig', {pages: pages, currentPage: currentPage}) }}
 {% endblock %}
