@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | Import picture
+PCThings | Imported picture
 {% endblock %}
 
 {% block pageTitle %}
-Import picture
+Imported picture
 {% endblock %}
 
 {% block bgImage %}
@@ -20,10 +20,14 @@ Import picture
 <div class="image-grid">
     <div class="image-grid-row">
         {% for image in images %}
-            <div class="image-grid-col" style="background-image: url('{{ image.getPath }}')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col">
+            <div style="background-image: url('{{ image.getPath }}')"><img src="/images/placeholder.png"></div>
+            <p>{{ image.getTitle }}</p>
+        </div>
         {% endfor %}
     </div>
 </div>
 <button onclick="" style="margin: 5px;">Import</button>
+<!-- import form goes here -->
 {{ include('template_fragment/_page_navigation.html.twig', {pages: pages, currentPage: currentPage}) }}
 {% endblock %}
