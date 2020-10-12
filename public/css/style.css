@@ -277,7 +277,7 @@ footer {
 	background-size: 95%;
 }
 .image-grid-col > p {
-	margin-top: 8px;
+	margin-top: 0px;
 	margin-bottom: 8px;
 	width: calc(100% - 20px);
 	margin-left: 10px;

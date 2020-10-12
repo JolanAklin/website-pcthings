@@ -16,6 +16,15 @@ Imported picture
 {% endblock %}
 
 {% block mainText %}
+{% for error in errors %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endfor %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <button onclick="" style="margin: 5px;">Import</button>
 <div class="image-grid">
     <div class="image-grid-row">
@@ -29,5 +38,21 @@ Imported picture
 </div>
 <button onclick="" style="margin: 5px;">Import</button>
 <!-- import form goes here -->
+
+{{ form_start(form, { 'attr': {'class': 'editUserForm'} }) }}
+{{ form_errors(form) }}
+
+<div>
+{% for child in form.children %}
+    {% if child.vars.name != '_token' %}
+        <div>
+            {{ form_label(child) }}
+            {{ form_widget(child) }}
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+{{ form_end(form) }}
+
 {{ include('template_fragment/_page_navigation.html.twig', {pages: pages, currentPage: currentPage}) }}
 {% endblock %}
