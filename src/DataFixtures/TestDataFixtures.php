@@ -35,6 +35,15 @@ class TestDataFixtures extends Fixture
 
         $manager->persist($image);
 
+        for ($i=0; $i < 21; $i++) { 
+            $image = new Image();
+            $image->setTitle("a nice image");
+            $image->setAlt("alt of a nice image");
+            $image->setPath("/images/page_header/_MG_9008-1.jpg");
+
+            $manager->persist($image);
+        }
+
         $image1 = new Image();
         $image1->setTitle("a nice image");
         $image1->setAlt("alt of a nice image");
@@ -56,7 +65,6 @@ class TestDataFixtures extends Fixture
         $user->setRegistrationDate($date);
         $user->setRoles(['ROLE_ADMIN']);
         $user->setProfilPic("/images/profile_pictures/profile_pic_jean.jpg");
-        $user->setRoles(['ROLE_USER']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             'abcd'
@@ -70,10 +78,9 @@ class TestDataFixtures extends Fixture
         $user1->setUsername("Jacky");
         $user1->setEmail("jack@skdj.com");
         $user1->setBlogImage($image);
-        $user->setRoles(['ROLE_USER']);
+        $user1->setRoles(['ROLE_USER']);
         $user1->setRegistrationDate($date);
         $user1->setProfilPic("/images/profile_pictures/jack_profile_pic.jpg");
-        $user1->setRoles(['ROLE_USER']);
         $user1->setPassword($this->passwordEncoder->encodePassword(
             $user1,
             'abcd'

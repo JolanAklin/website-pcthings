@@ -1,0 +1,17 @@
+{% if pages %}
+<div class="page-navigation">
+    {% if currentPage != 1 %}
+        <button onclick="window.location.href='/import-picture/{{ currentPage - 1 }}';"><</button>
+    {% endif %}
+    
+    <div class="page-navigation-link">
+        {% for page in pages %}
+            <a href="{{ page.link }}">{{ page.numero }}</a>
+        {% endfor %}
+    </div>
+    {% if currentPage != pages|last.numero %}
+        <button onclick="window.location.href='/import-picture/{{ currentPage + 1 }}';">></button>
+    {% endif %}
+    
+</div>
+{% endif %}
