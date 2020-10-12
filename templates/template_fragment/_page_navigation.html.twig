@@ -1,0 +1,9 @@
+<div class="page-navigation">
+    <button onclick=""><</button>
+    <div class="page-navigation-link">
+        {% for page in pages %}
+            <a href="{{ page.link }}">{{ page.numero }}</a>
+        {% endfor %}
+    </div>
+    <button onclick="">></button>
+</div>

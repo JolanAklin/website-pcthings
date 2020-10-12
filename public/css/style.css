@@ -253,6 +253,63 @@ footer {
 	flex-wrap: wrap;
 }
 
+.image-grid {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+.image-grid-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.image-grid-col {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 95%;
+	margin: 5px;
+	background-color: var(--color-lighter);
+	flex-basis: 300px !important;
+	flex-grow: 1;
+	transition: all 0.5s;
+}
+.image-grid-col:hover {
+	background-color: var(--color-accent-darker);
+	margin: 1px;
+	padding: 4px;
+	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	z-index: 100;
+}
+.image-grid-col > img {
+	width: 100%;
+	height: auto;
+	visibility: hidden;
+}
+
+.page-navigation {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	justify-content: center;
+	padding:5px;
+}
+.page-navigation-link {
+	padding-left: 5px;
+	padding-right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	max-width: 80%;
+}
+.page-navigation-link > a {
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
 .h-container :nth-child(1n) {
 	flex-basis: auto;
 }

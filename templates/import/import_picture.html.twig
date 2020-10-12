@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Import picture
+{% endblock %}
+
+{% block pageTitle %}
+Import picture
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block mainText %}
+<button onclick="" style="margin: 5px;">Import</button>
+<div class="image-grid">
+    <div class="image-grid-row">
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+    </div>
+</div>
+<button onclick="" style="margin: 5px;">Import</button>
+{{ include('template_fragment/_page_navigation.html.twig', {pages: pages}) }}
+{% endblock %}

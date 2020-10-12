@@ -54,3 +54,15 @@ edit_user:
 #--------------------------------------------------
 # End of SecurityController's routes
 #--------------------------------------------------
+
+#--------------------------------------------------
+# Start of ImportController's routes
+#--------------------------------------------------
+import_picture:
+    path: /import-picture/{page}
+    controller: App\Controller\ImportController::importPicture
+    defaults:
+        page: 1
+    requirements: 
+        page: '\d+'
+
