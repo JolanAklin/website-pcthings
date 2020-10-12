@@ -19,21 +19,11 @@ Import picture
 <button onclick="" style="margin: 5px;">Import</button>
 <div class="image-grid">
     <div class="image-grid-row">
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
-        <div class="image-grid-col" style="background-image: url('/images/page_header/_MG_9008-1.jpg')"><img src="/images/placeholder.png"></div>
+        {% for image in images %}
+            <div class="image-grid-col" style="background-image: url('{{ image.getPath }}')"><img src="/images/placeholder.png"></div>
+        {% endfor %}
     </div>
 </div>
 <button onclick="" style="margin: 5px;">Import</button>
-{{ include('template_fragment/_page_navigation.html.twig', {pages: pages}) }}
+{{ include('template_fragment/_page_navigation.html.twig', {pages: pages, currentPage: currentPage}) }}
 {% endblock %}

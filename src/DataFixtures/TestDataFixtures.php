@@ -35,6 +35,15 @@ class TestDataFixtures extends Fixture
 
         $manager->persist($image);
 
+        for ($i=0; $i < 21; $i++) { 
+            $image = new Image();
+            $image->setTitle("a nice image");
+            $image->setAlt("alt of a nice image");
+            $image->setPath("/images/page_header/_MG_9008-1.jpg");
+
+            $manager->persist($image);
+        }
+
         $image1 = new Image();
         $image1->setTitle("a nice image");
         $image1->setAlt("alt of a nice image");

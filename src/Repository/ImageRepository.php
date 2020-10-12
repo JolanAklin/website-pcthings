@@ -19,6 +19,31 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
+    public function findByGroupOf10($page)
+    {
+        $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+        if($page !== null && $page !== false)
+        {
+            $offset = $page * 10;
+            return $this->createQueryBuilder('i')
+                ->orderBy('i.id', 'ASC')
+                ->setFirstResult($offset)
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult()
+            ;
+        }else
+        {
+            die();
+        }
+    }
+
+    public function CountImages()
+    {
+        $qb = $this->createQueryBuilder('i');
+        return $qb->getQuery()->getScalarResult();
+    }
+
     // /**
     //  * @return Image[] Returns an array of Image objects
     //  */
