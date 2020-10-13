@@ -22,6 +22,13 @@ class ImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted("ROLE_IMPORT");
 
+        $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
+        $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
+        if($page > $pagesTot || $page <= 0)
+        {
+            return $this->redirectToRoute('import_picture');
+        }
+
         $image = new Image();
         $form = $this->get('form.factory')->createNamed('ImportPicture', ImportPictureFormType::class, $image);
         $errors = [];
@@ -71,8 +78,6 @@ class ImportController extends AbstractController
         }
 
         $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf10($page-1);
-        $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
-        $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 
