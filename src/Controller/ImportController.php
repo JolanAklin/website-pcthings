@@ -72,7 +72,7 @@ class ImportController extends AbstractController
 
         $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf10($page-1);
         $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
-        $pagesTot = ceil(count($countImage)/8);
+        $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 
@@ -92,7 +92,7 @@ class ImportController extends AbstractController
     public function modifyPicture ($imageId, Request $request)
     {
         $this->denyAccessUnlessGranted("ROLE_IMPORT");
-        
+
         $image = $this->getDoctrine()->getRepository(Image::class)->find($imageId);
         if($image !== null)
         {
