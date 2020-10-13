@@ -40,8 +40,20 @@ class ImageRepository extends ServiceEntityRepository
 
     public function CountImages()
     {
-        $qb = $this->createQueryBuilder('i');
-        return $qb->getQuery()->getScalarResult();
+        try {
+            $conn = $this->getEntityManager()->getConnection();
+            $sql = '
+                SELECT COUNT(*) FROM image
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([]);
+            return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            die();
+        }
+
+        /*$qb = $this->createQueryBuilder('i');
+        return $qb->getQuery()->getScalarResult();*/
     }
 
     // /**

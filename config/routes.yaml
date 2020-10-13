@@ -66,3 +66,15 @@ import_picture:
     requirements: 
         page: '\d+'
 
+imported_picture_modif:
+    path: /import-picture/modify/{imageId}
+    controller: App\Controller\ImportController::modifyPicture
+    defaults:
+        iamgeId: 1
+    requirements: 
+        imageId: '\d+'
+
+#--------------------------------------------------
+# End of ImportController's routes
+#--------------------------------------------------
+
