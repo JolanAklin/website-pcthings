@@ -6,7 +6,12 @@
     
     <div class="page-navigation-link">
         {% for page in pages %}
-            <a href="{{ page.link }}">{{ page.numero }}</a>
+            {% if page.numero == currentPage %}
+                <a href="{{ page.link }}" style="color: white;">{{ page.numero }}</a>        
+            {% else %}
+                <a href="{{ page.link }}" >{{ page.numero }}</a>
+            {% endif %}
+            
         {% endfor %}
     </div>
     {% if currentPage != pages|last.numero %}

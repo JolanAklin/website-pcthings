@@ -284,6 +284,9 @@ footer {
 	margin-right: 10px;
 	border-top: 1px solid white;
 }
+.image-grid-col:hover > p > a {
+	color: var(--color-lighter);
+}
 .image-grid-col:hover {
 	background-color: var(--color-accent-darker);
 	margin: 1px;
@@ -294,6 +297,24 @@ footer {
 	z-index: 100;
 }
 .image-grid-col > div > img {
+	width: 100%;
+	height: auto;
+	visibility: hidden;
+}
+
+.modify-image-display {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: var(--color-lighter);
+	background-size: 95%;
+	max-width: 500px;
+	max-height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+}
+.modify-image-display > img {
 	width: 100%;
 	height: auto;
 	visibility: hidden;

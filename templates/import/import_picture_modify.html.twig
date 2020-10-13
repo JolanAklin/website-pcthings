@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Modify imported picture
+{% endblock %}
+
+{% block pageTitle %}
+Modify imported picture
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block mainText %}
+{% for error in errors %}
+    <div class="alert alert-danger">{{ error }}</div>
+{% endfor %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+<div class="modify-image-display" style="background-image: url('{{ asset(image.getPath) }}');">
+    <img src="/images/placeholder.png">
+</div>
+
+{{ form_start(form, { 'attr': {'class': 'editUserForm form-no-max'} }) }}
+{{ form_errors(form) }}
+
+<div>
+{% for child in form.children %}
+    {% if child.vars.name != '_token' %}
+        <div>
+            {{ form_label(child) }}
+            {{ form_widget(child) }}
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+{{ form_end(form) }}
+{% endblock %}
