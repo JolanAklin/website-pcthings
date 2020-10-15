@@ -29,9 +29,10 @@ class BlogPostRepository extends ServiceEntityRepository
             {
                 $offset = $page * 10;
                 return $this->createQueryBuilder('b')
+                    ->innerJoin('App\Entity\Date', 'd')
                     ->andWhere('b.writer = :val')
                     ->setParameter('val', $writer)
-                    ->orderBy('b.id', 'DESC')
+                    ->orderBy('d.date', 'DESC')
                     ->setFirstResult($offset)
                     ->setMaxResults(10)
                     ->getQuery()
