@@ -19,34 +19,51 @@ class BlogPostRepository extends ServiceEntityRepository
         parent::__construct($registry, BlogPost::class);
     }
 
-    public function findByWriter($writer)
+    public function findByWriter($writer, $page)
     {
         try {
             $writer = intval($writer);
-            return $this->createQueryBuilder('b')
-                ->andWhere('b.writer = :val')
-                ->setParameter('val', $writer)
-                ->orderBy('b.id', 'DESC')
-                ->setMaxResults(10)
-                ->getQuery()
-                ->getResult();
+            $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+            $page -= 1;
+            if($page !== null && $page !== false)
+            {
+                $offset = $page * 10;
+                return $this->createQueryBuilder('b')
+                    ->andWhere('b.writer = :val')
+                    ->setParameter('val', $writer)
+                    ->orderBy('b.id', 'DESC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults(10)
+                    ->getQuery()
+                    ->getResult();
+            }
         } catch (\Throwable $th) {
             die();
         }
     }
     
-    public function findByWriterJoined()
+    public function findByWriterJoined($page)
     {
         try {
-            $entityManager = $this->getEntityManager();
-            $query = $entityManager->createQueryBuilder()
-                ->select('u.username, u.profilPic')
-                ->from('App\Entity\BlogPost','b')
-                ->innerJoin('App\Entity\User', 'u')
-                ->groupBy('u.id')
-                ->orderBy('u.username','ASC')
-                ->getQuery();
-            return $query->getResult();
+            $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+            $page -= 1;
+            if($page !== null && $page !== false)
+            {
+                $offset = $page * 10;
+                $entityManager = $this->getEntityManager();
+                $query = $entityManager->createQueryBuilder()
+                    ->select('u.username, u.profilPic')
+                    ->from('App\Entity\BlogPost','b')
+                    ->innerJoin('App\Entity\User', 'u')
+                    ->innerJoin('App\Entity\Date', 'd')
+                    ->groupBy('u.id')
+                    ->orderBy('max(d.date)','DESC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults(10)
+                    ->getQuery();
+                return $query->getResult();
+                
+            }
         } catch (\Throwable $th) {
             die();
         }
@@ -66,6 +83,44 @@ class BlogPostRepository extends ServiceEntityRepository
             $stmt = $conn->prepare($sql);
             $stmt->execute([]);
             return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
+    public function CountBlogPostWriter()
+    {
+        try {
+            $conn = $this->getEntityManager()->getConnection();
+            $sql = '
+                SELECT COUNT(DISTINCT user.id) as count FROM user
+                INNER JOIN blog_post ON user.id = writer_id
+                INNER JOIN date ON date.id = publication_date_id
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([]);
+            return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
+    public function CountBlogPostByUser($user)
+    {
+        try {
+            $user = filter_var($user, FILTER_SANITIZE_STRING);
+            if($user !== null && $user !== false)
+            {
+                $conn = $this->getEntityManager()->getConnection();
+                $sql = '
+                    SELECT COUNT(*) as count FROM blog_post
+                    INNER JOIN user on user.id = blog_post.writer_id
+                    WHERE user.username = :user
+                    ';
+                $stmt = $conn->prepare($sql);
+                $stmt->execute(['user' => $user]);
+                return $stmt->fetchAll();
+            }
         } catch (\Throwable $th) {
             die();
         }

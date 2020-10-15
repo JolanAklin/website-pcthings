@@ -15,8 +15,12 @@ pages:
         page: '\d+'
 
 blog:
-    path: /blog
+    path: /blog/{page}
     controller: App\Controller\HomeController::blog
+    defaults:
+        page: 1
+    requirements: 
+        page: '\d+'
 
 contact:
     path: /contact
@@ -31,10 +35,14 @@ contact:
 #--------------------------------------------------
 
 user_blog:
-    path: /blog/{username}
+    path: /blog/{username}/{page}
     controller: App\Controller\BlogController::ShowBlog
     defaults:
         username: ""
+        page: 1
+    requirements: 
+        page: '\d+'
+
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------

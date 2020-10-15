@@ -20,8 +20,8 @@ class HomeController extends AbstractController
 
     public function Pages($page)
     {
-        $countImage = $this->getDoctrine()->getRepository(Article::class)->CountArticle();
-        $pagesTot = ceil($countImage[0]['COUNT(*)']/10);
+        $countArticle = $this->getDoctrine()->getRepository(Article::class)->CountArticle();
+        $pagesTot = ceil($countArticle[0]['COUNT(*)']/10);
         if($pagesTot != 0)
         {
             if($page > $pagesTot || $page <= 0)
@@ -52,13 +52,37 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function Blog()
+    public function Blog($page)
     {
-        $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriterJoined();
+        $countBlogPost = $this->getDoctrine()->getRepository(BlogPost::class)->CountBlogPostWriter();
+        $pagesTot = ceil($countBlogPost[0]['count']/10);
+        if($pagesTot != 0)
+        {
+            if($page > $pagesTot || $page <= 0)
+            {
+                return $this->redirectToRoute('blog');
+            }
+        }else
+        {
+            if($page != 1)
+            {
+                return $this->redirectToRoute('blog');
+            }
+        }
+        $pagesArray = [];
+        for ($i=1; $i <= $pagesTot; $i++)
+        { 
+            array_push($pagesArray, ['numero' => $i]);
+        }
+
+        $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriterJoined($page);
         return $this->render('home/blog.html.twig', [
             'blogPostLinks' => $blogPostLinks,
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
             'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
+            'nbPages' => $pagesArray,
+            'baseLink' => '/blog/',
+            'currentPage' => $page,
         ]);
     }
 

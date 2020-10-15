@@ -111,14 +111,16 @@ class TestDataFixtures extends Fixture
             $manager->persist($article);
         }
 
-        $blogPost = new BlogPost();
-        $blogPost->setTitle("Yaaaa");
-        $blogPost->setContent("saudfhésahdflsah lkjahslfk ghaskljdhhflkasfhas lgklasjhf kljashdkjkldfksdgkas hk jhsakldgfl hgaslkjdhiu lsa HDGJAHSG AJSDHGKSHF LK FHALIUSDGLASHDLFGASLIUHGLU lsaudfg liazsdfiu salifdh iuasdfilus aliuahsghlsiau hkjldsahgl uhsag kjashdg lukhasidlfia8ztrh ashglizas uhlksadfklu");
-        $blogPost->setWriter($user);
-        $blogPost->setCategory($category);
-        $blogPost->setPublicationDate($date);
-
-        $manager->persist($blogPost);
+        for ($i=0; $i < 11; $i++) { 
+            $blogPost = new BlogPost();
+            $blogPost->setTitle("Yaaaa");
+            $blogPost->setContent("saudfhésahdflsah lkjahslfk ghaskljdhhflkasfhas lgklasjhf kljashdkjkldfksdgkas hk jhsakldgfl hgaslkjdhiu lsa HDGJAHSG AJSDHGKSHF LK FHALIUSDGLASHDLFGASLIUHGLU lsaudfg liazsdfiu salifdh iuasdfilus aliuahsghlsiau hkjldsahgl uhsag kjashdg lukhasidlfia8ztrh ashglizas uhlksadfklu");
+            $blogPost->setWriter($user);
+            $blogPost->setCategory($category);
+            $blogPost->setPublicationDate($date);
+    
+            $manager->persist($blogPost);
+        }
 
         $blogPost = new BlogPost();
         $blogPost->setTitle("talking about web");
