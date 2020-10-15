@@ -55,6 +55,43 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByGroupOf10($page)
+    {
+        $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+        $page -= 1;
+        if($page !== null && $page !== false)
+        {
+            $offset = $page * 10;
+            return $this->createQueryBuilder('a')
+                ->innerJoin('App\Entity\Date', 'd')
+                ->orderBy('d.date', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult()
+            ;
+        }else
+        {
+            die();
+        }
+    }
+
+    public function CountArticle()
+    {
+        try {
+            $conn = $this->getEntityManager()->getConnection();
+            $sql = '
+                SELECT COUNT(*) FROM article
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([]);
+            return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+    
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

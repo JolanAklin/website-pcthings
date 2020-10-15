@@ -18,13 +18,37 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function Pages()
+    public function Pages($page)
     {
-        $pages = $this->getDoctrine()->getRepository(Article::class)->findAll();
+        $countImage = $this->getDoctrine()->getRepository(Article::class)->CountArticle();
+        $pagesTot = ceil($countImage[0]['COUNT(*)']/10);
+        if($pagesTot != 0)
+        {
+            if($page > $pagesTot || $page <= 0)
+            {
+                return $this->redirectToRoute('pages');
+            }
+        }else
+        {
+            if($page != 1)
+            {
+                return $this->redirectToRoute('pages');
+            }
+        }
+        $pagesArray = [];
+        for ($i=1; $i <= $pagesTot; $i++)
+        { 
+            array_push($pagesArray, ['numero' => $i]);
+        }
+
+        $pages = $this->getDoctrine()->getRepository(Article::class)->findByGroupOf10($page);
         return $this->render('home/pages.html.twig', [
             'pages' => $pages,
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
             'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
+            'nbPages' => $pagesArray,
+            'baseLink' => '/pages/',
+            'currentPage' => $page,
         ]);
     }
 

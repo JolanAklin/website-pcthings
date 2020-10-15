@@ -96,18 +96,20 @@ class TestDataFixtures extends Fixture
         $category1->setName("web");
         $manager->persist($category1);
 
-        $article = new Article();
-        $article->setTitle("FileTeleport");
-        $article->setDescription("a super file transfer app");
-        $article->setContent("<h1>New Update</h1><p>éoasirfhasuhilah ilhasli hliuahgl hdklfghlka shglkahrgéuhaiuhg filuahlt guhahligéuaegiruésa hkjahskljg haklsjdhgklasjd fég hklahd klhaséjgh éaerh édjfhj ahkl hakjgh lahgiwhrpiu airghaskljgh lka gasfg fégo iargh lkdjsghoezgoiàser géodsfgeshé jghsgkhésjhgg éjsdfhgkljshroptz hjfglduertusdfglkjsdfklgjbsldkfghiuhtéph eurtp98t hliuer gsdg jsrlti hsldifis r0ehgoisdfgohsdig lirgihsdf hglksjrg iushdg sdh</p><p>hailuhgkashdlk ahigrhkajhl haliutziahgfiuahsdkfljat liueaiuas liutwililashl ghaliu rt</p><a href='https://github.com/JolanAklin/FileTeleporter' target='_blank'>fileteport</a><p>gliasgluashlti uéoi aligliuaséitz alghliueargliushdgkhsep8rtzh egrhlise rt</p>");
-        $article->setHeaderImage($image);
-        $article->setPublicationDate($date);
-        $article->setCategory($category);
-        $article->setWriter($user);
-        $article->setThumbnail($image1);
-        $article->setPathTitle("new-fileteleport-update");
-
-        $manager->persist($article);
+        for ($i=0; $i < 11; $i++) { 
+            $article = new Article();
+            $article->setTitle("FileTeleport");
+            $article->setDescription("a super file transfer app");
+            $article->setContent("<h1>New Update</h1><p>éoasirfhasuhilah ilhasli hliuahgl hdklfghlka shglkahrgéuhaiuhg filuahlt guhahligéuaegiruésa hkjahskljg haklsjdhgklasjd fég hklahd klhaséjgh éaerh édjfhj ahkl hakjgh lahgiwhrpiu airghaskljgh lka gasfg fégo iargh lkdjsghoezgoiàser géodsfgeshé jghsgkhésjhgg éjsdfhgkljshroptz hjfglduertusdfglkjsdfklgjbsldkfghiuhtéph eurtp98t hliuer gsdg jsrlti hsldifis r0ehgoisdfgohsdig lirgihsdf hglksjrg iushdg sdh</p><p>hailuhgkashdlk ahigrhkajhl haliutziahgfiuahsdkfljat liueaiuas liutwililashl ghaliu rt</p><a href='https://github.com/JolanAklin/FileTeleporter' target='_blank'>fileteport</a><p>gliasgluashlti uéoi aligliuaséitz alghliueargliushdgkhsep8rtzh egrhlise rt</p>");
+            $article->setHeaderImage($image);
+            $article->setPublicationDate($date);
+            $article->setCategory($category);
+            $article->setWriter($user);
+            $article->setThumbnail($image1);
+            $article->setPathTitle("new-fileteleport-update".uniqid("",true));
+    
+            $manager->persist($article);
+        }
 
         $blogPost = new BlogPost();
         $blogPost->setTitle("Yaaaa");

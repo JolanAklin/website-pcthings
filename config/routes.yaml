@@ -7,8 +7,12 @@ index:
     controller: App\Controller\HomeController::index
 
 pages:
-    path: /pages
+    path: /pages/{page}
     controller: App\Controller\HomeController::pages
+    defaults:
+        page: 1
+    requirements: 
+        page: '\d+'
 
 blog:
     path: /blog

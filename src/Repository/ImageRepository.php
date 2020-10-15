@@ -22,6 +22,7 @@ class ImageRepository extends ServiceEntityRepository
     public function findByGroupOf10($page)
     {
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+        $page -= 1;
         if($page !== null && $page !== false)
         {
             $offset = $page * 10;
@@ -51,9 +52,6 @@ class ImageRepository extends ServiceEntityRepository
         } catch (\Throwable $th) {
             die();
         }
-
-        /*$qb = $this->createQueryBuilder('i');
-        return $qb->getQuery()->getScalarResult();*/
     }
 
     // /**
