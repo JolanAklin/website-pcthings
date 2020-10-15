@@ -19,13 +19,13 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function findByGroupOf10($page)
+    public function findByGroupOf8($page)
     {
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
         $page -= 1;
         if($page !== null && $page !== false)
         {
-            $offset = $page * 10;
+            $offset = $page * 8;
             return $this->createQueryBuilder('i')
                 ->orderBy('i.id', 'DESC')
                 ->setFirstResult($offset)

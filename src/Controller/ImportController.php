@@ -24,6 +24,7 @@ class ImportController extends AbstractController
 
         $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
         $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
+        echo($pagesTot);
         if($pagesTot != 0)
         {
             if($page > $pagesTot || $page <= 0)
@@ -86,7 +87,7 @@ class ImportController extends AbstractController
             array_push($errors, "An error occured at the reading of the form fields");
         }
 
-        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf10($page);
+        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf8($page);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 
