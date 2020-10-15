@@ -24,7 +24,6 @@ class ImportController extends AbstractController
 
         $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
         $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
-        echo($pagesTot);
         if($pagesTot != 0)
         {
             if($page > $pagesTot || $page <= 0)
