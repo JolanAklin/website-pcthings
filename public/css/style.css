@@ -32,8 +32,8 @@ html {
 	margin: 0px;
 	min-width: 100%;
 	min-height: calc(100% - 64px);
-	padding-top: 64px;
-	overflow: hidden;
+	margin-top: 64px;
+	scroll-behavior: smooth;
 }
 
 body {
@@ -45,10 +45,9 @@ body {
 	font-size: var(--text-size);
 	min-width: 100%;
 	/*height: 100%;*/
-	max-height: calc(100vh - 64px);
+	min-height: calc(100vh - 64px);
 	margin: 0px;
 	word-break: break-word;
-	overflow: auto;
 }
 
 .can-grow {
@@ -190,9 +189,6 @@ a:hover {
 	color: var(--color-accent);
 }
 
-.padding-nav {
-	padding-top: 64px;
-}
 
 #navBar {
 	position: fixed;
