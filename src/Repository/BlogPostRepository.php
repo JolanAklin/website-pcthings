@@ -75,7 +75,7 @@ class BlogPostRepository extends ServiceEntityRepository
         try {
             $conn = $this->getEntityManager()->getConnection();
             $sql = '
-                SELECT title, username FROM blog_post b
+                SELECT title, username, b.id FROM blog_post b
                 INNER JOIN date ON date.id = publication_date_id
                 INNER JOIN user ON user.id = writer_id
                 ORDER BY date.date DESC
