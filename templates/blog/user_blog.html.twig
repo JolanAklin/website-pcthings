@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | {{ user.getUsername }}'s Blog
+PCThings | {{ user.getDisplayedNickName }}'s Blog
 {% endblock %}
 
 {% block pageTitle %}
-{{ user.getUsername }}'s Blog
+{{ user.getDisplayedNickName }}'s Blog
 {% endblock %}
 
 {% block bgImage %}

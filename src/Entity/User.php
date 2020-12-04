@@ -66,6 +66,11 @@ class User implements UserInterface
      */
     private $blogImage;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $displayedNickName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -207,6 +212,18 @@ class User implements UserInterface
     public function setBlogImage(?Image $blogImage): self
     {
         $this->blogImage = $blogImage;
+
+        return $this;
+    }
+
+    public function getDisplayedNickName(): ?string
+    {
+        return $this->displayedNickName;
+    }
+
+    public function setDisplayedNickName(string $displayedNickName): self
+    {
+        $this->displayedNickName = $displayedNickName;
 
         return $this;
     }

@@ -22,7 +22,7 @@ class EditUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, [
+            ->add('displayedNickName', TextType::class, [
                 'attr'=> ['class'=>'input'],
                 'constraints' => [
                     new Regex([

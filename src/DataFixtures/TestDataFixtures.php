@@ -60,6 +60,7 @@ class TestDataFixtures extends Fixture
         $user->setFirstName("Jean");
         $user->setLastName("DuPont");
         $user->setUsername("jeanDu");
+        $user->setDisplayedNickName("j3an");
         $user->setEmail("jean@mail.com");
         $user->setBlogImage($image);
         $user->setRegistrationDate($date);
@@ -76,6 +77,7 @@ class TestDataFixtures extends Fixture
         $user1->setFirstName("Jack");
         $user1->setLastName("Skdj");
         $user1->setUsername("Jacky");
+        $user1->setDisplayedNickName("J4CKY");
         $user1->setEmail("jack@skdj.com");
         $user1->setBlogImage($image);
         $user1->setRoles(['ROLE_USER']);

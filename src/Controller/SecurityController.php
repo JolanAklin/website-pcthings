@@ -15,6 +15,8 @@ use Error;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
@@ -47,7 +49,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    public function editUserSelf(Request $request)
+    public function editUserSelf(Request $request, ValidatorInterface $validator)
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $error = null;
@@ -56,11 +58,12 @@ class SecurityController extends AbstractController
         try {
             $errors = [];
             $form->handleRequest($request);
+            //update the user's infos
             if ($form->isSubmitted() && $form->isValid()) {
     
-                //update the password
                 $user = $form->getData();
-
+                
+                //update the password
                 $pass = $form->get('password')->getData();
                 if($pass !== null && $pass != "")
                 {
@@ -71,19 +74,27 @@ class SecurityController extends AbstractController
                 }
                 
 
+                //move the uploaded profile picture
                 if($form->get('profilPic')->getData() !== null)
                 {
                     $userProfilPic = $form->get('profilPic')->getData();
                     $userProfilPic->move($this->getParameter('profil_pic_dir'), $user->getProfilPic());
                 }
-    
+
+                //validate if the user object is valide for doctrine
+                $validator_errors = $validator->validate($user);
+                if(count($validator_errors)!=0)
+                {
+                    throw new \LogicException('User couldn\'t be validated');   
+                }
+
                 //persist the user entity
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
 
+                //return page if everything is ok
                 $this->addFlash('success', 'Your account has been successfully updates');
-    
                 return $this->redirectToRoute('edit_user', $request->query->all());
             }
             if($form->isSubmitted())
@@ -101,6 +112,7 @@ class SecurityController extends AbstractController
             array_push($errors, $error);
         }
 
+        //return page in case of errors
         return $this->render('security/edit_user.html.twig', 
         ['errors' => $errors,
         'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),

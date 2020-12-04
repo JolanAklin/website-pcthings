@@ -53,7 +53,7 @@ class BlogPostRepository extends ServiceEntityRepository
                 $offset = $page * 10;
                 $entityManager = $this->getEntityManager();
                 $query = $entityManager->createQueryBuilder()
-                    ->select('u.username, u.profilPic')
+                    ->select('u.username, u.profilPic', 'u.displayedNickName')
                     ->from('App\Entity\BlogPost','b')
                     ->innerJoin('App\Entity\User', 'u')
                     ->innerJoin('App\Entity\Date', 'd')
