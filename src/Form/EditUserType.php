@@ -24,13 +24,6 @@ class EditUserType extends AbstractType
         $builder
             ->add('displayedNickName', TextType::class, [
                 'attr'=> ['class'=>'input'],
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/\s/',
-                        'match' => false,
-                        'message' => 'Your username mustn\'t contain a white space',
-                    ])
-                ]
             ])
             ->add('password', PasswordType::class, [
                 'attr'=> ['class'=>'input'],

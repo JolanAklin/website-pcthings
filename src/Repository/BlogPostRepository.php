@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\BlogPost;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method BlogPost|null find($id, $lockMode = null, $lockVersion = null)
@@ -73,17 +74,12 @@ class BlogPostRepository extends ServiceEntityRepository
     public function findBlogByDate()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT title, username, b.id FROM blog_post b
-                INNER JOIN date ON date.id = publication_date_id
-                INNER JOIN user ON user.id = writer_id
-                ORDER BY date.date DESC
-                LIMIT 5
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT b.title, u.username, b.id FROM App\Entity\BlogPost b
+                JOIN b.publicationDate d
+                JOIN b.writer u
+                ORDER BY d.date DESC');
+            $query->setMaxResults(5);
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
@@ -92,15 +88,10 @@ class BlogPostRepository extends ServiceEntityRepository
     public function CountBlogPostWriter()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT COUNT(DISTINCT user.id) as count FROM user
-                INNER JOIN blog_post ON user.id = writer_id
-                INNER JOIN date ON date.id = publication_date_id
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT COUNT(DISTINCT u.id) as count FROM App\Entity\BlogPost b
+                JOIN b.writer u
+                JOIN b.publicationDate d');
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
@@ -112,15 +103,9 @@ class BlogPostRepository extends ServiceEntityRepository
             $user = filter_var($user, FILTER_SANITIZE_STRING);
             if($user !== null && $user !== false)
             {
-                $conn = $this->getEntityManager()->getConnection();
-                $sql = '
-                    SELECT COUNT(*) as count FROM blog_post
-                    INNER JOIN user on user.id = blog_post.writer_id
-                    WHERE user.username = :user
-                    ';
-                $stmt = $conn->prepare($sql);
-                $stmt->execute(['user' => $user]);
-                return $stmt->fetchAll();
+                $query = $this->getEntityManager()->createQuery('SELECT COUNT(b.id) as count FROM App\Entity\BlogPost b JOIN b.writer u WHERE u.username = :user')
+                ->setParameter('user', $user);
+                return $query->getResult();
             }
         } catch (\Throwable $th) {
             die();
