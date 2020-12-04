@@ -23,7 +23,7 @@ class ImportController extends AbstractController
         $this->denyAccessUnlessGranted("ROLE_IMPORT");
 
         $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
-        $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
+        $pagesTot = ceil($countImage[0]['count']/8);
         if($pagesTot != 0)
         {
             if($page > $pagesTot || $page <= 0)

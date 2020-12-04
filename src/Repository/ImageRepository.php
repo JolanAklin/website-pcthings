@@ -42,13 +42,8 @@ class ImageRepository extends ServiceEntityRepository
     public function CountImages()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT COUNT(*) FROM image
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT COUNT(i.id) as count FROM App\Entity\Image i');
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
