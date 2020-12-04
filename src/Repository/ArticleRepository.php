@@ -40,16 +40,11 @@ class ArticleRepository extends ServiceEntityRepository
     public function findArticleByDate()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT title, path_title FROM article a
-                INNER JOIN date ON date.id = publication_date_id
-                ORDER BY date.date DESC
-                LIMIT 5
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT a.title, a.pathTitle FROM App\Entity\Article a
+                JOIN a.publicationDate d
+                ORDER BY d.date DESC');
+            $query->setMaxResults(5);
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
@@ -79,13 +74,8 @@ class ArticleRepository extends ServiceEntityRepository
     public function CountArticle()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT COUNT(*) FROM article
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT COUNT(a.id) as count FROM App\Entity\Article a');
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }

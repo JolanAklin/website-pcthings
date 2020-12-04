@@ -21,7 +21,7 @@ class HomeController extends AbstractController
     public function Pages($page)
     {
         $countArticle = $this->getDoctrine()->getRepository(Article::class)->CountArticle();
-        $pagesTot = ceil($countArticle[0]['COUNT(*)']/10);
+        $pagesTot = ceil($countArticle[0]['count']/10);
         if($pagesTot != 0)
         {
             if($page > $pagesTot || $page <= 0)
