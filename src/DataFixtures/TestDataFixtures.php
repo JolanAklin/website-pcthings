@@ -65,7 +65,7 @@ class TestDataFixtures extends Fixture
         $user->setBlogImage($image);
         $user->setRegistrationDate($date);
         $user->setRoles(['ROLE_ADMIN']);
-        $user->setProfilPic("/images/profile_pictures/profile_pic_jean.jpg");
+        $user->setProfilPic(uniqid("user_profil_pic_", true));
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             'abcd'
@@ -82,7 +82,7 @@ class TestDataFixtures extends Fixture
         $user1->setBlogImage($image);
         $user1->setRoles(['ROLE_USER']);
         $user1->setRegistrationDate($date);
-        $user1->setProfilPic("/images/profile_pictures/jack_profile_pic.jpg");
+        $user1->setProfilPic(uniqid("user_profil_pic_", true));
         $user1->setPassword($this->passwordEncoder->encodePassword(
             $user1,
             'abcd'

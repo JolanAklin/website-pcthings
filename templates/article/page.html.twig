@@ -18,7 +18,7 @@ PCThings | {{ page.getTitle }}
 {% block mainText %}
 <div class="info">
     <div class="writer">
-        <img src="{{ page.getWriter.getProfilPic }}">
+        <img src={{ profil_pic_dir }}{{ asset(page.getWriter.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'">
         <div>{{ page.getWriter.getDisplayedNickName }}</div>
     </div>
     <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>

@@ -216,7 +216,7 @@ a:hover {
 	height: 100%;
 }
 
-#navBar div:last-child {
+#navBar div:last-child() {
 	width: 50%;
 }
 
@@ -1013,8 +1013,9 @@ form {
 		display: block;
 	}
 
-	#navBar button:nth-child(1n+3) {
+	#navBar button:nth-child(n):not(#menu) {
 		display: none;
+		order: 100;
 	}
 	.all-width-when-small-screen {
 		width: 100%;

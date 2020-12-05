@@ -13,17 +13,17 @@
 		
         <nav id="navBar">
 			<div id="website-title" onclick="window.location.href='/';"><img src="{{ asset("images/logos/logo_pcthings.png")}}"/></div>
-			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
 			<button onclick="window.location.href='/pages';">Pages</button>
 			<button onclick="window.location.href='/blog';">Blog</button>
 			<button onclick="window.location.href='/contact';">Contact</button>
 			{% if is_granted('ROLE_IMPORT') %}
-				<button onclick="window.location.href='/import-picture';">import picture</button>
+			<button onclick="window.location.href='/import-picture';">import picture</button>
 			{% endif %}
 			
 			{% if app.user %}
-				<img src="{{ asset(app.user.getProfilPic) }}" class="profile-button" onclick="window.location.href='/modify-account';"></img>
+			<img src={{ profil_pic_dir }}{{ asset(app.user.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'" class="profile-button" id="profile-button" onclick="window.location.href='/modify-account';"></img>
 			{% endif %}
+			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
 		</nav>
 		<div class="background-image" style='background: linear-gradient(transparent, var(--color-lighter)), url({% block bgImage %}{% endblock %}) no-repeat center; background-size: cover; background-position: center;'>
 			<img src="{% block bgImageAff %}{% endblock %}" style="visibility: hidden;" />
