@@ -71,6 +71,11 @@ class User implements UserInterface
      */
     private $displayedNickName;
 
+    /**
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $lastLoginAttempt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,6 +229,18 @@ class User implements UserInterface
     public function setDisplayedNickName(string $displayedNickName): self
     {
         $this->displayedNickName = $displayedNickName;
+
+        return $this;
+    }
+
+    public function getLastLoginAttempt(): ?string
+    {
+        return $this->lastLoginAttempt;
+    }
+
+    public function setLastLoginAttempt(?string $lastLoginAttempt): self
+    {
+        $this->lastLoginAttempt = $lastLoginAttempt;
 
         return $this;
     }

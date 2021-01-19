@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -73,6 +74,20 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Username could not be found.');
         }
+        // deny acces if the next try is too close in time
+        if($user->getLastLoginAttempt() !== Null)
+        {
+            if($user->getLastLoginAttempt() + 5 >= (new \DateTime())->getTimestamp())
+            {
+                // the user need to wait before trying again
+                throw new CustomUserMessageAuthenticationException('Wait 5sec before trying again.');
+            }
+        }
+
+        // set the last login attempt to protect from brutforce
+        $user->setLastLoginAttempt((new \DateTime())->getTimestamp());
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         return $user;
     }

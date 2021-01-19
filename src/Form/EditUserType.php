@@ -38,6 +38,11 @@ class EditUserType extends AbstractType
                         'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
                         'match' => true,
                         'message' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number and one special character (@, $, !, %, *, ?, &)',
+                    ]),
+                    new Regex([
+                        'pattern' => '/\s/',
+                        'match' => false,
+                        'message' => 'Your password mustn\'t contain a white space',
                     ])
                 ]
             ])
@@ -47,7 +52,7 @@ class EditUserType extends AbstractType
                     new Regex([
                         'pattern' => '/\s/',
                         'match' => false,
-                        'message' => 'Your username mustn\'t contain a white space',
+                        'message' => 'Your first name mustn\'t contain a white space',
                     ])
                 ]
             ])
@@ -57,7 +62,7 @@ class EditUserType extends AbstractType
                     new Regex([
                         'pattern' => '/\s/',
                         'match' => false,
-                        'message' => 'Your username mustn\'t contain a white space',
+                        'message' => 'Your lastname mustn\'t contain a white space',
                     ])
                 ]
             ])
