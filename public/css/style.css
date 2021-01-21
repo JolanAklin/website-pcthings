@@ -777,15 +777,45 @@ form {
 .post-link {
 	cursor: pointer;
 	margin: 5px;
-	flex-grow: 1;
-	flex-basis: 400px !important;
 	background-color: var(--color-lighter);
 	transition: all 0.5s;
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
-.post-link > img{
-
+.arrow {
+	width: 15px !important;
+	display: flex;
+	opacity: 0;
+	transition: all 0.5s;
+}
+.post-link-content {
+	margin: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.post-link-content > img{
+	width: auto !important;
+	height: 70px !important;
+}
+.post-link-content > div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.post-link-content > p{
+	font-size: 0.7em;
+	align-self: flex-end;
+	margin: 0px;
+	width: auto !important;
+	word-break: keep-all;
+}
+.post-link-content > div > p:nth-child(1) {
+	font-size: 1.2em;
+	margin: 0px;
+}
+.post-link-content > div > p {
+	margin: 0px;
 }
 .post-link:hover {
 	background-color: var(--color-accent-darker);
@@ -795,6 +825,9 @@ form {
 	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
 	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
+}
+.post-link:hover .arrow {
+	opacity: 1;
 }
 
 .blog-post:nth-child(n+2) {
