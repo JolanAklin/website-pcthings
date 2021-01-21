@@ -97,6 +97,21 @@ class TestDataFixtures extends Fixture
         $category1 = new Category();
         $category1->setName("web");
         $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("réseau");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("Systeme");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("Linux");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("Windows");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("C#");
+        $manager->persist($category1);
 
         for ($i=0; $i < 11; $i++) { 
             $article = new Article();

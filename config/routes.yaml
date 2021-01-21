@@ -43,6 +43,14 @@ user_blog:
     requirements: 
         page: '\d+'
 
+user_blog_post:
+    path: /blog-post/{blogId}
+    controller: App\Controller\BlogController::ShowBlogId
+    defaults:
+        blogId: 1
+    requirements: 
+        blogId: '\d+'
+
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------
@@ -86,6 +94,20 @@ imported_picture_modif:
     requirements: 
         imageId: '\d+'
 
+#--------------------------------------------------
+# End of ImportController's routes
+#--------------------------------------------------
+
+#--------------------------------------------------
+# Start of ImportController's routes
+#--------------------------------------------------
+category_index:
+    path: /category
+    controller: App\Controller\CategoryController::index
+
+category_list:
+    path: /category/{name}
+    controller: App\Controller\CategoryController::categoryList
 #--------------------------------------------------
 # End of ImportController's routes
 #--------------------------------------------------

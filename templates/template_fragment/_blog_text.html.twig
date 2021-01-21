@@ -7,7 +7,7 @@
             {{ blogPost.getContent }}
         </div>
         <div class="info">
-            <div>Category: <a src="#">{{ blogPost.getCategory.getName}}</a></div>
+            <div>Category: <a href={{ path("category_list", {name: blogPost.getCategory.getName}) }}>{{ blogPost.getCategory.getName}}</a></div>
             <div>{{ blogPost.getPublicationDate.getDate|date("d/m/Y") }}</div>
         </div>
     </div>

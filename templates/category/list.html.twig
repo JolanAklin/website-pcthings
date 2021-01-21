@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Categories
+{% endblock %}
+
+{% block pageTitle %}
+Categories
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block mainText %}
+<div class="v-container all-width">
+    <div class="category-object-list">
+        <div class="category-list">
+            <h2>Articles</h2>
+            {% if articles|length > 0 %}
+                {% for article in articles %}
+                    {{ include('template_fragment/_list_article.html.twig', {article: article}) }}
+                {% endfor %}
+            {% else %}
+                <p>Nothing to show here</p>
+            {% endif %}
+        </div>
+        <div class="category-list">
+            <h2>Blog posts</h2>
+            {% if blogPosts|length > 0 %}
+                {% for blogPost in blogPosts %}
+                    {{ include('template_fragment/_list_blog.html.twig', {blogPost: blogPost}) }}
+                {% endfor %}
+            {% else %}
+                <p>Nothing to show here</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

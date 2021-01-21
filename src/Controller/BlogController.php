@@ -13,8 +13,6 @@ class BlogController extends AbstractController
 {
     public function ShowBlog($username, $page)
     {
-        try {
-            
             $username = filter_var($username, FILTER_SANITIZE_STRING);
             if($username != "" && $username !== null && $username !== false)
             {
@@ -60,8 +58,22 @@ class BlogController extends AbstractController
             {
                 throw $this->createNotFoundException('The user does not exist');
             }
-        } catch (\Throwable $th) {
-            throw $this->createNotFoundException('The user does not exist');
+    }
+
+    public function ShowBlogId($blogId)
+    {
+        $blogId = filter_var($blogId, FILTER_SANITIZE_STRING);
+        if($blogId !== null && $blogId !== false)
+        {
+            $blogPost = $this->getDoctrine()->getRepository(BlogPost::class)->find($blogId);
+            if($blogId !== null)
+            {
+                return $this->render('blog/blog_post.html.twig', [
+                    'blogPost' => $blogPost,
+                    'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
+                    'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
+                ]);
+            }
         }
     }
 }
