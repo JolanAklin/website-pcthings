@@ -1,22 +1,22 @@
-
+---
 #--------------------------------------------------
 # Start of HomeController's routes
 #--------------------------------------------------
 index:
-    path: /
-    controller: App\Controller\HomeController::index
+  path: /
+  controller: App\Controller\HomeController::index
 
 pages:
-    path: /pages
-    controller: App\Controller\HomeController::pages
+  path: /pages
+  controller: App\Controller\HomeController::pages
 
 blog:
-    path: /blog
-    controller: App\Controller\HomeController::blog
+  path: /blog
+  controller: App\Controller\HomeController::blog
 
 contact:
-    path: /contact
-    controller: App\Controller\HomeController::contact
+  path: /contact
+  controller: App\Controller\HomeController::contact
 
 #--------------------------------------------------
 # End of HomeController's routes
@@ -27,10 +27,10 @@ contact:
 #--------------------------------------------------
 
 user_blog:
-    path: /blog/{username}
-    controller: App\Controller\BlogController::ShowBlog
-    defaults:
-        username: ""
+  path: /blog/{username}
+  controller: App\Controller\BlogController::ShowBlog
+  defaults:
+    username: ""
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------
@@ -39,8 +39,12 @@ user_blog:
 # Start of ArticleController's routes
 #--------------------------------------------------
 page:
-    path: /pages/{pathTitle}
-    controller: App\Controller\ArticleController::showPage
+  path: /pages/{pathTitle}
+  controller: App\Controller\ArticleController::showPage
+
+edit:
+  path: /pages/{pathTitle}/edit
+  controller: App\Controller\ArticleController::editPage
 #--------------------------------------------------
 # End of ArticleControllers routes
 #--------------------------------------------------
@@ -49,8 +53,8 @@ page:
 # Start of SecurityController's routes
 #--------------------------------------------------
 edit_user:
-    path: /modify-account
-    controller: App\Controller\SecurityController::editUserSelf
+  path: /modify-account
+  controller: App\Controller\SecurityController::editUserSelf
 #--------------------------------------------------
 # End of SecurityController's routes
 #--------------------------------------------------
@@ -59,21 +63,20 @@ edit_user:
 # Start of ImportController's routes
 #--------------------------------------------------
 import_picture:
-    path: /import-picture/{page}
-    controller: App\Controller\ImportController::importPicture
-    defaults:
-        page: 1
-    requirements: 
-        page: '\d+'
+  path: /import-picture/{page}
+  controller: App\Controller\ImportController::importPicture
+  defaults:
+    page: 1
+  requirements:
+    page: '\d+'
 
 imported_picture_modif:
-    path: /import-picture/modify/{imageId}
-    controller: App\Controller\ImportController::modifyPicture
-    defaults:
-        iamgeId: 1
-    requirements: 
-        imageId: '\d+'
-
+  path: /import-picture/modify/{imageId}
+  controller: App\Controller\ImportController::modifyPicture
+  defaults:
+    iamgeId: 1
+  requirements:
+    imageId: '\d+'
 #--------------------------------------------------
 # End of ImportController's routes
 #--------------------------------------------------

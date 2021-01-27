@@ -23,9 +23,8 @@ PCThings | {{ page.getTitle }}
     </div>
     <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>
     <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
-    {% if app.user == page.getWriter %}
-				<a href="{{ "/pages/" ~ page.getPathTitle ~ "/edit"}}">edit</a>
-    {% endif %}
 </div>
-{{ page.getContent|raw }}
+{# {{ page.getContent|raw }} #}
+<div id="root"></div>
+{{ encore_entry_script_tags('app') }}
 {% endblock %}
