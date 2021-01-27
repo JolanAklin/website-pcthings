@@ -21,49 +21,18 @@ const CustomEditor = {
       { match: (n) => Editor.isBlock(editor, n) }
     );
   },
-  isBoldMarkActive(editor) {
+  isLeafMarkActive(editor, type) {
     const [match] = Editor.nodes(editor, {
-      match: (n) => n.bold,
-      universal: true,
-    });
-
-    return !!match;
-  },
-  toggleBoldMark(editor) {
-    const isActive = CustomEditor.isBoldMarkActive(editor);
-    Transforms.setNodes(
-      editor,
-      { bold: isActive ? null : true },
-      { match: (n) => Text.isText(n), split: true }
-    );
-  },
-  isItalicMarkActive(editor) {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => n.italic,
+      match: (n) => n[type],
       universal: true,
     });
     return !!match;
   },
-  toggleItalicMark(editor) {
-    const isActive = CustomEditor.isItalicMarkActive(editor);
+  toggleLeafMark(editor, type) {
+    const isActive = CustomEditor.isLeafMarkActive(editor, type);
     Transforms.setNodes(
       editor,
-      { italic: isActive ? null : true },
-      { match: (n) => Text.isText(n), split: true }
-    );
-  },
-  isUnderlineMarkActive(editor) {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => n["underlined"],
-      universal: true,
-    });
-    return !!match;
-  },
-  toggleUnderlineMark(editor) {
-    const isActive = CustomEditor.isUnderlineMarkActive(editor);
-    Transforms.setNodes(
-      editor,
-      { underlined: isActive ? null : true },
+      { [type]: isActive ? null : true },
       { match: (n) => Text.isText(n), split: true }
     );
   },

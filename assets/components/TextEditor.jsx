@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { Slate, Editable, withReact } from "slate-react";
 import { createEditor } from "slate";
+import { withHistory } from "slate-history";
 import CustomEditor from "../editor";
 import {
   FirstHeadElement,
@@ -11,7 +12,7 @@ import {
 } from "./elements";
 
 var TextEditor = () => {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withReact(withHistory(createEditor())), []);
 
   const [value, setValue] = useState([
     { type: "paragraph", children: [{ text: "A line of text" }] },
@@ -21,7 +22,6 @@ var TextEditor = () => {
     setValue(newValue);
   };
   const renderElement = useCallback(({ attributes, children, element }) => {
-    console.log({ ...element });
     switch (element.type) {
       case "h1":
         return <FirstHeadElement {...attributes}>{children}</FirstHeadElement>;
@@ -66,17 +66,17 @@ var TextEditor = () => {
       }
       case "b": {
         e.preventDefault();
-        CustomEditor.toggleBoldMark(editor);
+        CustomEditor.toggleLeafMark(editor, "bold");
         break;
       }
       case "i": {
         e.preventDefault();
-        CustomEditor.toggleItalicMark(editor);
+        CustomEditor.toggleLeafMark(editor, "italic");
         break;
       }
       case "u": {
         e.preventDefault();
-        CustomEditor.toggleUnderlineMark(editor);
+        CustomEditor.toggleLeafMark(editor, "underlined");
       }
     }
   };
