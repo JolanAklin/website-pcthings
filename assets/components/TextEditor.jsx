@@ -81,7 +81,7 @@ var TextEditor = () => {
     }
   };
   return (
-    <Slate editor={editor} value={value} onChange={onChange}>
+    <Slate editor={editor} value={value} {props.editable ? onChange={onChange} : ''}>
       <Editable
         onKeyDown={onKeyDown}
         renderElement={renderElement}

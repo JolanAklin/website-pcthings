@@ -54,8 +54,7 @@ class TestDataFixtures extends Fixture
         $date = new Date();
         $date->setDate(new \DateTime());
 
-        $manager->persist($date);
-
+        $manager->persist($date);        
         $user = new User();
         $user->setFirstName("Jean");
         $user->setLastName("DuPont");
