@@ -178,14 +178,14 @@ footer {
 }
 
 
-a {
+a:not(.post-link) {
 	transition: all 0.3s;
 	color: var(--color-accent-darker);
 	font-family: "QuickSandBold";
 	text-decoration: initial;
 }
 
-a:hover {
+a:hover:not(.post-link) {
 	color: var(--color-accent);
 }
 
@@ -1000,6 +1000,15 @@ form {
 }
 
 @media screen and (max-width: 700px) {
+
+	.post-link-content {
+		flex-direction: column;
+	}
+	.post-link-content > img {
+		width: 70% !important;
+		height: auto !important;
+	}
+
 	.editUserForm > div div {
 		flex-direction: column;
 	}
