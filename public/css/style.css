@@ -783,6 +783,15 @@ form {
 	flex-direction: row;
 	align-items: center;
 }
+.blog-link {
+	cursor: pointer;
+	margin: 5px;
+	background-color: var(--color-lighter);
+	transition: all 0.5s;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
 .arrow {
 	width: 15px !important;
 	display: flex;
@@ -795,11 +804,26 @@ form {
 	flex-direction: row;
 	align-items: center;
 }
+.blog-link-content {
+	margin: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.blog-link-content > img{
+	border-radius: 100%;
+	width: 70px !important;
+	height: 70px !important;
+}
 .post-link-content > img{
 	width: auto !important;
 	height: 70px !important;
 }
 .post-link-content > div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.blog-link-content > div {
 	padding-left: 5px;
 	padding-right: 5px;
 }
@@ -811,6 +835,10 @@ form {
 	word-break: keep-all;
 }
 .post-link-content > div > p:nth-child(1) {
+	font-size: 1.2em;
+	margin: 0px;
+}
+.blog-link-content > div > p {
 	font-size: 1.2em;
 	margin: 0px;
 }
@@ -826,7 +854,19 @@ form {
 	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
 }
+.blog-link:hover {
+	background-color: var(--color-accent-darker);
+	margin: 1px;
+	padding: 4px;
+	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	z-index: 100;
+}
 .post-link:hover .arrow {
+	opacity: 1;
+}
+.blog-link:hover .arrow {
 	opacity: 1;
 }
 
