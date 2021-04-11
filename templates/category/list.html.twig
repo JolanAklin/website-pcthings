@@ -7,6 +7,9 @@ PCThings | Categories
 {% block pageTitle %}
 {{ category.getName }} category
 {% endblock %}
+{% block return %}
+<a href="{{ path("category_index") }}">⇽ Categories</a>
+{% endblock %}
 
 {% block bgImage %}
 {{ asset("images/page_header/home_image_header.jpg")}}

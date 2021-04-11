@@ -7,6 +7,9 @@ PCThings | {{ user.getDisplayedNickName }}'s Blog
 {% block pageTitle %}
 {{ user.getDisplayedNickName }}'s Blog
 {% endblock %}
+{% block return %}
+<a href="{{ path("blog") }}">⇽ Blogs</a>
+{% endblock %}
 
 {% block bgImage %}
 {{ asset(user.getBlogImage.getPath)}}

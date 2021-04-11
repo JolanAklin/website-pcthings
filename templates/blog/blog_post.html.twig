@@ -7,6 +7,9 @@ PCThings | {{ blogPost.getWriter.getDisplayedNickName }}'s Blog
 {% block pageTitle %}
 <a class="title-link" href="{{ path("user_blog", {username: blogPost.getWriter.getUsername, page: 1}) }}">{{ blogPost.getWriter.getDisplayedNickName }}'s Blog</a>
 {% endblock %}
+{% block return %}
+<a href="{{ path("category_list", {name: blogPost.getCategory.getName}) }}">⇽ {{ blogPost.getCategory.getName }} category</a>
+{% endblock %}
 
 {% block bgImage %}
 {{ asset(blogPost.getWriter.getBlogImage.getPath)}}
