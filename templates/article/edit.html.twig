@@ -16,15 +16,27 @@ PCThings | {{ page.getTitle }}
 {% endblock %} 
 
 {% block mainText %}
-<div class="info">
-    <div class="writer">
-        <img src="{{ page.getWriter.getProfilPic }}">
-        <div>{{ page.getWriter.getUsername }}</div>
-    </div>
-    <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>
-    <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
+<div class="h-container">
+    <div class="edit">
+        <div id="edit"></div>
+        <div>
+            <button id="AddTitle">Add a title</button>
+            <button id="AddSection">Add a section</button>
+        </div>
+        <div>
+            <button id="ToJson">To json</buttton>
+            <button id="ToHtml">To html</button>
+        </div>
+
 </div>
-{# {{ page.getContent|raw }} #}
-<div id="root"></div>
-{{ encore_entry_script_tags('app') }}
+
+<div class="preview">
+<div id="result">
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script type="module" src="{{asset("/scripts/edit/main.js")}}"></script>
 {% endblock %}
