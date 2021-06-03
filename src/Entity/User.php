@@ -17,7 +17,12 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $email;
+    
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
@@ -45,11 +50,6 @@ class User implements UserInterface
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $profilPic;
@@ -75,6 +75,7 @@ class User implements UserInterface
      * @ORM\Column(type="bigint", nullable=true)
      */
     private $lastLoginAttempt;
+
 
     public function getId(): ?int
     {
@@ -173,18 +174,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getProfilPic(): ?string
     {
         return $this->profilPic;
@@ -241,6 +230,18 @@ class User implements UserInterface
     public function setLastLoginAttempt(?string $lastLoginAttempt): self
     {
         $this->lastLoginAttempt = $lastLoginAttempt;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
