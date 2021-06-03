@@ -18,11 +18,12 @@ PCThings | {{ page.getTitle }}
 {% block mainText %}
 <div class="info">
     <div class="writer">
-        <img src="{{ page.getWriter.getProfilPic }}">
-        <div>{{ page.getWriter.getUsername }}</div>
+        <img src={{ profil_pic_dir }}{{ asset(page.getWriter.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'">
+        <div>{{ page.getWriter.getDisplayedNickName }}</div>
     </div>
-    <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>
+    <div>Category: <a href={{ path("category_list", {name: page.getCategory.getName}) }}>{{ page.getCategory.getName }}</a></div>
     <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
 </div>
+{# the raw pipe need to be removed #}
 {{ page.getContent|raw }}
 {% endblock %}

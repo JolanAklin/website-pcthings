@@ -23,10 +23,19 @@ class ImportController extends AbstractController
         $this->denyAccessUnlessGranted("ROLE_IMPORT");
 
         $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
-        $pagesTot = ceil($countImage[0]['COUNT(*)']/8);
-        if($page > $pagesTot || $page <= 0)
+        $pagesTot = ceil($countImage[0]['count']/8);
+        if($pagesTot != 0)
         {
-            return $this->redirectToRoute('import_picture');
+            if($page > $pagesTot || $page <= 0)
+            {
+                return $this->redirectToRoute('import_picture');
+            }
+        }else
+        {
+            if($page != 1)
+            {
+                return $this->redirectToRoute('import_picture');
+            }
         }
 
         $image = new Image();
@@ -77,11 +86,11 @@ class ImportController extends AbstractController
             array_push($errors, "An error occured at the reading of the form fields");
         }
 
-        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf10($page-1);
+        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf8($page);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 
-            array_push($pages, ['numero' => $i, 'link' => '/import-picture/'.$i]);
+            array_push($pages, ['numero' => $i]);
         }
         return $this->render('import/import_picture.html.twig', [
             'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
@@ -89,6 +98,7 @@ class ImportController extends AbstractController
             'images' => $images,
             'pages' => $pages,
             'currentPage' => $page,
+            'baseLink' => '/import-picture/',
             'form' => $form->createView(),
             'errors' => $errors
         ]);

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-PCThings | {{ user.getUsername }}'s Blog
+PCThings | {{ user.getDisplayedNickName }}'s Blog
 {% endblock %}
 
 {% block pageTitle %}
-{{ user.getUsername }}'s Blog
+{{ user.getDisplayedNickName }}'s Blog
 {% endblock %}
 
 {% block bgImage %}
@@ -21,4 +21,5 @@ PCThings | {{ user.getUsername }}'s Blog
         {{ include('template_fragment/_blog_text.html.twig', {blogPost: blogPost}) }}
     {% endfor %}
 </div>
+{{ include('template_fragment/_page_navigation.html.twig', {pages: nbPages, currentPage: currentPage, baseLink: baseLink}) }}
 {% endblock %}

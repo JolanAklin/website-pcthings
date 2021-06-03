@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | {{ blogPost.getWriter.getDisplayedNickName }}'s Blog
+{% endblock %}
+
+{% block pageTitle %}
+<a class="title-link" href="{{ path("user_blog", {username: blogPost.getWriter.getUsername, page: 1}) }}">{{ blogPost.getWriter.getDisplayedNickName }}'s Blog</a>
+{% endblock %}
+
+{% block bgImage %}
+{{ asset(blogPost.getWriter.getBlogImage.getPath)}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset(blogPost.getWriter.getBlogImage.getPath)}}
+{% endblock %}
+
+{% block mainText %}
+<div class="v-container all-width">
+    {{ include('template_fragment/_blog_text.html.twig', {blogPost: blogPost}) }}
+</div>
+{% endblock %}

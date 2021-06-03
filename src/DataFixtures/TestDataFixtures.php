@@ -60,11 +60,12 @@ class TestDataFixtures extends Fixture
         $user->setFirstName("Jean");
         $user->setLastName("DuPont");
         $user->setUsername("jeanDu");
+        $user->setDisplayedNickName("j3an");
         $user->setEmail("jean@mail.com");
         $user->setBlogImage($image);
         $user->setRegistrationDate($date);
         $user->setRoles(['ROLE_ADMIN']);
-        $user->setProfilPic("/images/profile_pictures/profile_pic_jean.jpg");
+        $user->setProfilPic(uniqid("user_profil_pic_", true));
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             'abcd'
@@ -76,11 +77,12 @@ class TestDataFixtures extends Fixture
         $user1->setFirstName("Jack");
         $user1->setLastName("Skdj");
         $user1->setUsername("Jacky");
+        $user1->setDisplayedNickName("J4CKY");
         $user1->setEmail("jack@skdj.com");
         $user1->setBlogImage($image);
         $user1->setRoles(['ROLE_USER']);
         $user1->setRegistrationDate($date);
-        $user1->setProfilPic("/images/profile_pictures/jack_profile_pic.jpg");
+        $user1->setProfilPic(uniqid("user_profil_pic_", true));
         $user1->setPassword($this->passwordEncoder->encodePassword(
             $user1,
             'abcd'
@@ -95,28 +97,47 @@ class TestDataFixtures extends Fixture
         $category1 = new Category();
         $category1->setName("web");
         $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("réseau");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("Systeme");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("Linux");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("Windows");
+        $manager->persist($category1);
+        $category1 = new Category();
+        $category1->setName("C#");
+        $manager->persist($category1);
 
-        $article = new Article();
-        $article->setTitle("FileTeleport");
-        $article->setDescription("a super file transfer app");
-        $article->setContent("<h1>New Update</h1><p>éoasirfhasuhilah ilhasli hliuahgl hdklfghlka shglkahrgéuhaiuhg filuahlt guhahligéuaegiruésa hkjahskljg haklsjdhgklasjd fég hklahd klhaséjgh éaerh édjfhj ahkl hakjgh lahgiwhrpiu airghaskljgh lka gasfg fégo iargh lkdjsghoezgoiàser géodsfgeshé jghsgkhésjhgg éjsdfhgkljshroptz hjfglduertusdfglkjsdfklgjbsldkfghiuhtéph eurtp98t hliuer gsdg jsrlti hsldifis r0ehgoisdfgohsdig lirgihsdf hglksjrg iushdg sdh</p><p>hailuhgkashdlk ahigrhkajhl haliutziahgfiuahsdkfljat liueaiuas liutwililashl ghaliu rt</p><a href='https://github.com/JolanAklin/FileTeleporter' target='_blank'>fileteport</a><p>gliasgluashlti uéoi aligliuaséitz alghliueargliushdgkhsep8rtzh egrhlise rt</p>");
-        $article->setHeaderImage($image);
-        $article->setPublicationDate($date);
-        $article->setCategory($category);
-        $article->setWriter($user);
-        $article->setThumbnail($image1);
-        $article->setPathTitle("new-fileteleport-update");
+        for ($i=0; $i < 11; $i++) { 
+            $article = new Article();
+            $article->setTitle("FileTeleport");
+            $article->setDescription("a super file transfer app");
+            $article->setContent("<h1>New Update</h1><p>éoasirfhasuhilah ilhasli hliuahgl hdklfghlka shglkahrgéuhaiuhg filuahlt guhahligéuaegiruésa hkjahskljg haklsjdhgklasjd fég hklahd klhaséjgh éaerh édjfhj ahkl hakjgh lahgiwhrpiu airghaskljgh lka gasfg fégo iargh lkdjsghoezgoiàser géodsfgeshé jghsgkhésjhgg éjsdfhgkljshroptz hjfglduertusdfglkjsdfklgjbsldkfghiuhtéph eurtp98t hliuer gsdg jsrlti hsldifis r0ehgoisdfgohsdig lirgihsdf hglksjrg iushdg sdh</p><p>hailuhgkashdlk ahigrhkajhl haliutziahgfiuahsdkfljat liueaiuas liutwililashl ghaliu rt</p><a href='https://github.com/JolanAklin/FileTeleporter' target='_blank'>fileteport</a><p>gliasgluashlti uéoi aligliuaséitz alghliueargliushdgkhsep8rtzh egrhlise rt</p>");
+            $article->setHeaderImage($image);
+            $article->setPublicationDate($date);
+            $article->setCategory($category);
+            $article->setWriter($user);
+            $article->setThumbnail($image1);
+            $article->setPathTitle("new-fileteleport-update".uniqid("",true));
+    
+            $manager->persist($article);
+        }
 
-        $manager->persist($article);
-
-        $blogPost = new BlogPost();
-        $blogPost->setTitle("Yaaaa");
-        $blogPost->setContent("saudfhésahdflsah lkjahslfk ghaskljdhhflkasfhas lgklasjhf kljashdkjkldfksdgkas hk jhsakldgfl hgaslkjdhiu lsa HDGJAHSG AJSDHGKSHF LK FHALIUSDGLASHDLFGASLIUHGLU lsaudfg liazsdfiu salifdh iuasdfilus aliuahsghlsiau hkjldsahgl uhsag kjashdg lukhasidlfia8ztrh ashglizas uhlksadfklu");
-        $blogPost->setWriter($user);
-        $blogPost->setCategory($category);
-        $blogPost->setPublicationDate($date);
-
-        $manager->persist($blogPost);
+        for ($i=0; $i < 11; $i++) { 
+            $blogPost = new BlogPost();
+            $blogPost->setTitle("Yaaaa");
+            $blogPost->setContent("saudfhésahdflsah lkjahslfk ghaskljdhhflkasfhas lgklasjhf kljashdkjkldfksdgkas hk jhsakldgfl hgaslkjdhiu lsa HDGJAHSG AJSDHGKSHF LK FHALIUSDGLASHDLFGASLIUHGLU lsaudfg liazsdfiu salifdh iuasdfilus aliuahsghlsiau hkjldsahgl uhsag kjashdg lukhasidlfia8ztrh ashglizas uhlksadfklu");
+            $blogPost->setWriter($user);
+            $blogPost->setCategory($category);
+            $blogPost->setPublicationDate($date);
+    
+            $manager->persist($blogPost);
+        }
 
         $blogPost = new BlogPost();
         $blogPost->setTitle("talking about web");

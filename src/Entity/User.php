@@ -50,7 +50,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $profilPic;
 
@@ -65,6 +65,16 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $blogImage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $displayedNickName;
+
+    /**
+     * @ORM\Column(type="bigint", nullable=true)
+     */
+    private $lastLoginAttempt;
 
     public function getId(): ?int
     {
@@ -207,6 +217,30 @@ class User implements UserInterface
     public function setBlogImage(?Image $blogImage): self
     {
         $this->blogImage = $blogImage;
+
+        return $this;
+    }
+
+    public function getDisplayedNickName(): ?string
+    {
+        return $this->displayedNickName;
+    }
+
+    public function setDisplayedNickName(string $displayedNickName): self
+    {
+        $this->displayedNickName = $displayedNickName;
+
+        return $this;
+    }
+
+    public function getLastLoginAttempt(): ?string
+    {
+        return $this->lastLoginAttempt;
+    }
+
+    public function setLastLoginAttempt(?string $lastLoginAttempt): self
+    {
+        $this->lastLoginAttempt = $lastLoginAttempt;
 
         return $this;
     }

@@ -19,12 +19,13 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function findByGroupOf10($page)
+    public function findByGroupOf8($page)
     {
         $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+        $page -= 1;
         if($page !== null && $page !== false)
         {
-            $offset = $page * 10;
+            $offset = $page * 8;
             return $this->createQueryBuilder('i')
                 ->orderBy('i.id', 'DESC')
                 ->setFirstResult($offset)
@@ -41,19 +42,11 @@ class ImageRepository extends ServiceEntityRepository
     public function CountImages()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT COUNT(*) FROM image
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT COUNT(i.id) as count FROM App\Entity\Image i');
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
-
-        /*$qb = $this->createQueryBuilder('i');
-        return $qb->getQuery()->getScalarResult();*/
     }
 
     // /**

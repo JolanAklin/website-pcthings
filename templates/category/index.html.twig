@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Categories
+{% endblock %}
+
+{% block pageTitle %}
+Categories
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block mainText %}
+<div class="v-container all-width">
+    <div class="category-row">
+        {% for category in categories %}
+            {{ include('template_fragment/_category.html.twig', {category: category}) }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
