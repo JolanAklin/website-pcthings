@@ -70,19 +70,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
-        // deny acces if the next try is too close in time
-        if ($user) {
-            if($user->getLastLoginAttempt() !== Null)
-            {
-                if($user->getLastLoginAttempt() + 5 >= (new \DateTime())->getTimestamp())
-                {
-                    // the user need to wait before trying again
-                    throw new CustomUserMessageAuthenticationException('Wait 5sec before trying again.');
-                }
-            }
-        }else{
+        if (!$user) {
+            // make the user wait if the email is wrong
+            sleep(5);
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('email could not be found.');
+            throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
         // set the last login attempt to protect from brutforce
@@ -95,7 +87,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        $isCredentialCorrect = $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        if($isCredentialCorrect)
+        {
+            return $isCredentialCorrect;
+        }else{
+            // make the user wait if the password is wrong
+            sleep(5);
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('Passwords are not matching.');
+        }
     }
 
     /**
