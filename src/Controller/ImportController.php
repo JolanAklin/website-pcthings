@@ -93,8 +93,6 @@ class ImportController extends AbstractController
             array_push($pages, ['numero' => $i]);
         }
         return $this->render('import/import_picture.html.twig', [
-            'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
             'images' => $images,
             'pages' => $pages,
             'currentPage' => $page,
@@ -142,8 +140,6 @@ class ImportController extends AbstractController
                 array_push($errors, "An error occured at the reading of the form fields");
             }
             return $this->render('import/import_picture_modify.html.twig', [
-                'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-                'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                 'form' => $form->createView(),
                 'image' => $image,
                 'errors' => $errors

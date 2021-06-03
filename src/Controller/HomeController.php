@@ -13,8 +13,6 @@ class HomeController extends AbstractController
     public function index()
     {
         return $this->render('home/index.html.twig', [
-            'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 
@@ -44,8 +42,6 @@ class HomeController extends AbstractController
         $pages = $this->getDoctrine()->getRepository(Article::class)->findByGroupOf10($page);
         return $this->render('home/pages.html.twig', [
             'pages' => $pages,
-            'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
             'nbPages' => $pagesArray,
             'baseLink' => '/pages/',
             'currentPage' => $page,
@@ -78,8 +74,6 @@ class HomeController extends AbstractController
         $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriterJoined($page);
         return $this->render('home/blog.html.twig', [
             'blogPostLinks' => $blogPostLinks,
-            'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
             'nbPages' => $pagesArray,
             'baseLink' => '/blog/',
             'currentPage' => $page,
@@ -90,8 +84,6 @@ class HomeController extends AbstractController
     {
         return $this->render('home/contact.html.twig', [
             'controller_name' => 'HomeController',
-            'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 }
