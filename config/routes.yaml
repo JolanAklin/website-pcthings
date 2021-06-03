@@ -112,3 +112,13 @@ category_list:
 # End of ImportController's routes
 #--------------------------------------------------
 
+#--------------------------------------------------
+# Start of About's routes
+#--------------------------------------------------
+about_user:
+    path: /about/user/{username}
+    controller: App\Controller\About::AboutUser
+#--------------------------------------------------
+# End of About's routes
+#--------------------------------------------------
+

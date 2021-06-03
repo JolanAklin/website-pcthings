@@ -109,6 +109,7 @@ button {
 	color: white;
 	height: 2.2em;
 	transition: all 0.5s;
+	font-weight: 700;
 }
 
 button:hover {

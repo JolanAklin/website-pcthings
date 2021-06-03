@@ -17,6 +17,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -45,11 +50,6 @@ class User implements UserInterface
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
      * @ORM\Column(type="string", length=255, unique=true)
      */
     private $profilPic;
@@ -72,9 +72,10 @@ class User implements UserInterface
     private $displayedNickName;
 
     /**
-     * @ORM\Column(type="bigint", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $lastLoginAttempt;
+    private $about = [];
+
 
     public function getId(): ?int
     {
@@ -173,18 +174,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getProfilPic(): ?string
     {
         return $this->profilPic;
@@ -233,14 +222,26 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLastLoginAttempt(): ?string
+    public function getEmail(): ?string
     {
-        return $this->lastLoginAttempt;
+        return $this->email;
     }
 
-    public function setLastLoginAttempt(?string $lastLoginAttempt): self
+    public function setEmail(string $email): self
     {
-        $this->lastLoginAttempt = $lastLoginAttempt;
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAbout(): ?array
+    {
+        return $this->about;
+    }
+
+    public function setAbout(?array $about): self
+    {
+        $this->about = $about;
 
         return $this;
     }

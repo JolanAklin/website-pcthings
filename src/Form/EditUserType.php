@@ -31,11 +31,11 @@ class EditUserType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new Length([
-                        'min' => 8,
+                        'min' => 10,
                         'minMessage' => 'Your password must be at least {{ limit }} characters long'
                     ]),
                     new Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/',
                         'match' => true,
                         'message' => 'Your password must contain at least one uppercase letter, one lowercase letter, one number and one special character (@, $, !, %, *, ?, &)',
                     ]),
