@@ -7,6 +7,9 @@ PCThings | {{ page.getTitle }}
 {% block pageTitle %}
 {{ page.getTitle }}
 {% endblock %}
+{% block return %}
+<a href="{{ path("pages") }}">⇽ Articles</a>
+{% endblock %}
 
 {% block bgImage %}
 {{ asset(page.getHeaderImage.getPath)}}

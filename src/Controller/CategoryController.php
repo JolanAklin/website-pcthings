@@ -26,7 +26,7 @@ class CategoryController extends AbstractController
         $name = filter_var($name, FILTER_SANITIZE_STRING);
         if($name !== null && $name !== false)
         {
-            $category = $this->getDoctrine()->getRepository(Category::class)->findBy(['name' => $name]);
+            $category = $this->getDoctrine()->getRepository(Category::class)->findOneBy(['name' => $name]);
             if($category !== null)
             {
                 return $this->render('category/list.html.twig', [
@@ -34,6 +34,7 @@ class CategoryController extends AbstractController
                     'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                     'articles' => $this->getDoctrine()->getRepository(Article::class)->findBy(['category' => $category]),
                     'blogPosts' => $this->getDoctrine()->getRepository(BlogPost::class)->findBy(['category' => $category]),
+                    'category' => $category,
                 ]);
             }
         }

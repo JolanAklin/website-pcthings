@@ -13,8 +13,8 @@
 		
         <nav id="navBar">
 			<div id="website-title" onclick="window.location.href='/';"><img src="{{ asset("images/logos/logo_pcthings.png")}}"/></div>
-			<button onclick="window.location.href='/pages';">Pages</button>
-			<button onclick="window.location.href='/blog';">Blog</button>
+			<button onclick="window.location.href='/pages';">Articles</button>
+			<button onclick="window.location.href='/blog';">Blogs</button>
 			<button onclick="window.location.href='/category';">Categories</button>
 			<button onclick="window.location.href='/contact';">Contact</button>
 			{% if is_granted('ROLE_IMPORT') %}
@@ -47,6 +47,7 @@
 				<div class="page-title">
 					{% block pageTitle %}{% endblock %}
 				</div>
+				<div>{% block return %}{% endblock %}</div>
 				<div class="main-text">
                     {% block mainText %}{% endblock %}
 				</div>

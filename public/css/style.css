@@ -178,14 +178,14 @@ footer {
 }
 
 
-a {
+a:not(.post-link) {
 	transition: all 0.3s;
 	color: var(--color-accent-darker);
 	font-family: "QuickSandBold";
 	text-decoration: initial;
 }
 
-a:hover {
+a:hover:not(.post-link) {
 	color: var(--color-accent);
 }
 
@@ -774,100 +774,100 @@ form {
 }
 
 
-.post-link,
-.blog-link {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	border-bottom: 1px solid white;
+.post-link {
+	cursor: pointer;
+	margin: 5px;
+	background-color: var(--color-lighter);
 	transition: all 0.5s;
-	cursor: default;
-
-}
-
-.blog-link {
-	border: none;
-}
-
-.post-link .post-link-content,
-.blog-link .blog-link-content {
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 }
-
-.post-link .post-link-content :nth-child(1n),
-.blog-link .blog-link-content :nth-child(1n) {
-	margin-top: 17px;
-	margin-bottom: 17px;
+.blog-link {
+	cursor: pointer;
+	margin: 5px;
+	background-color: var(--color-lighter);
+	transition: all 0.5s;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
-
-.post-link .post-link-content>img {
-	height: 120px !important;
-	width: auto !important;
-}
-
-.blog-link .blog-link-content>img {
-	height: 50px !important;
-	width: auto !important;
-	border-radius: 100%;
-}
-
-.post-link .post-link-content div,
-.blog-link .blog-link-content div {
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.post-link .post-link-content div p:nth-child(1) {
-	margin: 0px;
-	font-size: 1.2em;
-	font-weight: bold;
-}
-
-.blog-link .blog-link-content div p:nth-child(1) {
-	margin: 0px;
-	font-size: 1.2em;
-	font-weight: bold;
-	position: relative;
-	top: 50%;
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
-}
-
-.post-link .post-link-content div p:nth-child(2) {
-	margin: 0px;
-}
-
-.post-link .post-link-content :nth-child(3),
-.blog-link .blog-link-content :nth-child(3) {
-	padding-left: 10px;
-	align-self: flex-end;
-	font-size: 0.7em;
-	word-break: normal;
-	width: auto;
-}
-
-.post-link .arrow:last-child,
-.blog-link .arrow:last-child {
-	cursor: default;
-	font-size: 1.2em;
-	align-self: center;
-	display: inline-block;
-	position: relative;
+.arrow {
+	width: 15px !important;
+	display: flex;
 	opacity: 0;
-	width: 20px;
-	transition: 0.5s;
+	transition: all 0.5s;
 }
-
-.post-link:hover,
+.post-link-content {
+	margin: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.blog-link-content {
+	margin: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.blog-link-content > img{
+	border-radius: 100%;
+	width: 70px !important;
+	height: 70px !important;
+}
+.post-link-content > img{
+	width: auto !important;
+	height: 70px !important;
+}
+.post-link-content > div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.blog-link-content > div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.post-link-content > p{
+	font-size: 0.7em;
+	align-self: flex-end;
+	margin: 0px;
+	width: auto !important;
+	word-break: keep-all;
+}
+.post-link-content > div > p:nth-child(1) {
+	font-size: 1.2em;
+	margin: 0px;
+}
+.blog-link-content > div > p {
+	font-size: 1.2em;
+	margin: 0px;
+}
+.post-link-content > div > p {
+	margin: 0px;
+}
+.post-link:hover {
+	background-color: var(--color-accent-darker);
+	margin: 1px;
+	padding: 4px;
+	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	z-index: 100;
+}
 .blog-link:hover {
-	padding-left: 10px;
+	background-color: var(--color-accent-darker);
+	margin: 1px;
+	padding: 4px;
+	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	z-index: 100;
 }
-
-.post-link:hover .arrow:last-child,
-.blog-link:hover .arrow:last-child {
+.post-link:hover .arrow {
 	opacity: 1;
-	right: 0;
+}
+.blog-link:hover .arrow {
+	opacity: 1;
 }
 
 .blog-post:nth-child(n+2) {
@@ -1040,23 +1040,20 @@ form {
 }
 
 @media screen and (max-width: 700px) {
-	.post-link .post-link-content, .editUserForm > div div {
+
+	.post-link-content {
+		flex-direction: column;
+	}
+	.post-link-content > img {
+		width: 70% !important;
+		height: auto !important;
+	}
+
+	.editUserForm > div div {
 		flex-direction: column;
 	}
 	.editUserForm > div div label {
 		width: 100% !important;
-	}
-
-	.post-link .post-link-content>img {
-		height: auto !important;
-		width: calc(100% - 20px) !important;
-		margin-bottom: 0px !important;
-		padding: 0px 10px 0px 10px !important;
-	}
-
-	.post-link .post-link-content div {
-		width: calc(100% - 20px) !important;
-		margin-bottom: 0px !important;
 	}
 
 	.search-bar {

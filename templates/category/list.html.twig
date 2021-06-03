@@ -5,7 +5,10 @@ PCThings | Categories
 {% endblock %}
 
 {% block pageTitle %}
-Categories
+{{ category.getName }} category
+{% endblock %}
+{% block return %}
+<a href="{{ path("category_index") }}">⇽ Categories</a>
 {% endblock %}
 
 {% block bgImage %}

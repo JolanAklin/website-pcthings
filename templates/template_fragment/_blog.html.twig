@@ -1,4 +1,4 @@
-<div class="blog-link" onclick="window.location.href='{{ '/blog/' ~ blogPostLink.username }}';">
+<div class="blog-link" onclick="window.location.href='{{ path("user_blog", {username: blogPostLink.username}) }}';">
     <div class="blog-link-content">
         <img src={{ profil_pic_dir }}{{ asset(blogPostLink.profilPic) }} onerror="this.src='/images/icons/no_pic_user.png'">
         <div>
