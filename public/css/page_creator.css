@@ -1,0 +1,48 @@
+.edit {
+    width: 100%;
+}
+
+.page-element {
+    background-color: var(--color-lighter);
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+}
+.page-element-info-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+.page-element-input {
+    background-color: var(--color);
+    padding: 5px 10px 5px 10px;
+    caret-color: var(--color-accent);
+}
+
+.page-element-input.input-title {
+    font-size: 2em;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.page-element-input.input-title2 {
+    font-size: 1.4em;
+    color: white;
+    font-weight: 500;
+}
+
+.page-element-input.input-quote {
+    font-family: "ABeeZee";
+	padding: 10px;
+	font-size: var(--quote-size);
+}
+
+.page-element-input.input-quote:before {
+	content: '" ';
+}
+
+.page-element-input.input-quote:after {
+	content: ' "';
+}

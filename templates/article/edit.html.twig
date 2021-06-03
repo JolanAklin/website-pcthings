@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset("/css/page_creator.css") }}">{% endblock %}
+
 {% block title %}
 PCThings | {{ page.getTitle }}
 {% endblock %}
@@ -17,23 +19,7 @@ PCThings | {{ page.getTitle }}
 
 {% block mainText %}
 <div class="h-container">
-    <div class="edit">
-        <div id="edit"></div>
-        <div>
-            <button id="AddTitle">Add a title</button>
-            <button id="AddSection">Add a section</button>
-        </div>
-        <div>
-            <button id="ToJson">To json</buttton>
-            <button id="ToHtml">To html</button>
-        </div>
-
-</div>
-
-<div class="preview">
-<div id="result">
-</div>
-</div>
+    {{ include('template_fragment/text_editor/_text_editor.html.twig') }}
 </div>
 {% endblock %}
 
