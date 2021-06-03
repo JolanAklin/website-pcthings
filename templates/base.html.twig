@@ -32,12 +32,12 @@
 			<div class="v-container w-xs font-medium white border h-auto p-10 m-top-30 child-p-v-5 left-container">
 
 				<div class="font-medium font-bold">Article's latest</div>
-				{% for articles_latest_link in articles_latest %}
+				{% for articles_latest_link in NewsPanel.ArticlesLatest %}
 					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/pages/" ~ articles_latest_link.path_title, title:  articles_latest_link.title}) }}
 				{% endfor %}
 
 				<div class="font-medium font-bold">Blog's latest</div>
-				{% for blogs_latest_link in blogs_latest %}
+				{% for blogs_latest_link in NewsPanel.BlogsLatest %}
 					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/blog/" ~ blogs_latest_link.username, title:  blogs_latest_link.title}) }}
 				{% endfor %}
 

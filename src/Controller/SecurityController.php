@@ -42,8 +42,6 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', 
         ['last_username' => $lastUsername, 
         'error' => $error,
-        'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-        'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         ]);
     }
 
@@ -103,8 +101,6 @@ class SecurityController extends AbstractController
 
         return $this->render('security/edit_user.html.twig', 
         ['errors' => $errors,
-        'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-        'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
         'form' => $form->createView(),
         ]);
     }

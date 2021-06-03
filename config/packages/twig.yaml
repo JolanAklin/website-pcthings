@@ -1,2 +1,6 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+
+    globals:
+        # the value is the service's id
+        NewsPanel: '@App\Service\NewsPanel'
