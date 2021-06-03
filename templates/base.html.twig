@@ -34,7 +34,7 @@
 
 				<div class="font-medium font-bold">Article's latest</div>
 				{% for articles_latest_link in NewsPanel.ArticlesLatest %}
-					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/pages/" ~ articles_latest_link.path_title, title:  articles_latest_link.title}) }}
+					{{ include('template_fragment/_side_nav_entry.html.twig', {link: "/pages/" ~ articles_latest_link.pathTitle, title:  articles_latest_link.title}) }}
 				{% endfor %}
 
 				<div class="font-medium font-bold">Blog's latest</div>
