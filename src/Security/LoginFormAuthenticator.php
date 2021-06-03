@@ -77,11 +77,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
-        // set the last login attempt to protect from brutforce
-        $user->setLastLoginAttempt((new \DateTime())->getTimestamp());
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
         return $user;
     }
 
