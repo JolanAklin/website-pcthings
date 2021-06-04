@@ -3,16 +3,26 @@ import { Element } from "./Element.js";
 export function Code(idPosition) {
   this.addPositionNode = document.getElementById(idPosition);
   this.mainDiv = document.createElement("DIV");
+  this.codeTitle = document.createElement("DIV");
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
     // create a text element to display the element name
     var infoText = document.createElement("P");
     infoText.className = "page-element-info-text";
-    infoText.innerHTML = "Code";
+    infoText.innerHTML = "Code title";
     this.mainDiv.appendChild(infoText);
 
     this.mainDiv.className = "page-element input-code";
+    this.codeTitle.className = "page-element-input input-code-title"
+    this.codeTitle.contentEditable = true;
+    this.mainDiv.appendChild(this.codeTitle);
+
+    var infoText = document.createElement("P");
+    infoText.className = "page-element-info-text";
+    infoText.innerHTML = "Code";
+    this.mainDiv.appendChild(infoText);
+
     this.mainTextDiv.className = "page-element-input input-code";
     this.mainTextDiv.contentEditable = true;
     this.mainDiv.appendChild(this.mainTextDiv);
@@ -32,7 +42,7 @@ export function Code(idPosition) {
         content += encodeURIComponent(element.textContent + "\n");
       });
     }
-    return { Type:"code", Content: content };
+    return { Type:"code", Content: [ { Title : this.codeTitle.textContent }, { Content : content } ] };
   };
 
   /*

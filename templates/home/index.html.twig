@@ -43,13 +43,17 @@ Home
         <div>je-suis-un-autre-code.cs</div>
         <button>Copy</button>
     </div>
-    <pre><code>
-        <p>private int hello;</p>
-        <p>public void Start()</p>
-        <p>{</p>
-        <p style="margin-left:2em;">hello = 2;</p>
-        <p>}</p>
-    </code></pre>
+    <pre><code>using UnityEngine;
+
+public class Test : MonoBehaviour
+{
+    public Transform cube;
+    void Update()
+    {
+        int test = 0;
+        cube.Position = Vector3.Zero;
+    }
+}</code></pre>
 </div>
 <p></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>a</p>
 {% endblock %}

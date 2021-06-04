@@ -33,6 +33,10 @@
     font-weight: 500;
 }
 
+.page-element-input.input-code-title {
+    margin-bottom: 5px;
+}
+
 .page-element-input.input-quote {
     font-family: "ABeeZee";
 	padding: 10px;
