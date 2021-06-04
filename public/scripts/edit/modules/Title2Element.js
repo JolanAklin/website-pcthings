@@ -6,12 +6,7 @@ export function Title2(idPosition) {
   this.title = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    // create a text element to display the element name
-    var infoText = document.createElement("P");
-    infoText.className = "page-element-info-text";
-    infoText.innerHTML = "Title";
-    this.mainDiv.appendChild(infoText);
-
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Title 2"));
 
     this.mainDiv.className = "page-element input-title2";
     this.title.contentEditable = true;

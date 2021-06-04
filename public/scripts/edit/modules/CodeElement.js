@@ -7,11 +7,7 @@ export function Code(idPosition) {
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    // create a text element to display the element name
-    var infoText = document.createElement("P");
-    infoText.className = "page-element-info-text";
-    infoText.innerHTML = "Code title";
-    this.mainDiv.appendChild(infoText);
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Code title"));
 
     this.mainDiv.className = "page-element input-code";
     this.codeTitle.className = "page-element-input input-code-title"

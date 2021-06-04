@@ -6,11 +6,7 @@ export function Paragraph(idPosition) {
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    // create a text element to display the element name
-    var infoText = document.createElement("P");
-    infoText.className = "page-element-info-text";
-    infoText.innerHTML = "Paragraph";
-    this.mainDiv.appendChild(infoText);
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Paragraph"));
 
     this.mainDiv.className = "page-element input-paragraph";
     this.mainTextDiv.className = "page-element-input input-paragraph";
