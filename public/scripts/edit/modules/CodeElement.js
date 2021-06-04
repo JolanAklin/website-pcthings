@@ -1,13 +1,16 @@
 import { Element } from "./Element.js";
 
-export function Code(idPosition) {
-  this.addPositionNode = document.getElementById(idPosition);
+export function Code(idPosition, id, destroyFunction) {
+  this.id = id;
+  this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
+
+  this.addPositionNode = document.getElementById(idPosition);
   this.codeTitle = document.createElement("DIV");
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Code title"));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Code title", this.id, this.destroyFunction, this.mainDiv));
 
     this.mainDiv.className = "page-element input-code";
     this.codeTitle.className = "page-element-input input-code-title"

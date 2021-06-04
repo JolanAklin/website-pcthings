@@ -1,12 +1,15 @@
 import { Element } from "./Element.js";
 
-export function Paragraph(idPosition) {
-  this.addPositionNode = document.getElementById(idPosition);
+export function Paragraph(idPosition, id, destroyFunction) {
+  this.id = id;
+  this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
+
+  this.addPositionNode = document.getElementById(idPosition);
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Paragraph"));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Paragraph", this.id, this.destroyFunction, this.mainDiv));
 
     this.mainDiv.className = "page-element input-paragraph";
     this.mainTextDiv.className = "page-element-input input-paragraph";

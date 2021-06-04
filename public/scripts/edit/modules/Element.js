@@ -7,7 +7,8 @@ export function Element() {
     return "";
   };
 
-  Element.prototype.CreateHeader = function(name) {
+  Element.prototype.CreateHeader = function(name, id, destroyFunction, mainDiv) {
+
     var removeButton = document.createElement("BUTTON");
     var upButton = document.createElement("BUTTON");
     var downButton = document.createElement("BUTTON");
@@ -41,7 +42,13 @@ export function Element() {
     removeButton.appendChild(removeButtonImg);
     removeButton.className = "control-button page-element-remove-button";
     elementHeader.appendChild(removeButton);
+    removeButton.addEventListener("click", function() { Delete(id, destroyFunction, mainDiv); });
 
     return elementHeader;
+  }
+
+  function Delete(id, destroyFunction, mainDiv) {
+    destroyFunction(id);
+    mainDiv.parentNode.removeChild(mainDiv);
   }
 }

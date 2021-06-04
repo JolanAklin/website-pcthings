@@ -32,7 +32,7 @@
 .element-header {
     display: grid;
     grid-template-columns: auto repeat(3, min-content);
-    grid-template-rows:
+    grid-template-rows: auto;
 }
 
 .control-button {

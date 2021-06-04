@@ -1,12 +1,15 @@
 import { Element } from "./Element.js";
 
-export function Title(idPosition) {
-  this.addPositionNode = document.getElementById(idPosition);
+export function Title(idPosition, id, destroyFunction) {
+  this.id = id;
+  this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
+
+  this.addPositionNode = document.getElementById(idPosition);
   this.title = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Title"));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Title", this.id, this.destroyFunction, this.mainDiv));
 
     this.mainDiv.className = "page-element input-title";
     this.title.contentEditable = true;

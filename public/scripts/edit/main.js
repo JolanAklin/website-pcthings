@@ -5,7 +5,8 @@ import { Title2 } from "./modules/Title2Element.js";
 import { Quote } from "./modules/QuoteElement.js";
 import { Code } from "./modules/CodeElement.js";
 
-const contentEditables = [];
+var id = 0;
+var contentEditables = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   document.execCommand("defaultParagraphSeparator", false, "div");
@@ -21,23 +22,32 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function AddParagraph() {
-  contentEditables.push(new Paragraph("edit"));
+  contentEditables.push(new Paragraph("edit", id, Remove));
+  id = id + 1;
 }
 
 function AddTitle() {
-  contentEditables.push(new Title("edit"));
+  contentEditables.push(new Title("edit", id, Remove));
+  id = id + 1;
 }
 
 function AddTitle2() {
-  contentEditables.push(new Title2("edit"));
+  contentEditables.push(new Title2("edit", id, Remove));
+  id = id + 1;
 }
 
 function AddQuote() {
-  contentEditables.push(new Quote("edit"));
+  contentEditables.push(new Quote("edit", id, Remove));
+  id = id + 1;
 }
 
 function AddCode() {
-  contentEditables.push(new Code("edit"));
+  contentEditables.push(new Code("edit", id, Remove));
+  id = id + 1;
+}
+
+function Remove(objectId) {
+  contentEditables = contentEditables.filter(x => x.id != objectId);
 }
 
 function ToJson() {

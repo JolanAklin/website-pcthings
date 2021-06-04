@@ -1,12 +1,15 @@
 import { Element } from "./Element.js";
 
-export function Quote(idPosition) {
-  this.addPositionNode = document.getElementById(idPosition);
+export function Quote(idPosition, id, destroyFunction) {
+  this.id = id;
+  this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
+
+  this.addPositionNode = document.getElementById(idPosition);
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Quote"));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Quote", this.id, this.destroyFunction, this.mainDiv));
 
     this.mainDiv.className = "page-element input-quote";
     this.mainTextDiv.className = "page-element-input input-quote";
