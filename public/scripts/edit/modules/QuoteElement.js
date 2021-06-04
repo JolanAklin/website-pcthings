@@ -1,6 +1,6 @@
 import { Element } from "./Element.js";
 
-export function Quote(idPosition, id, destroyFunction) {
+export function Quote(idPosition, id, destroyFunction, moveElement) {
   this.id = id;
   this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
@@ -9,7 +9,7 @@ export function Quote(idPosition, id, destroyFunction) {
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Quote", this.id, this.destroyFunction, this.mainDiv));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Quote", this.id, this.destroyFunction, this.mainDiv, moveElement));
 
     this.mainDiv.className = "page-element input-quote";
     this.mainTextDiv.className = "page-element-input input-quote";

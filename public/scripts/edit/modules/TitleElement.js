@@ -1,6 +1,6 @@
 import { Element } from "./Element.js";
 
-export function Title(idPosition, id, destroyFunction) {
+export function Title(idPosition, id, destroyFunction, moveElement) {
   this.id = id;
   this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
@@ -9,7 +9,7 @@ export function Title(idPosition, id, destroyFunction) {
   this.title = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Title", this.id, this.destroyFunction, this.mainDiv));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Title", this.id, this.destroyFunction, this.mainDiv, moveElement));
 
     this.mainDiv.className = "page-element input-title";
     this.title.contentEditable = true;

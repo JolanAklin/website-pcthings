@@ -1,6 +1,6 @@
 import { Element } from "./Element.js";
 
-export function Paragraph(idPosition, id, destroyFunction) {
+export function Paragraph(idPosition, id, destroyFunction, moveElement) {
   this.id = id;
   this.destroyFunction = destroyFunction;
   this.mainDiv = document.createElement("DIV");
@@ -9,7 +9,7 @@ export function Paragraph(idPosition, id, destroyFunction) {
   this.mainTextDiv = document.createElement("DIV");
 
   const CreateElement = (ev) => {
-    this.mainDiv.appendChild(Element.prototype.CreateHeader("Paragraph", this.id, this.destroyFunction, this.mainDiv));
+    this.mainDiv.appendChild(Element.prototype.CreateHeader("Paragraph", this.id, this.destroyFunction, this.mainDiv, moveElement));
 
     this.mainDiv.className = "page-element input-paragraph";
     this.mainTextDiv.className = "page-element-input input-paragraph";
