@@ -1,0 +1,108 @@
+:root {
+    --control-button-size: 15px;
+}
+
+/*
+ * common rules
+ */
+
+.edit {
+    width: 100%;
+}
+
+.page-element {
+    background-color: var(--color-lighter);
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+}
+.page-element-info-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+.page-element-input {
+    background-color: var(--color);
+    padding: 5px 10px 5px 10px;
+    caret-color: var(--color-accent);
+}
+
+.element-header {
+    display: grid;
+    grid-template-columns: auto repeat(3, min-content);
+    grid-template-rows: auto;
+}
+
+.control-button {
+    padding: 0px;
+    border: none;
+    height: auto;
+    width: var(--control-button-size);
+    border-radius: 0px;
+    font-size: 0em;
+    background-color: transparent;
+    margin: 0px 5px 0px 5px;
+}
+
+.control-button>img {
+    width: var(--control-button-size);
+    height: var(--control-button-size);
+}
+
+.page-element-remove-button>img {
+    filter: brightness(0.5) sepia(1) saturate(10000%);
+    -webkit-filter: brightness(0.5) sepia(1) saturate(10000%);
+}
+.page-element-remove-button:hover>img {
+    filter: brightness(1) sepia(0) saturate(100%);
+    -webkit-filter: brightness(1) sepia(0) saturate(100%);
+}
+
+.page-element-down-button>img {
+    -webkit-transform:rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/*
+ * element specific rules
+ */
+
+.page-element-input.input-title {
+    font-size: 2em;
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.page-element-input.input-title2 {
+    font-size: 1.4em;
+    color: white;
+    font-weight: 500;
+}
+
+.page-element-input.input-code-title {
+    margin-bottom: 5px;
+}
+
+.page-element-input.input-code {
+    font-family: "RobotoMono";
+	font-size: var(--code-size);
+}
+
+.page-element-input.input-quote {
+    font-family: "ABeeZee";
+	padding: 10px;
+	font-size: var(--quote-size);
+}
+
+.page-element-input.input-quote:before {
+	content: '" ';
+}
+
+.page-element-input.input-quote:after {
+	content: ' "';
+}

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset("/css/page_creator.css") }}">{% endblock %}
+
 {% block title %}
 PCThings | {{ page.getTitle }}
 {% endblock %}
@@ -16,15 +18,11 @@ PCThings | {{ page.getTitle }}
 {% endblock %} 
 
 {% block mainText %}
-<div class="info">
-    <div class="writer">
-        <img src="{{ page.getWriter.getProfilPic }}">
-        <div>{{ page.getWriter.getUsername }}</div>
-    </div>
-    <div>Category: <a src="#">{{ page.getCategory.getName }}</a></div>
-    <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
+<div class="h-container">
+    {{ include('template_fragment/text_editor/_text_editor.html.twig') }}
 </div>
-{# {{ page.getContent|raw }} #}
-<div id="root"></div>
-{{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% block javascripts %}
+<script type="module" src="{{asset("/scripts/edit/main.js")}}"></script>
 {% endblock %}

@@ -98,7 +98,7 @@ body {
 	padding-right: 20px;
 }
 
-button {
+button:not(.control-button) {
 	background-color: rgba(0, 0, 0, 0);
 	border: solid 3px var(--color-accent-darker);
 	border-radius: 5px;
@@ -109,11 +109,11 @@ button {
 	transition: all 0.5s;
 }
 
-button:hover {
+button:hover:not(.control-button) {
 	background-color: var(--color-accent);
 }
 
-button:active {
+button:active:not(.control-button) {
 	transition: all 0.2s;
 	background-color: var(--color-accent-darker);
 	border: solid 3px var(--color-accent);
@@ -162,12 +162,9 @@ footer {
 	align-items: center;
 }
 
-.code_container>div+div {
-	display: inline-block;
+.code_container>div+pre>code {
 	font-family: "RobotoMono";
-	padding: 10px;
 	font-size: var(--code-size);
-	overflow: auto;
 }
 
 .code_container>div+div>p {
