@@ -48,6 +48,11 @@ body {
 	word-break: break-word;
 }
 
+p {
+	min-height: var(--text-size);
+	font-size: var(--text-size);
+}
+
 .can-grow {
 	flex-grow: 1000000000;
 }

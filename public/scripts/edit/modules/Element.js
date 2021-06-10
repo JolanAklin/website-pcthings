@@ -3,9 +3,9 @@ export function Element() {
     return {};
   };
 
-  Element.prototype.ToHtml = function () {
+  Element.prototype.FromJson = function (json) {
     return "";
-  };
+  }
 
   Element.prototype.CreateHeader = function(name, id, destroyFunction, mainDiv, moveElement) {
 

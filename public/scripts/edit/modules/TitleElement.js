@@ -23,14 +23,9 @@ export function Title(idPosition, id, destroyFunction, moveElement) {
     return { Type:"h", Content: content };
   };
 
-  /*
-  Title.prototype.ToHtml = function () {
-    var content = this.title.textContent;
-    var titleHtml = document.createElement("H1");
-    titleHtml.innerHTML = content;
-    return titleHtml;
+  Title.prototype.FromJson = function (json) {
+    this.title.textContent = json.Content;
   };
-  */
 
   CreateElement();
 }

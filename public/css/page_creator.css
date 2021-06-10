@@ -29,6 +29,11 @@
     caret-color: var(--color-accent);
 }
 
+.page-element-input > div {
+    min-height: var(--text-size);
+    font-weight: var(--text-size);
+}
+
 .element-header {
     display: grid;
     grid-template-columns: auto repeat(3, min-content);

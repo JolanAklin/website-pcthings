@@ -2,12 +2,27 @@
 {% for pageElement in JSONDecoded.pageContent %}
     {% if pageElement.Type == "h" %}
         <h1>{{ pageElement.Content }}</h1>
+
     {% elseif pageElement.Type == "h2" %}
         <h2>{{ pageElement.Content }}</h2>
+
     {% elseif pageElement.Type == "p" %}
-        <p>{{ pageElement.Content }}</p>
+        {% for p in TwigHelper.SplitText(TwigHelper.URLDecode(pageElement.Content)) %}
+            <p>{{ p }}</p>
+        {% endfor %}
+
     {% elseif pageElement.Type == "quote" %}
-        <p class="quote" >{{ pageElement.Content }}</p>
+        <p class="quote" >
+        {% set content = TwigHelper.SplitText(TwigHelper.URLDecode(pageElement.Content)) %}
+        {% for key, quote in content %}
+            {% if key + 2 < content|length %}
+                {{ quote }}</br>
+            {% else %}
+                {{ quote }}
+            {% endif %}
+        {% endfor %}
+        </p>
+
     {% elseif pageElement.Type == "code" %}
         <div class="code_container">
             <div>

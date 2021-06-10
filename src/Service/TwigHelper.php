@@ -14,4 +14,9 @@ class TwigHelper
     {
         return urldecode($urlEncodedString);
     }
+
+    function SplitText($text) : array
+    {
+        return explode("\n", $text);
+    }
 }

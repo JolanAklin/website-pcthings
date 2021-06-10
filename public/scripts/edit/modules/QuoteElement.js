@@ -34,28 +34,15 @@ export function Quote(idPosition, id, destroyFunction, moveElement) {
     return { Type:"quote", Content: content };
   };
 
-  /*
-  Quote.prototype.ToHtml = function () {
-    var contentDivs = Array.from(this.mainTextDiv.getElementsByTagName("DIV"));
-    var content;
-    if (contentDivs.length == 0) {
-      content = this.mainTextDiv.textContent;
-    } else {
-      contentDivs.forEach((element) => {
-        content += element.textContent + "</br>";
-      });
-    }
-
-    var div = document.createElement("DIV");
-    var titleforhtml = document.createElement("H2");
-    titleforhtml.innerHTML = this.titleDiv.textContent;
-    div.appendChild(titleforhtml);
-    var p = document.createElement("P");
-    p.innerHTML = content;
-    div.appendChild(p);
-    return div;
+  Quote.prototype.FromJson = function (json) {
+    var contentString = decodeURIComponent(json.Content);
+    var contentStringSplit = contentString.split("\n");
+    contentStringSplit.forEach(element => {
+      var div = document.createElement("DIV");
+      div.textContent = element;
+      this.mainTextDiv.appendChild(div);
+    });
   };
-  */
 
   CreateElement();
 }

@@ -17,33 +17,72 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("AddQuote").addEventListener("click", AddQuote);
   document.getElementById("AddCode").addEventListener("click", AddCode);
 
-  document.getElementById("ValidateForm").addEventListener("click", ValidateForm)
+  document.getElementById("ValidateForm").addEventListener("click", ValidateForm);
+
+  // check if there is some data to read and create the corresponding elements
+  var fillsWithJSON = document.getElementsByClassName("fillWithJSON");
+  var readJsonFrom = fillsWithJSON[0];
+  if(readJsonFrom.value != "") {
+    var parsedJson = JSON.parse(readJsonFrom.value);
+    parsedJson.pageContent.forEach(element => {
+      switch (element.Type) {
+        case "p":
+            AddParagraph().FromJson(element);
+          break;
+        case "h":
+          AddTitle().FromJson(element);
+        break;
+        case "h2":
+          AddTitle2().FromJson(element);
+        break;
+        case "quote":
+          AddQuote().FromJson(element);
+        break;
+        case "code":
+          AddCode().FromJson(element);
+        break;
+      
+        default:
+          break;
+      }
+    });
+  }
 
 });
 
 function AddParagraph() {
-  contentEditables.push(new Paragraph("edit", id, Remove, MoveElement));
+  var p = new Paragraph("edit", id, Remove, MoveElement);
+  contentEditables.push(p);
   id = id + 1;
+  return p;
 }
 
 function AddTitle() {
-  contentEditables.push(new Title("edit", id, Remove, MoveElement));
+  var h = new Title("edit", id, Remove, MoveElement)
+  contentEditables.push(h);
   id = id + 1;
+  return h;
 }
 
 function AddTitle2() {
-  contentEditables.push(new Title2("edit", id, Remove, MoveElement));
+  var h2 = new Title2("edit", id, Remove, MoveElement)
+  contentEditables.push(h2);
   id = id + 1;
+  return h2;
 }
 
 function AddQuote() {
-  contentEditables.push(new Quote("edit", id, Remove, MoveElement));
+  var quote = new Quote("edit", id, Remove, MoveElement);
+  contentEditables.push(quote);
   id = id + 1;
+  return quote;
 }
 
 function AddCode() {
-  contentEditables.push(new Code("edit", id, Remove, MoveElement));
+  var code = new Code("edit", id, Remove, MoveElement);
+  contentEditables.push(code);
   id = id + 1;
+  return code;
 }
 
 function Remove(objectId) {
