@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Entity\BlogPost;
 use App\Form\NewArticleType;
+use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AbstractController
 {
@@ -30,15 +30,10 @@ class ArticleController extends AbstractController
             throw $this->createNotFoundException('The page does not exist');
         }
     }
-    public function editPage($pathTitle)
+    public function editPage($pathTitle, Request $request)
     {
-<<<<<<< HEAD
         $this->denyAccessUnlessGranted('ROLE_ADMIN',null,'User tried to access a page without having the right permission');
-         try {
-=======
-        $this->denyAccessUnlessGranted('ROLE_ADMIN',null,'User tried to access a page without having ROLE_ADMIN');
-         //try {
->>>>>>> d4d37be755e21ebc070a07501b5c6075c8136668
+        //try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
                 $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
@@ -49,6 +44,17 @@ class ArticleController extends AbstractController
 
                 //creating form
                 $form = $this->createForm(NewArticleType::class,$page);
+
+                // handling form return
+                $form->handleRequest($request);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $page = $form->getData();
+
+                    //persist the user entity
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($page);
+                    $entityManager->flush();
+                }
 
 
                 if ($page !== null) {
