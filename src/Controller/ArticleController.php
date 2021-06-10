@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
     }
     public function editPage($pathTitle)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN',null,'User tried to access a page without having ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN',null,'User tried to access a page without having the right permission');
          try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
