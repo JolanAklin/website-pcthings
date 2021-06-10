@@ -19,7 +19,7 @@ class NewArticleType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('description', TextType::class)
-            ->add('content', hiddenType::class)
+            ->add('content', hiddenType::class, ['attr' => ['class' => 'fillWithJSON']])
             ->add('pathTitle', TextType::class)
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -28,7 +28,7 @@ class NewArticleType extends AbstractType
             ])
             ->add('headerImage', hiddenType::class, ['mapped' => false])
             ->add('thumbnail', hiddenType::class, ['mapped' => false])
-            ->add('save', SubmitType::class)
+            //->add('save', SubmitType::class, ['attr' => ['class' => 'validateForm']])
         ;
     }
 

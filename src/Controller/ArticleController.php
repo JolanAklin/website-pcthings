@@ -12,7 +12,7 @@ class ArticleController extends AbstractController
 {
     public function showPage($pathTitle)
     {
-        try {
+        //try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
                 $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
@@ -26,9 +26,9 @@ class ArticleController extends AbstractController
                     throw $this->createNotFoundException('The page does not exist');
                 }
             }
-        } catch (\Throwable $th) {
+        /*} catch (\Throwable $th) {
             throw $this->createNotFoundException('The page does not exist');
-        }
+        }*/
     }
     public function editPage($pathTitle, Request $request)
     {

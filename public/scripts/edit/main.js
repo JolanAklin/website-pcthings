@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("AddQuote").addEventListener("click", AddQuote);
   document.getElementById("AddCode").addEventListener("click", AddCode);
 
-  document.getElementById("ToJson").addEventListener("click", ToJson);
-  document.getElementById("ToHtml").addEventListener("click", ShowInHtml);
+  document.getElementById("ValidateForm").addEventListener("click", ValidateForm)
+
 });
 
 function AddParagraph() {
@@ -79,18 +79,25 @@ function MoveElement(objectId, dir) {
   contentEditables[pos] = temp;
 }
 
-function ToJson() {
-  var json = { pageContent: [] };
-  contentEditables.forEach((element) => {
-    json.pageContent.push(element.ToJson());
-  });
-  alert(JSON.stringify(json));
-}
-
 function ShowInHtml() {
   var addPos = document.getElementById("result");
   addPos.innerHTML = "";
   contentEditables.forEach((element) => {
     addPos.appendChild(element.ToHtml());
   });
+}
+
+function ConvertToJSON() {
+  var json = { pageContent: [] };
+  contentEditables.forEach((element) => {
+    json.pageContent.push(element.ToJson());
+  });
+  return JSON.stringify(json);
+}
+
+function ValidateForm() {
+  var editForms = document.getElementsByClassName("editForm");
+  var fillsWithJSON = document.getElementsByClassName("fillWithJSON");
+  fillsWithJSON[0].value = ConvertToJSON();
+  editForms[0].submit();
 }
