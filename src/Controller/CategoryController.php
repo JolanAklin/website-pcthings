@@ -15,8 +15,6 @@ class CategoryController extends AbstractController
     public function index()
     {
         return $this->render('category/index.html.twig', [
-            'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-            'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
             'categories' => $this->getDoctrine()->getRepository(Category::class)->findall(),
         ]);
     }
@@ -30,8 +28,6 @@ class CategoryController extends AbstractController
             if($category !== null)
             {
                 return $this->render('category/list.html.twig', [
-                    'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-                    'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                     'articles' => $this->getDoctrine()->getRepository(Article::class)->findBy(['category' => $category]),
                     'blogPosts' => $this->getDoctrine()->getRepository(BlogPost::class)->findBy(['category' => $category]),
                     'category' => $category,

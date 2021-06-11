@@ -58,8 +58,6 @@ class ArticleController extends AbstractController
                 if ($page !== null) {
                     return $this->render('article/edit.html.twig', [
                         'page' => $page,
-                        'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-                        'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                         'form' => $form->createView(),
                     ]);
                 } else {
