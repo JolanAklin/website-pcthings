@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | About {{ user.getUsername }}
+{% endblock %}
+
+{% block pageTitle %}
+About {{ user.getUsername }}
+{% endblock %}
+
+{% block bgImage %}
+{{ asset(user.getBlogImage.getPath)}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset(user.getBlogImage.getPath)}}
+{% endblock %} 
+
+{% block mainText %}
+<div class="info">
+    <div class="writer">
+        <img src={{ profil_pic_dir }}{{ asset(user.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'">
+        <div>{{ user.getDisplayedNickName }}</div>
+    </div>
+</div>
+<div class="about">
+    {{ user.getAbout.text }}
+    {# need to add the parsing when the page editor while be done #}
+</div>
+{% endblock %}

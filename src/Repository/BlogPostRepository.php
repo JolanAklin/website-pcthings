@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\BlogPost;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method BlogPost|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,34 +20,52 @@ class BlogPostRepository extends ServiceEntityRepository
         parent::__construct($registry, BlogPost::class);
     }
 
-    public function findByWriter($writer)
+    public function findByWriter($writer, $page)
     {
         try {
             $writer = intval($writer);
-            return $this->createQueryBuilder('b')
-                ->andWhere('b.writer = :val')
-                ->setParameter('val', $writer)
-                ->orderBy('b.id', 'DESC')
-                ->setMaxResults(10)
-                ->getQuery()
-                ->getResult();
+            $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+            $page -= 1;
+            if($page !== null && $page !== false)
+            {
+                $offset = $page * 10;
+                return $this->createQueryBuilder('b')
+                    ->innerJoin('App\Entity\Date', 'd')
+                    ->andWhere('b.writer = :val')
+                    ->setParameter('val', $writer)
+                    ->orderBy('d.date', 'DESC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults(10)
+                    ->getQuery()
+                    ->getResult();
+            }
         } catch (\Throwable $th) {
             die();
         }
     }
     
-    public function findByWriterJoined()
+    public function findByWriterJoined($page)
     {
         try {
-            $entityManager = $this->getEntityManager();
-            $query = $entityManager->createQueryBuilder()
-                ->select('u.username, u.profilPic')
-                ->from('App\Entity\BlogPost','b')
-                ->innerJoin('App\Entity\User', 'u')
-                ->groupBy('u.id')
-                ->orderBy('u.username','ASC')
-                ->getQuery();
-            return $query->getResult();
+            $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+            $page -= 1;
+            if($page !== null && $page !== false)
+            {
+                $offset = $page * 10;
+                $entityManager = $this->getEntityManager();
+                $query = $entityManager->createQueryBuilder()
+                    ->select('u.username, u.profilPic', 'u.displayedNickName')
+                    ->from('App\Entity\BlogPost','b')
+                    ->innerJoin('App\Entity\User', 'u')
+                    ->innerJoin('App\Entity\Date', 'd')
+                    ->groupBy('u.id')
+                    ->orderBy('max(d.date)','DESC')
+                    ->setFirstResult($offset)
+                    ->setMaxResults(10)
+                    ->getQuery();
+                return $query->getResult();
+                
+            }
         } catch (\Throwable $th) {
             die();
         }
@@ -55,17 +74,39 @@ class BlogPostRepository extends ServiceEntityRepository
     public function findBlogByDate()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT title, username FROM blog_post b
-                INNER JOIN date ON date.id = publication_date_id
-                INNER JOIN user ON user.id = writer_id
-                ORDER BY date.date DESC
-                LIMIT 5
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT b.title, u.username, b.id FROM App\Entity\BlogPost b
+                JOIN b.publicationDate d
+                JOIN b.writer u
+                ORDER BY d.date DESC');
+            $query->setMaxResults(5);
+            return $query->getResult();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
+    public function CountBlogPostWriter()
+    {
+        try {
+            $query = $this->getEntityManager()->createQuery('SELECT COUNT(DISTINCT u.id) as count FROM App\Entity\BlogPost b
+                JOIN b.writer u
+                JOIN b.publicationDate d');
+            return $query->getResult();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
+    public function CountBlogPostByUser($user)
+    {
+        try {
+            $user = filter_var($user, FILTER_SANITIZE_STRING);
+            if($user !== null && $user !== false)
+            {
+                $query = $this->getEntityManager()->createQuery('SELECT COUNT(b.id) as count FROM App\Entity\BlogPost b JOIN b.writer u WHERE u.username = :user')
+                ->setParameter('user', $user);
+                return $query->getResult();
+            }
         } catch (\Throwable $th) {
             die();
         }

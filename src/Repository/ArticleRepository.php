@@ -40,20 +40,47 @@ class ArticleRepository extends ServiceEntityRepository
     public function findArticleByDate()
     {
         try {
-            $conn = $this->getEntityManager()->getConnection();
-            $sql = '
-                SELECT title, path_title FROM article a
-                INNER JOIN date ON date.id = publication_date_id
-                ORDER BY date.date DESC
-                LIMIT 5
-                ';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([]);
-            return $stmt->fetchAll();
+            $query = $this->getEntityManager()->createQuery('SELECT a.title, a.pathTitle FROM App\Entity\Article a
+                JOIN a.publicationDate d
+                ORDER BY d.date DESC');
+            $query->setMaxResults(5);
+            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
     }
+
+    public function findByGroupOf10($page)
+    {
+        $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
+        $page -= 1;
+        if($page !== null && $page !== false)
+        {
+            $offset = $page * 10;
+            return $this->createQueryBuilder('a')
+                ->innerJoin('App\Entity\Date', 'd')
+                ->orderBy('d.date', 'DESC')
+                ->setFirstResult($offset)
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult()
+            ;
+        }else
+        {
+            die();
+        }
+    }
+
+    public function CountArticle()
+    {
+        try {
+            $query = $this->getEntityManager()->createQuery('SELECT COUNT(a.id) as count FROM App\Entity\Article a');
+            return $query->getResult();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+    
 
     // /**
     //  * @return Article[] Returns an array of Article objects

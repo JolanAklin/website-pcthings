@@ -31,4 +31,5 @@ Blog
     {#{{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}#}
 </div>
 {{ include('template_fragment/_search.html.twig') }}
+{{ include('template_fragment/_page_navigation.html.twig', {pages: nbPages, currentPage: currentPage, baseLink: baseLink}) }}
 {% endblock %}

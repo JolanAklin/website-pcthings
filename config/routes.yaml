@@ -7,12 +7,20 @@ index:
   controller: App\Controller\HomeController::index
 
 pages:
-  path: /pages
-  controller: App\Controller\HomeController::pages
+    path: /pages/{page}
+    controller: App\Controller\HomeController::pages
+    defaults:
+        page: 1
+    requirements: 
+        page: '\d+'
 
 blog:
-  path: /blog
-  controller: App\Controller\HomeController::blog
+    path: /blog/{page}
+    controller: App\Controller\HomeController::blog
+    defaults:
+        page: 1
+    requirements: 
+        page: '\d+'
 
 contact:
   path: /contact
@@ -27,10 +35,21 @@ contact:
 #--------------------------------------------------
 
 user_blog:
-  path: /blog/{username}
-  controller: App\Controller\BlogController::ShowBlog
-  defaults:
-    username: ""
+    path: /blog/{username}/{page}
+    controller: App\Controller\BlogController::ShowBlog
+    defaults:
+        username: ""
+        page: 1
+    requirements: 
+        page: '\d+'
+
+user_blog_post:
+    path: /blog-post/{blogId}
+    controller: App\Controller\BlogController::ShowBlogId
+    defaults:
+        blogId: 1
+    requirements: 
+        blogId: '\d+'
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------
@@ -79,5 +98,29 @@ imported_picture_modif:
     imageId: '\d+'
 #--------------------------------------------------
 # End of ImportController's routes
+#--------------------------------------------------
+
+#--------------------------------------------------
+# Start of ImportController's routes
+#--------------------------------------------------
+category_index:
+    path: /category
+    controller: App\Controller\CategoryController::index
+
+category_list:
+    path: /category/{name}
+    controller: App\Controller\CategoryController::categoryList
+#--------------------------------------------------
+# End of ImportController's routes
+#--------------------------------------------------
+
+#--------------------------------------------------
+# Start of About's routes
+#--------------------------------------------------
+about_user:
+    path: /about/user/{username}
+    controller: App\Controller\About::AboutUser
+#--------------------------------------------------
+# End of About's routes
 #--------------------------------------------------
 

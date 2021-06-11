@@ -17,6 +17,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -45,12 +50,7 @@ class User implements UserInterface
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $profilPic;
 
@@ -65,6 +65,17 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $blogImage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $displayedNickName;
+
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private $about = [];
+
 
     public function getId(): ?int
     {
@@ -163,18 +174,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
     public function getProfilPic(): ?string
     {
         return $this->profilPic;
@@ -207,6 +206,42 @@ class User implements UserInterface
     public function setBlogImage(?Image $blogImage): self
     {
         $this->blogImage = $blogImage;
+
+        return $this;
+    }
+
+    public function getDisplayedNickName(): ?string
+    {
+        return $this->displayedNickName;
+    }
+
+    public function setDisplayedNickName(string $displayedNickName): self
+    {
+        $this->displayedNickName = $displayedNickName;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAbout(): ?array
+    {
+        return $this->about;
+    }
+
+    public function setAbout(?array $about): self
+    {
+        $this->about = $about;
 
         return $this;
     }

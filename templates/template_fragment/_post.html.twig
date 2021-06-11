@@ -1,11 +1,11 @@
-<div class="post-link" onclick="window.location.href='/pages/{{page.getPathTitle}}';">
-        <div class="post-link-content">
-            <img src={{ page.getThumbnail.getPath }} alt={{page.getHeaderImage.getAlt}}>
-            <div>
-                <p>{{ page.getTitle }}</p>
-                <p>{{ page.getDescription }}</p>
-            </div>
-            <p>{{ page.getPublicationDate.getDate|date("d/m/Y")}}</p>
+<div class="post-link" onclick="window.location.href='{{ path("page", {pathTitle: page.getPathTitle}) }}';">
+    <div class="post-link-content">
+        <img src={{ page.getThumbnail.getPath }} alt={{page.getHeaderImage.getAlt}}>
+        <div>
+            <p>{{ page.getTitle }}</p>
+            <p>{{ page.getDescription }}</p>
         </div>
-        <div class="arrow">»</div>
+        <p>{{ page.getPublicationDate.getDate|date("d/m/Y")}}</p>
     </div>
+    <div class="arrow">»</div>
+</div>
