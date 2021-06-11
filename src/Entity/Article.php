@@ -28,7 +28,7 @@ class Article
     private $description;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="text")
      */
     private $content;
 

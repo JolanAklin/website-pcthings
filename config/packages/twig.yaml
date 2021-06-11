@@ -4,4 +4,3 @@ twig:
         profil_pic_dir: '/images/profile_pictures'
         # the value is the service's id
         NewsPanel: '@App\Service\NewsPanel'
-        TwigHelper: '@App\Service\TwigHelper'

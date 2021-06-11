@@ -27,8 +27,6 @@ PCThings | {{ page.getTitle }}
     <div>Category: <a href={{ path("category_list", {name: page.getCategory.getName}) }}>{{ page.getCategory.getName }}</a></div>
     <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
 </div>
-{% if app.user == page.getWriter %}
-    <div class="edit-button"><a href="{{ "/pages/" ~ page.getPathTitle ~ "/edit"}}">Edit</a></div>
-{% endif %}
-{{ include('template_fragment/text_editor/_json_to_text.html.twig', {'JSON': page.getContent}) }}
+{# the raw pipe need to be removed #}
+{{ page.getContent|raw }}
 {% endblock %}

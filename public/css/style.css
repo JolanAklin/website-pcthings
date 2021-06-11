@@ -50,11 +50,6 @@ body {
 	word-break: break-word;
 }
 
-p {
-	min-height: var(--text-size);
-	font-size: var(--text-size);
-}
-
 .can-grow {
 	flex-grow: 1000000000;
 }
@@ -105,7 +100,7 @@ p {
 	padding-right: 20px;
 }
 
-button:not(.control-button) {
+button {
 	background-color: rgba(0, 0, 0, 0);
 	border: solid 3px var(--color-accent-darker);
 	border-radius: 5px;
@@ -117,36 +112,14 @@ button:not(.control-button) {
 	font-weight: 700;
 }
 
-button:hover:not(.control-button) {
+button:hover {
 	background-color: var(--color-accent);
 }
 
-button:active:not(.control-button) {
+button:active {
 	transition: all 0.2s;
 	background-color: var(--color-accent-darker);
 	border: solid 3px var(--color-accent);
-}
-
-.edit-button {
-	display: flex;
-	flex-direction: column; 
-	justify-content: center;
-	bottom: 50px;
-	right: 50px;
-	width: 50px;
-	height: 30px;
-	background-color: var(--color-accent-darker);
-	border-radius: 5px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-.edit-button>a {
-	display: block;
-	width: auto;
-	height: min-content;
-	color: white;
-	font-weight: 700;
-	text-align: center;
 }
 
 .profile-button {
@@ -192,9 +165,12 @@ footer {
 	align-items: center;
 }
 
-.code_container>div+pre>code {
+.code_container>div+div {
+	display: inline-block;
 	font-family: "RobotoMono";
+	padding: 10px;
 	font-size: var(--code-size);
+	overflow: auto;
 }
 
 .code_container>div+div>p {
