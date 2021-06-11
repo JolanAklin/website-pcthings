@@ -50,6 +50,11 @@ body {
 	word-break: break-word;
 }
 
+p {
+	min-height: var(--text-size);
+	font-size: var(--text-size);
+}
+
 .can-grow {
 	flex-grow: 1000000000;
 }
@@ -100,7 +105,7 @@ body {
 	padding-right: 20px;
 }
 
-button {
+button:not(.control-button) {
 	background-color: rgba(0, 0, 0, 0);
 	border: solid 3px var(--color-accent-darker);
 	border-radius: 5px;
@@ -112,14 +117,36 @@ button {
 	font-weight: 700;
 }
 
-button:hover {
+button:hover:not(.control-button) {
 	background-color: var(--color-accent);
 }
 
-button:active {
+button:active:not(.control-button) {
 	transition: all 0.2s;
 	background-color: var(--color-accent-darker);
 	border: solid 3px var(--color-accent);
+}
+
+.edit-button {
+	display: flex;
+	flex-direction: column; 
+	justify-content: center;
+	bottom: 50px;
+	right: 50px;
+	width: 50px;
+	height: 30px;
+	background-color: var(--color-accent-darker);
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.edit-button>a {
+	display: block;
+	width: auto;
+	height: min-content;
+	color: white;
+	font-weight: 700;
+	text-align: center;
 }
 
 .profile-button {
@@ -165,12 +192,9 @@ footer {
 	align-items: center;
 }
 
-.code_container>div+div {
-	display: inline-block;
+.code_container>div+pre>code {
 	font-family: "RobotoMono";
-	padding: 10px;
 	font-size: var(--code-size);
-	overflow: auto;
 }
 
 .code_container>div+div>p {

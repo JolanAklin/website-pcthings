@@ -1,1 +1,4 @@
 # config/validator/validation.yaml
+App\Entity\Article:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: pathTitle
