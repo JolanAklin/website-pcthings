@@ -49,6 +49,7 @@ export function Code(idPosition, id, destroyFunction, moveElement) {
     
     var contentString = decodeURIComponent(json.Content[1].Content);
     var contentStringSplit = contentString.split("\n");
+    contentStringSplit.pop();
     contentStringSplit.forEach(element => {
       var div = document.createElement("DIV");
       div.textContent = element;

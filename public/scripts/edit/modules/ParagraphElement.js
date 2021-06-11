@@ -37,6 +37,7 @@ export function Paragraph(idPosition, id, destroyFunction, moveElement) {
   Paragraph.prototype.FromJson = function (json) {
     var contentString = decodeURIComponent(json.Content);
     var contentStringSplit = contentString.split("\n");
+    contentStringSplit.pop();
     contentStringSplit.forEach(element => {
       var div = document.createElement("DIV");
       div.textContent = element;
