@@ -21,8 +21,6 @@ class About extends AbstractController
             {
                 return $this->render('about_user.html.twig', [
                     'user' => $user,
-                    'blogs_latest' => $this->getDoctrine()->getRepository(BlogPost::class)->findBlogByDate(),
-                    'articles_latest' => $this->getDoctrine()->getRepository(Article::class)->findArticleByDate(),
                 ]);
             }
         }

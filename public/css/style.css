@@ -127,28 +127,6 @@ button:active:not(.control-button) {
 	border: solid 3px var(--color-accent);
 }
 
-.edit-button {
-	display: flex;
-	flex-direction: column; 
-	justify-content: center;
-	bottom: 50px;
-	right: 50px;
-	width: 50px;
-	height: 30px;
-	background-color: var(--color-accent-darker);
-	border-radius: 5px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-.edit-button>a {
-	display: block;
-	width: auto;
-	height: min-content;
-	color: white;
-	font-weight: 700;
-	text-align: center;
-}
-
 .profile-button {
 	height: 2.2em;
 	border-radius: 100%;
@@ -212,6 +190,31 @@ a:not(.post-link) {
 
 a:hover:not(.post-link) {
 	color: var(--color-accent);
+}
+
+.edit-button {
+	display: flex;
+	flex-direction: column; 
+	justify-content: center;
+	bottom: 50px;
+	right: 50px;
+	width: 50px;
+	height: 30px;
+	background-color: var(--color-accent-darker);
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.edit-button>a {
+	display: block;
+	width: auto;
+	height: min-content;
+	color: white;
+	font-weight: 700;
+	text-align: center;
+}
+.edit-button:hover>a {
+	color: var(--color-lighter);
 }
 
 .title-link {
