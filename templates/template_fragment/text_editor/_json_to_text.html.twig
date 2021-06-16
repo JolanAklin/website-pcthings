@@ -15,11 +15,7 @@
         <p class="quote" >
         {% set content = TwigHelper.SplitText(TwigHelper.URLDecode(pageElement.Content)) %}
         {% for key, quote in content %}
-            {% if key + 2 < content|length %}
-                {{ TwigHelper.FormatText(quote)|raw }}</br>
-            {% else %}
-                {{ TwigHelper.FormatText(quote)|raw }}
-            {% endif %}
+            {{ TwigHelper.FormatText(quote)|raw }}</br>
         {% endfor %}
         </p>
 
