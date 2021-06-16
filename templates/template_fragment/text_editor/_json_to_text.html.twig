@@ -8,7 +8,7 @@
 
     {% elseif pageElement.Type == "p" %}
         {% for p in TwigHelper.SplitText(TwigHelper.URLDecode(pageElement.Content)) %}
-            <p>{{ p }}</p>
+            <p>{{ TwigHelper.FormatText(p)|raw }}</p>
         {% endfor %}
 
     {% elseif pageElement.Type == "quote" %}
@@ -16,9 +16,9 @@
         {% set content = TwigHelper.SplitText(TwigHelper.URLDecode(pageElement.Content)) %}
         {% for key, quote in content %}
             {% if key + 2 < content|length %}
-                {{ quote }}</br>
+                {{ TwigHelper.FormatText(quote)|raw }}</br>
             {% else %}
-                {{ quote }}
+                {{ TwigHelper.FormatText(quote)|raw }}
             {% endif %}
         {% endfor %}
         </p>

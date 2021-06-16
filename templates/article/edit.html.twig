@@ -22,6 +22,7 @@ PCThings | {{ page.getTitle }}
     {{ include('template_fragment/text_editor/_text_editor.html.twig') }}
 </div>
 {{form(form, { 'attr': {'class': 'editForm'} }) }}
+{{ include('template_fragment/text_editor/_custom_text_formater_info.html.twig') }}
 {% endblock %}
 
 {% block javascripts %}
