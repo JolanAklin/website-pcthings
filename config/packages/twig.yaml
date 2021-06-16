@@ -5,3 +5,7 @@ twig:
         # the value is the service's id
         NewsPanel: '@App\Service\NewsPanel'
         TwigHelper: '@App\Service\TwigHelper'
+
+when@test:
+    twig:
+        strict_variables: true
