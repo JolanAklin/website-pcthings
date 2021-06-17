@@ -6,25 +6,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\BlogPost;
-use App\Entity\Article;
-use App\Entity\Image;
-use App\Entity\EditUserType;
 use App\Form\EditUserType as FormEditUserType;
-use Error;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class SecurityController extends AbstractController
 {
-    private $passwordEncoder;
+    private $passwordHasher;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
-         $this->passwordEncoder = $passwordEncoder;
+         $this->passwordHasher = $passwordHasher;
     }
 
     /**
@@ -65,7 +58,7 @@ class SecurityController extends AbstractController
                 $pass = $form->get('password')->getData();
                 if($pass !== null && $pass != "")
                 {
-                    $user->setPassword($this->passwordEncoder->encodePassword(
+                    $user->setPassword($this->passwordHasher->hashPassword(
                         $user,
                         $pass
                     ));

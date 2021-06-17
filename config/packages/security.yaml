@@ -7,7 +7,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
         # used to reload user from session & other features (e.g. switch_user)
     password_hashers:
         # use your user class name here
@@ -21,6 +21,9 @@ security:
             security: false
         main:
             lazy: true
+            login_throttling:
+                max_attempts: 5
+                interval: '15 minutes'
             provider: app_user_provider
             guard:
                 authenticators:

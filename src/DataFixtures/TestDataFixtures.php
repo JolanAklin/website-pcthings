@@ -11,16 +11,16 @@ use App\Entity\Article;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class TestDataFixtures extends Fixture
 {
 
-    private $passwordEncoder;
+    private $passwordHasher;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
-         $this->passwordEncoder = $passwordEncoder;
+         $this->passwordHasher = $passwordHasher;
     }
 
     public function load(ObjectManager $manager)
@@ -65,7 +65,7 @@ class TestDataFixtures extends Fixture
         $user->setRegistrationDate($date);
         $user->setRoles(['ROLE_ADMIN']);
         $user->setProfilPic(uniqid("user_profil_pic_", true));
-        $user->setPassword($this->passwordEncoder->encodePassword(
+        $user->setPassword($this->passwordHasher->hashPassword(
             $user,
             'abcd'
         ));
@@ -82,7 +82,7 @@ class TestDataFixtures extends Fixture
         $user1->setRoles(['ROLE_USER']);
         $user1->setRegistrationDate($date);
         $user1->setProfilPic(uniqid("user_profil_pic_", true));
-        $user1->setPassword($this->passwordEncoder->encodePassword(
+        $user1->setPassword($this->passwordHasher->hashPassword(
             $user1,
             'abcd'
         ));
