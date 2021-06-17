@@ -19,12 +19,12 @@ PCThings | {{ page.getTitle }}
 
 {% block mainText %}
 <div class="h-container">
-    {{ include('template_fragment/text_editor/_text_editor.html.twig') }}
+    <a class="button-slicker" href={{ path('page', {pathTitle: page.pathTitle}) }}>See page</a>
+    {{ include('template_fragment/text_editor/_text_editor.html.twig', {form: form}) }}
 </div>
-{{form(form, { 'attr': {'class': 'editForm'} }) }}
+
 {{ include('template_fragment/text_editor/_custom_text_formater_info.html.twig') }}
 {% endblock %}
-
 {% block javascripts %}
 <script type="module" src="{{asset("/scripts/edit/main.js")}}"></script>
 {% endblock %}

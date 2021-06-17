@@ -40,7 +40,7 @@ class TwigHelper
         $replacements[1] = '<span style="color: $1;">$2</span>';
         $replacements[2] = '<span style="font-weight: bold;">$1</span>';
         $replacements[3] = '<span style="font-style: italic;">$1</span>';
-        $replacements[4] = '<a href="$2" title="$3" target="_blank">$1</a>';
+        $replacements[4] = '<a class="link" href="$2" title="$3" target="_blank">$1</a>';
         $replacements[5] = '<span class="alert alert-danger">$1</span>';
         $replacements[6] = '<span class="alert alert-warning">$1</span>';
         $replacements[7] = '<span class="alert alert-info">$1</span>';
