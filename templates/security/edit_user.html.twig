@@ -18,7 +18,7 @@ Edit your profile
 {% block mainText %}
 {% if app.user %}
 <div>
-    <p>You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a></p>
+    <p>You are logged in as {{ app.user.username }}, <a class="link" href="{{ path('app_logout') }}">Logout</a></p>
 </div>
 {% endif %}
 {% for error in errors %}

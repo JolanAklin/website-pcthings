@@ -110,7 +110,8 @@ p {
 	padding-right: 20px;
 }
 
-button:not(.control-button):not(.button-slicker) {
+button:not(.control-button):not(.button-slicker), .button {
+	box-sizing: border-box;
 	background-color: rgba(0, 0, 0, 0);
 	border: solid 3px var(--color-accent-darker);
 	border-radius: 5px;
@@ -121,13 +122,14 @@ button:not(.control-button):not(.button-slicker) {
 	transition: all 0.5s;
 	font-weight: 700;
 	font-family: "NotoSans";
+	text-decoration: none;
 }
 
-button:hover:not(.control-button):not(.button-slicker) {
+button:hover:not(.control-button):not(.button-slicker), .button:hover {
 	background-color: var(--color-accent);
 }
 
-button:active:not(.control-button):not(.button-slicker) {
+button:active:not(.control-button):not(.button-slicker), .button:active {
 	transition: all 0.2s;
 	background-color: var(--color-accent-darker);
 	border: solid 3px var(--color-accent);
@@ -212,6 +214,12 @@ footer {
 	padding: 0px;
 }
 
+a {
+	font-family: "QuickSand";
+	font-size: var(--text-size);
+	color: white;
+	text-decoration: none;
+}
 
 .link {
 	transition: all 0.3s;
@@ -342,6 +350,7 @@ footer {
 	width: calc(100% - 20px) !important;
 	margin-left: 10px;
 	margin-right: 10px;
+	font-size: 1em;
 }
 .category-row {
 	display: flex;
@@ -365,6 +374,7 @@ footer {
 	width: calc(100% - 10px) !important;
 	background-color: var(--color-lighter);
 	transition: all 0.5s;
+	font-size: 1em;
 }
 .category-list-element:hover {
 	background-color: var(--color-accent-darker);
@@ -629,6 +639,7 @@ footer {
 	align-items: center;
 	transition: all 0.5s;
 	cursor: default;
+	font-size: 1em;
 }
 
 .animated-link :nth-child(2) {
@@ -851,6 +862,7 @@ form {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	font-size: 1em;
 }
 .blog-link {
 	cursor: pointer;
@@ -860,6 +872,7 @@ form {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	font-size: 1em;
 }
 .arrow {
 	width: 15px !important;

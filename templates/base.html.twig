@@ -12,17 +12,17 @@
     <body>
 		
         <nav id="navBar">
-			<div id="website-title" onclick="window.location.href='/';"><img src="{{ asset("images/logos/logo_pcthings.png")}}"/></div>
-			<button onclick="window.location.href='/pages';">Articles</button>
-			<button onclick="window.location.href='/blog';">Blogs</button>
-			<button onclick="window.location.href='/category';">Categories</button>
-			<button onclick="window.location.href='/contact';">Contact</button>
+			<a href="/"><div id="website-title"><img src="{{ asset("images/logos/logo_pcthings.png")}}"/></div></a>
+			<a class="button" href="/pages">Articles</a>
+			<a class="button" href='/blog'>Blogs</a>
+			<a class="button" href='/category'>Categories</a>
+			<a class="button" href='/contact'>Contact</a>
 			{% if is_granted('ROLE_IMPORT') %}
-			<button onclick="window.location.href='/import-picture';">import picture</button>
+			<a class="button" href='/import-picture'>import picture</a>
 			{% endif %}
 			
 			{% if app.user %}
-			<img src={{ profil_pic_dir }}{{ asset(app.user.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'" class="profile-button" id="profile-button" onclick="window.location.href='/modify-account';"></img>
+			<a href="/modify-account"><img src={{ profil_pic_dir }}{{ asset(app.user.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'" class="profile-button" id="profile-button"></img></a>
 			{% endif %}
 			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
 		</nav>
