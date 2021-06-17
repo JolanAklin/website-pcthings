@@ -28,6 +28,11 @@
 	src: url("./RobotoMono-Regular.ttf");
 }
 
+@font-face {
+	font-family: "NotoSans";
+	src: url("./NotoSans-Regular.ttf");
+}
+
 html {
 	margin: 0px;
 	min-width: 100%;
@@ -105,7 +110,7 @@ p {
 	padding-right: 20px;
 }
 
-button:not(.control-button) {
+button:not(.control-button):not(.button-slicker) {
 	background-color: rgba(0, 0, 0, 0);
 	border: solid 3px var(--color-accent-darker);
 	border-radius: 5px;
@@ -115,16 +120,43 @@ button:not(.control-button) {
 	height: 2.2em;
 	transition: all 0.5s;
 	font-weight: 700;
+	font-family: "NotoSans";
 }
 
-button:hover:not(.control-button) {
+button:hover:not(.control-button):not(.button-slicker) {
 	background-color: var(--color-accent);
 }
 
-button:active:not(.control-button) {
+button:active:not(.control-button):not(.button-slicker) {
 	transition: all 0.2s;
 	background-color: var(--color-accent-darker);
 	border: solid 3px var(--color-accent);
+}
+
+.button-slicker {
+	box-sizing: border-box;
+	display: block;
+	background-color: var(--color-lighter);
+	color: white;
+	padding: 5px;
+	font-size: 1em;
+	min-height: 38px;
+	line-height: 28px;
+	width: 100%;
+	transition: all 0.5s;
+	font-weight: 700;
+	border: none;
+	text-decoration: none;
+
+	text-align: center;
+	font-family: "NotoSans";
+}
+.button-slicker:hover {
+	background-color: var(--color-accent-darker);
+	-webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);
+	z-index: 100;
 }
 
 .profile-button {
@@ -181,14 +213,14 @@ footer {
 }
 
 
-a:not(.post-link) {
+.link {
 	transition: all 0.3s;
 	color: var(--color-accent-darker);
 	font-family: "QuickSandBold";
 	text-decoration: initial;
 }
 
-a:hover:not(.post-link) {
+.link:hover {
 	color: var(--color-accent);
 }
 
@@ -234,9 +266,9 @@ a:hover:not(.post-link) {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	padding: 10px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 10px 62px 0px rgba(0, 0, 0, 0.75);
 	width: calc(100% - 20px);
 	z-index: 10000000;
 }
@@ -273,9 +305,9 @@ footer {
 	flex-wrap: wrap;
 	justify-content: space-around;
 	padding: 10px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 }
 
 /*containers*/
@@ -299,9 +331,9 @@ footer {
 	background-color: var(--color-accent-darker);
 	margin: 1px;
 	padding: 4px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
 }
 .category > p {
@@ -338,9 +370,9 @@ footer {
 	background-color: var(--color-accent-darker);
 	margin: 1px;
 	padding: 4px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
 }
 .category-list-element > p {
@@ -390,9 +422,9 @@ footer {
 	background-color: var(--color-accent-darker);
 	margin: 1px;
 	padding: 4px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
 }
 .image-grid-col > div > img {
@@ -687,6 +719,10 @@ footer {
 	display: inline-block;
 }
 
+.input:focus {
+	outline: none;
+}
+
 .input::placeholder {
 	color: #adadad;
 }
@@ -784,6 +820,7 @@ form {
 	padding:10px;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	display: block;
 }
 .alert-form {
 	max-width: calc(900px - 24px);
@@ -792,9 +829,13 @@ form {
 	background-color: rgb(120, 0, 0);
 	border: 2px solid red;
 }
-.alert-info {
+.alert-warning {
 	background-color: rgb(120, 120, 0);
 	border: 2px solid yellow;
+}
+.alert-info {
+	background-color: rgb(0, 80, 155);
+	border: 2px solid rgb(0, 162, 255);
 }
 .alert-success {
 	background-color: rgb(0, 120, 0);
@@ -877,18 +918,18 @@ form {
 	background-color: var(--color-accent-darker);
 	margin: 1px;
 	padding: 4px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
 }
 .blog-link:hover {
 	background-color: var(--color-accent-darker);
 	margin: 1px;
 	padding: 4px;
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 	z-index: 100;
 }
 .post-link:hover .arrow {
@@ -1010,9 +1051,9 @@ form {
 	right: 20%;
 	padding: 20px;
 	background-color: var(--color);
-	-webkit-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
-	box-shadow: 10px 10px 62px 0px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 62px 0px rgba(0, 0, 0, 0.75);
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;

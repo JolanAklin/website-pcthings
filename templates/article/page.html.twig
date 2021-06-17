@@ -8,7 +8,7 @@ PCThings | {{ page.getTitle }}
 {{ page.getTitle }}
 {% endblock %}
 {% block return %}
-<a href="{{ path("pages") }}">⇽ Articles</a>
+<a class="link" href="{{ path("pages") }}">⇽ Articles</a>
 {% endblock %}
 
 {% block bgImage %}
@@ -24,11 +24,11 @@ PCThings | {{ page.getTitle }}
         <img src={{ profil_pic_dir }}{{ asset(page.getWriter.getProfilPic) }} onerror="this.src='/images/icons/no_pic_user.png'">
         <div>{{ page.getWriter.getDisplayedNickName }}</div>
     </div>
-    <div>Category: <a href={{ path("category_list", {name: page.getCategory.getName}) }}>{{ page.getCategory.getName }}</a></div>
+    <div>Category: <a class="link" href={{ path("category_list", {name: page.getCategory.getName}) }}>{{ page.getCategory.getName }}</a></div>
     <div>{{ page.getPublicationDate.getDate|date("d/m/Y") }}</div>
 </div>
 {% if app.user == page.getWriter %}
-    <div class="edit-button"><a href="{{ "/pages/" ~ page.getPathTitle ~ "/edit"}}">Edit</a></div>
+    <div><a class="button-slicker  m-top-30" href="{{ "/pages/" ~ page.getPathTitle ~ "/edit"}}">Edit</a></div>
 {% endif %}
 {{ include('template_fragment/text_editor/_json_to_text.html.twig', {'JSON': page.getContent}) }}
 {% endblock %}

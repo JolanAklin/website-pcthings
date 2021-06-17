@@ -7,9 +7,9 @@
     <div class="page-navigation-link">
         {% for page in pages %}
             {% if page.numero == currentPage %}
-                <a href="{{ baseLink }}{{ page.numero }}" style="color: white;">{{ page.numero }}</a>        
+                <a class="link" href="{{ baseLink }}{{ page.numero }}" style="color: white;">{{ page.numero }}</a>        
             {% else %}
-                <a href="{{ baseLink }}{{ page.numero }}" >{{ page.numero }}</a>
+                <a class="link" href="{{ baseLink }}{{ page.numero }}" >{{ page.numero }}</a>
             {% endif %}
             
         {% endfor %}

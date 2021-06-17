@@ -26,9 +26,14 @@ export function Paragraph(idPosition, id, destroyFunction, moveElement) {
     if (contentDivs.length == 0) {
       content = this.mainTextDiv.textContent;
     }else {
+      var i = 0;
       contentDivs.forEach((element) => {
         console.log(element.textContent);
-        content += encodeURIComponent(element.textContent + "\n");
+        if(i == contentDivs.length - 1)
+          content += encodeURIComponent(element.textContent);
+        else
+          content += encodeURIComponent(element.textContent + "\n");
+        i += 1;
       });
     }
     return { Type:"p", Content: content };
@@ -37,7 +42,6 @@ export function Paragraph(idPosition, id, destroyFunction, moveElement) {
   Paragraph.prototype.FromJson = function (json) {
     var contentString = decodeURIComponent(json.Content);
     var contentStringSplit = contentString.split("\n");
-    contentStringSplit.pop();
     contentStringSplit.forEach(element => {
       var div = document.createElement("DIV");
       div.textContent = element;

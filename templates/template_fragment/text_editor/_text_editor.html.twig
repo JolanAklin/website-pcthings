@@ -1,12 +1,13 @@
 <div class="edit">
     <div id="edit"></div>
-    <div>
-        <button id="AddTitle">Add a title</button>
-        <button id="AddTitle2">Add a title2</button>
-        <button id="AddParagraph">Add a paragraph</button>
-        <button id="AddQuote">Add a quote</button>
-        <button id="AddCode">Add a code</button>
+    <div class="add-button-cluster">
+        <button class="button-slicker" id="AddTitle">Add a title</button>
+        <button class="button-slicker" id="AddTitle2">Add a title2</button>
+        <button class="button-slicker" id="AddParagraph">Add a paragraph</button>
+        <button class="button-slicker" id="AddQuote">Add a quote</button>
+        <button class="button-slicker" id="AddCode">Add a code</button>
     </div>
+    {{form(form, { 'attr': {'class': 'editForm'} }) }}
     <div>
         <button id="ValidateForm">Validate form</button>
     </div>
