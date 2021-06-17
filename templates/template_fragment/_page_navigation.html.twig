@@ -1,7 +1,7 @@
 {% if pages %}
 <div class="page-navigation">
     {% if currentPage != 1 %}
-        <button onclick="window.location.href='{{ baseLink }}{{ currentPage - 1 }}';"><</button>
+        <a class="button" href={{ baseLink }}{{ currentPage - 1 }}><</a>
     {% endif %}
     
     <div class="page-navigation-link">
@@ -15,7 +15,7 @@
         {% endfor %}
     </div>
     {% if currentPage != pages|last.numero %}
-        <button onclick="window.location.href='{{ baseLink }}{{ currentPage + 1 }}';">></button>
+        <a class="button" href={{ baseLink }}{{ currentPage + 1 }}>></a>
     {% endif %}
     
 </div>

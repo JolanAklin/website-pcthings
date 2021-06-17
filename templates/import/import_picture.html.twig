@@ -58,7 +58,7 @@ Imported picture
         {% for image in images %}
         <div class="image-grid-col">
             <div style="background-image: url('{{ image.getPath }}')"><img src="/images/placeholder.png"></div>
-            <p>{{ image.getTitle }} | <a href="/import-picture/modify/{{ image.getId }}">edit</a></p>
+            <p>{{ image.getTitle }} | <a class="link" href="/import-picture/modify/{{ image.getId }}">edit</a></p>
         </div>
         {% endfor %}
     </div>

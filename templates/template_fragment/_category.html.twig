@@ -1,1 +1,1 @@
-<div class="category" onclick="window.location.href='{{ path("category_list", {name: category.getName}) }}';"><p>{{ category.getName }}</p></div>
+<a class="category" href={{ path("category_list", {name: category.getName}) }}><p>{{ category.getName }}</p></a>
