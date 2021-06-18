@@ -20,6 +20,9 @@ Pages
 {{ include('template_fragment/_tag_filter.html.twig') }}
 
 <div class="v-container all-width">
+    {% if is_granted('ROLE_WRITER') %}
+        <a class="button-slicker" href={{ path('add_page') }}>Add article</a>
+    {% endif %}
     {% if pages|length > 0 %}
         {% for page in pages %}
             {{ include('template_fragment/_post.html.twig', {'page': page}) }}
