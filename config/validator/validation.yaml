@@ -2,3 +2,12 @@
 App\Entity\Article:
     constraints:
         - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: pathTitle
+
+App\Entity\Category:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+
+App\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: username

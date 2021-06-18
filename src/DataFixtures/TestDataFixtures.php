@@ -78,7 +78,7 @@ class TestDataFixtures extends Fixture
         $user1->setLastName("Skdj");
         $user1->setUsername("Jacky");
         $user1->setDisplayedNickName("J4CKY");
-        $user1->setEmail("jack@skdj.com");
+        $user1->setEmail("jack@jack.com");
         $user1->setBlogImage($image);
         $user1->setRoles(['ROLE_USER']);
         $user1->setRegistrationDate($date);
