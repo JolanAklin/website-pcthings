@@ -3,23 +3,22 @@
 {% block stylesheets %}<link rel="stylesheet" href="{{ asset("/css/page_creator.css") }}">{% endblock %}
 
 {% block title %}
-PCThings | {{ page.getTitle }}
+PCThings | Add Article
 {% endblock %}
 
 {% block pageTitle %}
-{{ page.getTitle }}
+Add Article
 {% endblock %}
 
 {% block bgImage %}
-{{ asset(page.getHeaderImage.getPath)}}
+{{ asset("images/page_header/home_image_header.jpg")}}
 {% endblock %}
 {% block bgImageAff %}
-{{ asset(page.getHeaderImage.getPath)}}
+{{ asset("images/page_header/home_image_header.jpg")}}
 {% endblock %}
 
 {% block mainText %}
 <div class="h-container">
-    <a class="button-slicker" href={{ path('page', {pathTitle: page.pathTitle}) }}>See page</a>
     {{ include('template_fragment/text_editor/_text_editor.html.twig', {form: form}) }}
 </div>
 

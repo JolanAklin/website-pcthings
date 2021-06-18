@@ -33,7 +33,7 @@ class ArticleRepository extends ServiceEntityRepository
                 ;
             }
         } catch (\Throwable $th) {
-            die();
+            return null;
         }
     }
 
@@ -46,7 +46,7 @@ class ArticleRepository extends ServiceEntityRepository
             $query->setMaxResults(5);
             return $query->getResult();
         } catch (\Throwable $th) {
-            die();
+            return null;
         }
     }
 
@@ -67,7 +67,7 @@ class ArticleRepository extends ServiceEntityRepository
             ;
         }else
         {
-            die();
+            return null;
         }
     }
 
@@ -77,7 +77,7 @@ class ArticleRepository extends ServiceEntityRepository
             $query = $this->getEntityManager()->createQuery('SELECT COUNT(a.id) as count FROM App\Entity\Article a');
             return $query->getResult();
         } catch (\Throwable $th) {
-            die();
+            return null;
         }
     }
     

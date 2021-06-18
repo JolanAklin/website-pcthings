@@ -56,6 +56,10 @@ user_blog_post:
 #--------------------------------------------------
 # Start of ArticleController's routes
 #--------------------------------------------------
+add_page:
+  path: /pages/add
+  controller: App\Controller\ArticleController::addPage
+
 page:
   path: /pages/{pathTitle}
   controller: App\Controller\ArticleController::showPage
