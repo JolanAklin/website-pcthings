@@ -585,6 +585,9 @@ footer {
 .p-10 {
 	padding: 10px;
 }
+.m-top-20 {
+	margin-top: 20px;
+}
 
 .m-top-30 {
 	margin-top: 30px;
@@ -1104,6 +1107,19 @@ form {
 	margin-top: 5px;
 }
 
+.footer {
+	font-size: 1em;
+	text-align: center;
+}
+.footer a {
+	font-size: 1em;
+	font-weight: normal;
+	text-decoration: underline;
+}
+.footer .title {
+	font-size: var(--text-size);
+	font-weight: bold;
+}
 
 @media screen and (max-width: 1020px) {
 	.left-container {
