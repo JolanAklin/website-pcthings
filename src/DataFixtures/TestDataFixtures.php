@@ -131,7 +131,7 @@ class TestDataFixtures extends Fixture
         for ($i=0; $i < 11; $i++) { 
             $blogPost = new BlogPost();
             $blogPost->setTitle("Yaaaa");
-            $blogPost->setContent("saudfhésahdflsah lkjahslfk ghaskljdhhflkasfhas lgklasjhf kljashdkjkldfksdgkas hk jhsakldgfl hgaslkjdhiu lsa HDGJAHSG AJSDHGKSHF LK FHALIUSDGLASHDLFGASLIUHGLU lsaudfg liazsdfiu salifdh iuasdfilus aliuahsghlsiau hkjldsahgl uhsag kjashdg lukhasidlfia8ztrh ashglizas uhlksadfklu");
+            $blogPost->setContent('{"pageContent":[{"Type":"h","Content":"This is a blog post"},{"Type":"p","Content":"sdf asdf sad sadjfksdjfé skd fésjlédf élsajdflésd jflk sflé sélf ls flkdhfg kjdfkjg dsfjgh lds kld dsk flkd gfkj gkljds dsflkgdf dkljf gkljds ds gkjdhsf gklsh las hliuarliu ar aru glaiu lsu hlksadh saj lsh fkjlsa lsh flk"}]}');
             $blogPost->setWriter($user);
             $blogPost->setCategory($category);
             $blogPost->setPublicationDate($date);
@@ -141,7 +141,7 @@ class TestDataFixtures extends Fixture
 
         $blogPost = new BlogPost();
         $blogPost->setTitle("talking about web");
-        $blogPost->setContent("uahslfh lasjdhf lkajhdgkl askjldhlka f ljadfasgd flasjhdfjgsjfgadfhasdf kbsdblkas gb safd jahsd kjsaf ajskdfh luuash iuhaéhgaslkghlasuh gljasdjfshfgjlsdldfg lkdsj lkaslasj glas ghlask hah");
+        $blogPost->setContent('{"pageContent":[{"Type":"h","Content":"This is a blog post"},{"Type":"p","Content":"sdf asdf sad sadjfksdjfé skd fésjlédf élsajdflésd jflk sflé sélf ls flkdhfg kjdfkjg dsfjgh lds kld dsk flkd gfkj gkljds dsflkgdf dkljf gkljds ds gkjdhsf gklsh las hliuarliu ar aru glaiu lsu hlksadh saj lsh fkjlsa lsh flk"}]}');
         $blogPost->setWriter($user);
         $blogPost->setCategory($category1);
         $blogPost->setPublicationDate($date);
@@ -150,7 +150,7 @@ class TestDataFixtures extends Fixture
 
         $blogPost = new BlogPost();
         $blogPost->setTitle("web");
-        $blogPost->setContent("asdfgasgf asdf sadf as fasgasdg adsg uahslfh lasjdhf lkajhdgkl askjldhlka f ljadfasgd flasjhdfjgsjfgadfhasdf kbsdblkas gb safd jahsd kjsaf ajskdfh luuash iuhaéhgaslkghlasuh gljasdjfshfgjlsdldfg lkdsj lkaslasj glas ghlask hah");
+        $blogPost->setContent('{"pageContent":[{"Type":"h","Content":"This is a blog post"},{"Type":"p","Content":"sdf asdf sad sadjfksdjfé skd fésjlédf élsajdflésd jflk sflé sélf ls flkdhfg kjdfkjg dsfjgh lds kld dsk flkd gfkj gkljds dsflkgdf dkljf gkljds ds gkjdhsf gklsh las hliuarliu ar aru glaiu lsu hlksadh saj lsh fkjlsa lsh flk"}]}');
         $blogPost->setWriter($user1);
         $blogPost->setCategory($category1);
         $blogPost->setPublicationDate($date);

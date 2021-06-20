@@ -4,7 +4,7 @@
             {{ blogPost.getTitle}}
         </div>
         <div class="blog-post-content">
-            {{ blogPost.getContent }}
+            {{ include('template_fragment/text_editor/_json_to_text.html.twig', {'JSON': blogPost.getContent}) }}
         </div>
         <div class="info">
             <div>Category: <a class="link" href={{ path("category_list", {name: blogPost.getCategory.getName}) }}>{{ blogPost.getCategory.getName}}</a></div>

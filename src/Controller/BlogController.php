@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\BlogPost;
 use App\Entity\Article;
+use App\Form\NewBlogPostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -68,6 +70,37 @@ class BlogController extends AbstractController
             {
                 return $this->render('blog/blog_post.html.twig', [
                     'blogPost' => $blogPost,
+                ]);
+            }
+        }
+    }
+
+    public function EditBlogPost($blogId, Request $request)
+    {
+        $blogId = filter_var($blogId, FILTER_SANITIZE_STRING);
+        if($blogId !== null && $blogId !== false)
+        {
+            $blogPost = $this->getDoctrine()->getRepository(BlogPost::class)->find($blogId);
+            
+            //creating form
+            $form = $this->createForm(NewBlogPostType::class,$blogPost);
+
+            // handling form return
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $blogPost = $form->getData();
+
+                //persist the user entity
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($blogPost);
+                $entityManager->flush();
+            }
+
+            if($blogId !== null)
+            {
+                return $this->render('blog/edit.html.twig', [
+                    'blogPost' => $blogPost,
+                    'form' => $form->createView(),
                 ]);
             }
         }
