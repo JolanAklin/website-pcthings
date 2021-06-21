@@ -23,27 +23,41 @@ class BlogPostRepository extends ServiceEntityRepository
     public function findByWriter($writer, $page)
     {
         try {
-            $writer = intval($writer);
+            $writer = filter_var($writer, FILTER_SANITIZE_NUMBER_INT);
             $page = filter_var($page, FILTER_SANITIZE_NUMBER_INT);
             $page -= 1;
             if($page !== null && $page !== false)
             {
                 $offset = $page * 10;
-                return $this->createQueryBuilder('b')
-                    ->innerJoin('App\Entity\Date', 'd')
-                    ->andWhere('b.writer = :val')
-                    ->setParameter('val', $writer)
-                    ->orderBy('d.date', 'DESC')
-                    ->setFirstResult($offset)
-                    ->setMaxResults(10)
-                    ->getQuery()
-                    ->getResult();
+                $query = $this->getEntityManager()->createQuery('SELECT b FROM App\Entity\BlogPost b
+                    JOIN b.publicationDate d
+                    JOIN b.writer u
+                    WHERE u.id = ?1
+                    ORDER BY d.date DESC');
+                $query->setParameter(1, $writer);
+                $query->setFirstResult($offset);
+                $query->setMaxResults(10);
+                return $query->getResult();
             }
         } catch (\Throwable $th) {
             die();
         }
     }
     
+    public function findBlogByDate()
+    {
+        try {
+            $query = $this->getEntityManager()->createQuery('SELECT b.title, u.username, b.id FROM App\Entity\BlogPost b
+                JOIN b.publicationDate d
+                JOIN b.writer u
+                ORDER BY d.date DESC');
+            $query->setMaxResults(5);
+            return $query->getResult();
+        } catch (\Throwable $th) {
+            die();
+        }
+    }
+
     public function findByWriterJoined($page)
     {
         try {
@@ -66,20 +80,6 @@ class BlogPostRepository extends ServiceEntityRepository
                 return $query->getResult();
                 
             }
-        } catch (\Throwable $th) {
-            die();
-        }
-    }
-
-    public function findBlogByDate()
-    {
-        try {
-            $query = $this->getEntityManager()->createQuery('SELECT b.title, u.username, b.id FROM App\Entity\BlogPost b
-                JOIN b.publicationDate d
-                JOIN b.writer u
-                ORDER BY d.date DESC');
-            $query->setMaxResults(5);
-            return $query->getResult();
         } catch (\Throwable $th) {
             die();
         }
