@@ -23,7 +23,7 @@ class BlogPost
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="json")
      */
     private $content;
 

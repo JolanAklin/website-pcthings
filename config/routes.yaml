@@ -43,7 +43,7 @@ user_blog:
         page: '\d+'
 
 user_blog_edit:
-  path: /blog-post/edit/{blogId}
+  path: /blog-post/{blogId}/edit
   controller: App\Controller\BlogController::EditBlogPost
   defaults:
     blogId: 1

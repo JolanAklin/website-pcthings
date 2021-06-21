@@ -77,10 +77,15 @@ class BlogController extends AbstractController
 
     public function EditBlogPost($blogId, Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
         $blogId = filter_var($blogId, FILTER_SANITIZE_STRING);
         if($blogId !== null && $blogId !== false)
         {
             $blogPost = $this->getDoctrine()->getRepository(BlogPost::class)->find($blogId);
+
+            if ($blogPost->getWriter() !== $this->getUser()) {
+                throw $this->createAccessDeniedException();
+            }
             
             //creating form
             $form = $this->createForm(NewBlogPostType::class,$blogPost);

@@ -10,5 +10,9 @@
             <div>Category: <a class="link" href={{ path("category_list", {name: blogPost.getCategory.getName}) }}>{{ blogPost.getCategory.getName}}</a></div>
             <div>{{ blogPost.getPublicationDate.getDate|date("d/m/Y") }}</div>
         </div>
+        {% if app.user == blogPost.getWriter %}
+            <div><a class="button-slicker inverted  m-top-30" href={{ path("user_blog_edit", {blogId: blogPost.getId}) }}>Edit</a></div>
+        {% endif %}
     </div>
+    
 </div>
