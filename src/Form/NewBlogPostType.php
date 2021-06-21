@@ -25,7 +25,7 @@ class NewBlogPostType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'The article needs a title',
+                        'message' => 'The blog post needs a title',
                     ])
                 ]
             ])
@@ -34,7 +34,7 @@ class NewBlogPostType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'The article needs content',
+                        'message' => 'The blog post needs content',
                     ])
                 ]
             ])
@@ -46,7 +46,7 @@ class NewBlogPostType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'The article needs a category',
+                        'message' => 'The blog post needs a category',
                     ])
                 ]
             ])

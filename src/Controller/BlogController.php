@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\BlogPost;
-use App\Entity\Article;
+use App\Entity\Date;
+
 use App\Form\NewBlogPostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,6 +109,46 @@ class BlogController extends AbstractController
                     'form' => $form->createView(),
                 ]);
             }
+        }
+    }
+
+    public function AddBlogPost(Request $request)
+    {
+        $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
+        
+        $blogPost = new BlogPost();
+
+        //creating form
+        $form = $this->createForm(NewBlogPostType::class,$blogPost);
+
+        // handling form return
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $blogPost = $form->getData();
+            
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $date = new Date();
+            $date->setDate(new \DateTime());
+            $entityManager->persist($date);
+            $entityManager->flush();
+
+            $blogPost->setPublicationDate($date);
+            $blogPost->setWriter($this->getUser());
+
+            //persist the user entity
+            $entityManager->persist($blogPost);
+            $entityManager->flush();
+        }
+
+        if($blogPost !== null)
+        {
+            return $this->render('blog/add.html.twig', [
+                'blogPost' => $blogPost,
+                'form' => $form->createView(),
+            ]);
+        } else {
+            throw $this->createNotFoundException('An error occured');
         }
     }
 }

@@ -58,6 +58,10 @@ user_blog_post:
     requirements: 
         blogId: '\d+'
 
+user_blog_add:
+  path: /blog-post/add
+  controller: App\Controller\BlogController::AddBlogPost
+
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------

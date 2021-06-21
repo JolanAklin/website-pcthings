@@ -72,9 +72,7 @@ class ArticleController extends AbstractController
     public function addPage(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
-
-        $entityManager = $this->getDoctrine()->getManager();
-
+        
         $page = new Article();
         
         //creating form
@@ -85,6 +83,8 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $page = $form->getData();
             
+            $entityManager = $this->getDoctrine()->getManager();
+
             $date = new Date();
             $date->setDate(new \DateTime());
             $entityManager->persist($date);
