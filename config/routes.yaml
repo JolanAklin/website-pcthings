@@ -42,6 +42,14 @@ user_blog:
     requirements: 
         page: '\d+'
 
+user_blog_edit:
+  path: /blog-post/{blogId}/edit
+  controller: App\Controller\BlogController::EditBlogPost
+  defaults:
+    blogId: 1
+  requirements: 
+    blogId: '\d+'
+
 user_blog_post:
     path: /blog-post/{blogId}
     controller: App\Controller\BlogController::ShowBlogId
@@ -49,6 +57,11 @@ user_blog_post:
         blogId: 1
     requirements: 
         blogId: '\d+'
+
+user_blog_add:
+  path: /blog-post/add
+  controller: App\Controller\BlogController::AddBlogPost
+
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------

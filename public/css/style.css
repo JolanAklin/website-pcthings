@@ -153,6 +153,9 @@ button:active:not(.control-button):not(.button-slicker), .button:active {
 	text-align: center;
 	font-family: "NotoSans";
 }
+.button-slicker.inverted {
+	background-color: var(--color);
+}
 .button-slicker:hover {
 	background-color: var(--color-accent-darker);
 	-webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.75);

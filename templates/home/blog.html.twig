@@ -20,6 +20,9 @@ Blog
 {{ include('template_fragment/_tag_filter.html.twig') }}
 
 <div class="v-container all-width">
+    {% if is_granted('ROLE_WRITER') %}
+        <a class="button-slicker" href={{ path('user_blog_add') }}>Add a blog post</a>
+    {% endif %}
     {% if blogPostLinks|length > 0 %}
         {% for blogPostLink in blogPostLinks %}
             {{ include('template_fragment/_blog.html.twig', {blogPostLink: blogPostLink}) }}
