@@ -4,6 +4,7 @@ import { Title } from "./modules/TitleElement.js";
 import { Title2 } from "./modules/Title2Element.js";
 import { Quote } from "./modules/QuoteElement.js";
 import { Code } from "./modules/CodeElement.js";
+import { Table } from "./modules/Table.js";
 
 var id = 0;
 var contentEditables = [];
@@ -11,43 +12,46 @@ var contentEditables = [];
 document.addEventListener("DOMContentLoaded", function () {
   document.execCommand("defaultParagraphSeparator", false, "div");
 
-  document.getElementById("AddParagraph").addEventListener("click", AddParagraph);
+  document
+    .getElementById("AddParagraph")
+    .addEventListener("click", AddParagraph);
   document.getElementById("AddTitle").addEventListener("click", AddTitle);
   document.getElementById("AddTitle2").addEventListener("click", AddTitle2);
   document.getElementById("AddQuote").addEventListener("click", AddQuote);
   document.getElementById("AddCode").addEventListener("click", AddCode);
-
-  document.getElementById("ValidateForm").addEventListener("click", ValidateForm);
+  document.getElementById("AddTable").addEventListener("click", AddTable);
+  document
+    .getElementById("ValidateForm")
+    .addEventListener("click", ValidateForm);
 
   // check if there is some data to read and create the corresponding elements
   var fillsWithJSON = document.getElementsByClassName("fillWithJSON");
   var readJsonFrom = fillsWithJSON[0];
-  if(readJsonFrom.value != "") {
+  if (readJsonFrom.value != "") {
     var parsedJson = JSON.parse(readJsonFrom.value);
-    parsedJson.pageContent.forEach(element => {
+    parsedJson.pageContent.forEach((element) => {
       switch (element.Type) {
         case "p":
-            AddParagraph().FromJson(element);
+          AddParagraph().FromJson(element);
           break;
         case "h":
           AddTitle().FromJson(element);
-        break;
+          break;
         case "h2":
           AddTitle2().FromJson(element);
-        break;
+          break;
         case "quote":
           AddQuote().FromJson(element);
-        break;
+          break;
         case "code":
           AddCode().FromJson(element);
-        break;
-      
+          break;
+
         default:
           break;
       }
     });
   }
-
 });
 
 function AddParagraph() {
@@ -58,14 +62,14 @@ function AddParagraph() {
 }
 
 function AddTitle() {
-  var h = new Title("edit", id, Remove, MoveElement)
+  var h = new Title("edit", id, Remove, MoveElement);
   contentEditables.push(h);
   id = id + 1;
   return h;
 }
 
 function AddTitle2() {
-  var h2 = new Title2("edit", id, Remove, MoveElement)
+  var h2 = new Title2("edit", id, Remove, MoveElement);
   contentEditables.push(h2);
   id = id + 1;
   return h2;
@@ -84,36 +88,44 @@ function AddCode() {
   id = id + 1;
   return code;
 }
+function AddTable() {
+  var table = new Table("edit", id, Remove, MoveElement);
+  id = id + 1;
+  return table;
+}
 
 function Remove(objectId) {
-  contentEditables = contentEditables.filter(x => x.id != objectId);
+  contentEditables = contentEditables.filter((x) => x.id != objectId);
 }
 
 // from https://www.geeksforgeeks.org/how-to-move-an-array-element-from-one-array-position-to-another-in-javascript/ modified
 function MoveElement(objectId, dir) {
-  var toMove = contentEditables.find(obj => obj.id == objectId);
+  var toMove = contentEditables.find((obj) => obj.id == objectId);
   var x = contentEditables.indexOf(toMove);
-    
-  if(dir > 1)
-  {
+
+  if (dir > 1) {
     dir = 1;
   }
-  if(dir < -1)
-  {
+  if (dir < -1) {
     dir = -1;
   }
   var pos = x - dir;
-  if(pos < 0 || pos > contentEditables.length-1)
-  {
+  if (pos < 0 || pos > contentEditables.length - 1) {
     return;
   }
 
-  if(dir == -1)
-    toMove.mainDiv.parentNode.insertBefore(contentEditables[pos].mainDiv, toMove.mainDiv);
-  if(dir == 1)
-    toMove.mainDiv.parentNode.insertBefore(toMove.mainDiv, contentEditables[pos].mainDiv);
+  if (dir == -1)
+    toMove.mainDiv.parentNode.insertBefore(
+      contentEditables[pos].mainDiv,
+      toMove.mainDiv
+    );
+  if (dir == 1)
+    toMove.mainDiv.parentNode.insertBefore(
+      toMove.mainDiv,
+      contentEditables[pos].mainDiv
+    );
 
-  var temp = contentEditables[x]; 
+  var temp = contentEditables[x];
   contentEditables[x] = contentEditables[pos];
   contentEditables[pos] = temp;
 }
