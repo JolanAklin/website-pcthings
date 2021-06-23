@@ -4,7 +4,7 @@ import { Title } from "./modules/TitleElement.js";
 import { Title2 } from "./modules/Title2Element.js";
 import { Quote } from "./modules/QuoteElement.js";
 import { Code } from "./modules/CodeElement.js";
-import { Table } from "./modules/Table.js";
+import { Table } from "./modules/TableElement.js";
 
 var id = 0;
 var contentEditables = [];
@@ -90,6 +90,7 @@ function AddCode() {
 }
 function AddTable() {
   var table = new Table("edit", id, Remove, MoveElement);
+  contentEditables.push(table);
   id = id + 1;
   return table;
 }
