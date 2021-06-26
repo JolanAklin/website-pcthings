@@ -8,10 +8,7 @@ export function Table(idPosition, id, destroyFunction, moveElement) {
 
   this.addPositionNode = document.getElementById(idPosition);
   this.contentDiv = document.createElement("DIV");
-  this.buttonsDiv = document.createElement("DIV");
   this.table = document.createElement("table");
-  //2d array containing data by row and after by column
-  this.currentContent = [["test"]]
   const createElement = (ev) => {
     console.log("create");
     this.mainDiv.appendChild(
@@ -22,37 +19,67 @@ export function Table(idPosition, id, destroyFunction, moveElement) {
         this.mainDiv,
         moveElement
       )
-    ); 
+    );
     this.mainDiv.className = "page-element";
     this.contentDiv.className = "page-element-input input-content";
-    this.buttonsDiv.classname= "v-container"
-    const b1 = document.createElement("button");
-    b1.textContent = "Add row";
-    const b2 = document.createElement("button");
-    b2.textContent = "Add column";
-    this.buttonsDiv.appendChild(b1);
-    this.buttonsDiv.appendChild(b2);
 
     this.table.className = "input-table";
     let tr = document.createElement("tr");
     let td = document.createElement("td");
-    td.textContent = "1";
     tr.appendChild(td);
+    td.contentEditable = true;
     this.table.appendChild(tr);
+    this.table.addEventListener("keydown", (ev) => {
+      switch (ev.key) {
+        case "Tab":
+          ev.preventDefault();
+          this.AddTD();
+          break;
+        case "Enter":
+          ev.preventDefault();
+          this.AddTR();
+          break;
+      }
+    });
 
-    this.contentDiv.appendChild(this.buttonsDiv);
     this.contentDiv.appendChild(this.table);
 
     this.mainDiv.appendChild(this.contentDiv);
-    this.addPositionNode.appendChild(this.mainDiv)
+    this.addPositionNode.appendChild(this.mainDiv);
   };
   Table.prototype.ToJson = function () {
-    let gridsNumber = this.gridsNumber.textContent;
-    return { Type: "Table", Content: content}
-  }
-  Table.prototype.FromJson = function(json) {
+    let content = [];
+    let trs = this.table.childNodes;
+    for (let tr in trs) {
+      let tds = tr.childNodes;
+    }
+    return { Type: "Table", Content: content };
+  };
+  Table.prototype.FromJson = function (json) {
     this.gridsNumber.textContent = json.Content[0].gridsNumber;
-  }
+  };
+  Table.prototype.AddTD = function () {
+    const selected = window.getSelection().focusNode.parentNode;
+    if (selected.nodeName == "TD") {
+      const td = document.createElement("TD");
+      td.contentEditable = true;
+      selected.parentNode.appendChild(td);
+      td.focus();
+    }
+  };
+  Table.prototype.AddTR = function () {
+    const selected = window.getSelection().focusNode.parentNode;
+    if (selected.nodeName == "TD") {
+      const tr = document.createElement("TR");
+
+      const td = document.createElement("TD");
+      td.contentEditable = true;
+      tr.appendChild(td);
+
+      selected.parentNode.parentNode.appendChild(tr);
+      td.focus();
+    }
+  };
   createElement();
 }
 
