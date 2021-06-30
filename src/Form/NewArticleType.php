@@ -82,7 +82,6 @@ class NewArticleType extends AbstractType
             ])
             ->add('headerImage', EntityType::class, [
                 'class' => Image::class,
-                'placeholder' => 'Choose the header image',
                 'mapped' => true,
                 'attr' => ['class' => 'input header-image-select'],
                 'required' => true,
@@ -98,7 +97,6 @@ class NewArticleType extends AbstractType
             ])
             ->add('thumbnail', EntityType::class, [
                 'class' => Image::class,
-                'placeholder' => 'Choose the thumbnail image',
                 'mapped' => true,
                 'attr' => ['class' => 'input thumbnail-image-select'],
                 'required' => true,

@@ -31,7 +31,11 @@ PCThings | {{ page.getTitle }}
 <script>
 
     function HeaderImageChanged (event) {
-        axios.post('/images/'+this.value).then(function(response) {
+        const selectValue = this.value;
+        if(selectValue == 0) {
+            return;
+        }
+        axios.post('/images/'+selectValue).then(function(response) {
             const imagelink = response.data.imageLink;
 
             var header = document.querySelector('div.background-image');
@@ -42,7 +46,11 @@ PCThings | {{ page.getTitle }}
     }
 
     function ThumbnailImageChanged(event) {
-        axios.post('/images/'+this.value).then(function(response) {
+        const selectValue = this.value;
+        if(selectValue == 0) {
+            return;
+        }
+        axios.post('/images/'+selectValue).then(function(response) {
             const imagelink = response.data.imageLink;
 
             var thumbnailDisplay = document.querySelector('img.thumbnail-display');
