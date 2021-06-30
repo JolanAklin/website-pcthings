@@ -5,8 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Article;
 use App\Entity\Date;
+use App\Entity\Image;
 use App\Form\NewArticleType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends AbstractController
 {
@@ -107,5 +109,24 @@ class ArticleController extends AbstractController
         } else {
             throw $this->createNotFoundException('An error occured');
         }
+    }
+
+    // ajax stuff
+
+    /**
+     * get the image link to show it. Used in the page-edit form
+     */
+    public function GetImageLink ($imageId) : Response
+    {
+        $imageId = filter_var($imageId, FILTER_SANITIZE_NUMBER_INT);
+        if ($imageId !== null && $imageId !== false) {
+            $image = $this->getDoctrine()->getRepository(Image::class)->findOneBy(['id' => $imageId]);
+            if($image == null)
+            {
+                return $this->json(['code' => 404, 'message' => 'not found'], 404);
+            }
+            return $this->json(['code' => 200, 'imageLink' => $image->GetPath()], 200);
+        }
+        return $this->json(['code' => 404, 'message' => 'not found'], 404);
     }
 }
