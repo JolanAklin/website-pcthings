@@ -27,7 +27,7 @@
 			<button id="menu" onclick="OpenMenu()"><img src="{{ asset("images/icons/menu.png") }}"/></button>
 		</nav>
 		<div class="background-image" style='background: linear-gradient(transparent, var(--color-lighter)), url({% block bgImage %}{% endblock %}) no-repeat center; background-size: cover; background-position: center;'>
-			<img src="{% block bgImageAff %}{% endblock %}" style="visibility: hidden;" />
+			<img class="background-image-child" src="{% block bgImageAff %}{% endblock %}" style="visibility: hidden;" />
 		</div>
 		<div class="h-container full-width wrap-reverse can-grow">
 			<div class="v-container w-xs font-medium white border h-auto p-10 m-top-30 child-p-v-5 left-container">

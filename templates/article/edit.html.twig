@@ -27,4 +27,38 @@ PCThings | {{ page.getTitle }}
 {% endblock %}
 {% block javascripts %}
 <script type="module" src="{{asset("/scripts/edit/main.js")}}"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    function HeaderImageChanged (event) {
+        axios.post('/images/'+this.value).then(function(response) {
+            const imagelink = response.data.imageLink;
+
+            var header = document.querySelector('div.background-image');
+            header.style.background = "linear-gradient(transparent, var(--color-lighter)), url("+imagelink+") no-repeat center center/cover";
+            var headerChild = header.querySelector('img.background-image-child');
+            headerChild.src = imagelink;
+        });
+    }
+
+    function ThumbnailImageChanged(event) {
+        axios.post('/images/'+this.value).then(function(response) {
+            const imagelink = response.data.imageLink;
+
+            var thumbnailDisplay = document.querySelector('img.thumbnail-display');
+            thumbnailDisplay.src = imagelink;
+        });
+    }
+
+    document.querySelectorAll('select.header-image-select').forEach(function(select) {
+        select.addEventListener('change', HeaderImageChanged);
+        select.dispatchEvent(new Event('change'));
+    });
+    
+    document.querySelectorAll('select.thumbnail-image-select').forEach(function(select) {
+        select.addEventListener('change', ThumbnailImageChanged);
+        select.dispatchEvent(new Event('change'));
+    })
+
+</script>
 {% endblock %}

@@ -130,6 +130,15 @@
     transform: rotate(180deg);
 }
 
+.thumbnail-display {
+    display: block;
+    max-width: 500px;
+    max-height: 500px;
+    height: auto;
+    width: auto;
+    margin-bottom: 10px;
+}
+
 /*
  * element specific rules
  */

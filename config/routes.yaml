@@ -80,6 +80,15 @@ page:
 edit:
   path: /pages/{pathTitle}/edit
   controller: App\Controller\ArticleController::editPage
+
+get_image_path_in_page_edit_ajax:
+  path: /images/{imageId}
+  controller: App\Controller\ArticleController::GetImageLink
+  methods: POST
+  defaults:
+    imageId: 0
+  requirements:
+    imageId: '\d+'
 #--------------------------------------------------
 # End of ArticleControllers routes
 #--------------------------------------------------
@@ -139,3 +148,5 @@ about_user:
 #--------------------------------------------------
 # End of About's routes
 #--------------------------------------------------
+
+
