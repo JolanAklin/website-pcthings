@@ -27,6 +27,13 @@ export function Code(idPosition, id, destroyFunction, moveElement) {
     this.mainDiv.appendChild(this.mainTextDiv);
 
     this.addPositionNode.appendChild(this.mainDiv);
+
+    // prevent multi line
+    this.codeTitle.addEventListener("keydown", ev => {
+      if (ev.key === "Enter") {
+          ev.preventDefault();
+      }
+    });
   };
 
   Code.prototype.ToJson = function () {
