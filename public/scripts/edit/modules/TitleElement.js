@@ -16,6 +16,13 @@ export function Title(idPosition, id, destroyFunction, moveElement) {
     this.title.className = "page-element-input input-title";
     this.mainDiv.appendChild(this.title);
     this.addPositionNode.appendChild(this.mainDiv);
+
+    // prevent multi line
+    this.title.addEventListener("keydown", ev => {
+      if (ev.key === "Enter") {
+          ev.preventDefault();
+      }
+    });
   };
 
   Title.prototype.ToJson = function () {
