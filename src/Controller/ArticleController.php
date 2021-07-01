@@ -9,6 +9,7 @@ use App\Entity\Image;
 use App\Form\NewArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ArticleController extends AbstractController
 {
@@ -33,7 +34,7 @@ class ArticleController extends AbstractController
     public function editPage($pathTitle, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
-        try {
+        //try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
                 $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
@@ -49,6 +50,9 @@ class ArticleController extends AbstractController
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
                     $page = $form->getData();
+
+                    // convert the content of every element to text for search purposes
+                    $page->setContentIndexable($this->JSONToText($page->getContent()));
 
                     //persist the user entity
                     $entityManager = $this->getDoctrine()->getManager();
@@ -66,9 +70,9 @@ class ArticleController extends AbstractController
                     throw $this->createNotFoundException('The page does not exist');
                 }
             }
-        } catch (\Throwable $th) {
-            throw $this->createNotFoundException('The page does not exist');
-        }
+        //} catch (\Throwable $th) {
+        //    throw $this->createNotFoundException('The page does not exist');
+        //}
     }
 
     public function addPage(Request $request)
@@ -95,6 +99,9 @@ class ArticleController extends AbstractController
             $page->setPublicationDate($date);
             $page->setWriter($this->getUser());
 
+            // convert the content of every element to text for search purposes
+            $page->setContentIndexable($this->JSONToText($page->getContent()));
+
             //persist the user entity
             $entityManager->persist($page);
             $entityManager->flush();
@@ -109,6 +116,21 @@ class ArticleController extends AbstractController
         } else {
             throw $this->createNotFoundException('An error occured');
         }
+    }
+
+    /**
+     * return a text that can be indexed for search purposes
+     */
+    public function JSONToText($json) : string
+    {
+        //{"pageContent":[{"Type":"p","Content":"asgasdg%0Aasdg%0Asa%0Adg%0Aas"},{"Type":"h","Content":"sdf"}]}
+
+        $text = "";
+        $json = json_decode($json, true);
+        foreach ($json["pageContent"] as $key => $value) {
+            $text .= " ".$value["Content"];
+        };
+        return urldecode($text);
     }
 
     // ajax stuff
@@ -126,6 +148,16 @@ class ArticleController extends AbstractController
                 return $this->json(['code' => 404, 'message' => 'not found'], 404);
             }
             return $this->json(['code' => 200, 'imageLink' => $image->GetPath()], 200);
+        }
+        return $this->json(['code' => 404, 'message' => 'not found'], 404);
+    }
+
+    public function SearchArticle ($searchWord) : Response
+    {
+        $articles = $this->getDoctrine()->getRepository(Article::class)->Search($searchWord);
+        if($articles !== null)
+        {
+            return $this->json(['code' => 200, 'message' => count($articles), 'articles' => json_encode($articles)], 200);
         }
         return $this->json(['code' => 404, 'message' => 'not found'], 404);
     }

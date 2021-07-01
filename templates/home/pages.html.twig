@@ -35,3 +35,17 @@ Pages
 {{ include('template_fragment/_search.html.twig') }}
 {{ include('template_fragment/_page_navigation.html.twig', {pages: nbPages, currentPage: currentPage, baseLink: baseLink}) }}
 {% endblock %}
+{% block javascripts %}
+<script>
+var searchBar = document.querySelector("div.search-bar").querySelector("input#search");
+
+searchBar.addEventListener("keydown", function(e) {
+    if(e.code == "Enter")
+    {
+        axios.post('/pages/search/'+this.value).then(function(response) {
+            console.log(response.data);
+        });
+    }
+})
+</script>
+{% endblock %}

@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\Table(indexes={@Index(name="search_index", fields={"title", "description", "contentIndexable"}, flags={"fulltext"})})
  */
 class Article
 {
@@ -66,6 +68,11 @@ class Article
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $pathTitle;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $contentIndexable;
 
     public function getId(): ?int
     {
@@ -176,6 +183,18 @@ class Article
     public function setPathTitle(string $pathTitle): self
     {
         $this->pathTitle = $pathTitle;
+
+        return $this;
+    }
+
+    public function getContentIndexable(): ?string
+    {
+        return $this->contentIndexable;
+    }
+
+    public function setContentIndexable(?string $contentIndexable): self
+    {
+        $this->contentIndexable = $contentIndexable;
 
         return $this;
     }

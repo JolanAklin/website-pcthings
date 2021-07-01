@@ -80,6 +80,25 @@ class ArticleRepository extends ServiceEntityRepository
             return null;
         }
     }
+
+    public function Search($searchValue)
+    {
+        $searchValue = filter_var($searchValue, FILTER_SANITIZE_STRING);
+        if($searchValue !== null && $searchValue !== false)
+        {
+            $conn = $this->getEntityManager()->getConnection();
+
+            $sql = 'SELECT path_title FROM article
+            WHERE MATCH(title, description, content_indexable) AGAINST(:searchValue) 
+            ORDER BY MATCH(title, description, content_indexable) AGAINST(:searchValue) DESC';
+
+            $stmt = $conn->prepare($sql);
+            $resultset = $stmt->executeQuery([':searchValue' => $searchValue]);
+
+            // returns an array of arrays (i.e. a raw data set)
+            return $stmt->fetchAllAssociative();
+        }
+    }
     
 
     // /**
