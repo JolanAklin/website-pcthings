@@ -671,6 +671,19 @@ footer {
 }
 
 /*search bar*/
+.search-results {
+	height: auto;
+	width:calc(80% - 60px);
+	background-color: #1e1f21eb;
+	z-index: 1000000;
+	position: absolute;
+	padding: 0px 10px 0px 10px;
+}
+
+.search-results p:first-child {
+	margin: 5px 0px 5px 0px;
+}
+
 .search-bar {
 	display: flex;
 	flex-direction: row;
@@ -679,6 +692,10 @@ footer {
 	margin-bottom: 10px;
 	width: 100%;
 
+}
+
+.search-bar input:focus {
+	outline: none;
 }
 
 .search-bar input:first-child {

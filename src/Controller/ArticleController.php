@@ -9,7 +9,6 @@ use App\Entity\Image;
 use App\Form\NewArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\Length;
 
 class ArticleController extends AbstractController
 {
@@ -50,9 +49,6 @@ class ArticleController extends AbstractController
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
                     $page = $form->getData();
-
-                    // convert the content of every element to text for search purposes
-                    $page->setContentIndexable($this->JSONToText($page->getContent()));
 
                     //persist the user entity
                     $entityManager = $this->getDoctrine()->getManager();
@@ -99,9 +95,6 @@ class ArticleController extends AbstractController
             $page->setPublicationDate($date);
             $page->setWriter($this->getUser());
 
-            // convert the content of every element to text for search purposes
-            $page->setContentIndexable($this->JSONToText($page->getContent()));
-
             //persist the user entity
             $entityManager->persist($page);
             $entityManager->flush();
@@ -116,21 +109,6 @@ class ArticleController extends AbstractController
         } else {
             throw $this->createNotFoundException('An error occured');
         }
-    }
-
-    /**
-     * return a text that can be indexed for search purposes
-     */
-    public function JSONToText($json) : string
-    {
-        //{"pageContent":[{"Type":"p","Content":"asgasdg%0Aasdg%0Asa%0Adg%0Aas"},{"Type":"h","Content":"sdf"}]}
-
-        $text = "";
-        $json = json_decode($json, true);
-        foreach ($json["pageContent"] as $key => $value) {
-            $text .= " ".$value["Content"];
-        };
-        return urldecode($text);
     }
 
     // ajax stuff
@@ -152,11 +130,20 @@ class ArticleController extends AbstractController
         return $this->json(['code' => 404, 'message' => 'not found'], 404);
     }
 
+    /**
+     * Search articles
+     */
     public function SearchArticle ($searchWord) : Response
     {
         $articles = $this->getDoctrine()->getRepository(Article::class)->Search($searchWord);
         if($articles !== null)
         {
+            for ($i=0; $i < count($articles); $i++) { 
+                $date = new \DateTime($articles[$i]["date"]);
+                $formatDate = $date->format('d m Y');
+                $formatDate = str_replace(" ", "/", $formatDate);
+                $articles[$i]["date"] = $formatDate;
+            }
             return $this->json(['code' => 200, 'message' => count($articles), 'articles' => json_encode($articles)], 200);
         }
         return $this->json(['code' => 404, 'message' => 'not found'], 404);

@@ -111,6 +111,7 @@ class Article
     public function setContent(string $content): self
     {
         $this->content = $content;
+        $this->setContentIndexable($this->JSONToText($content));
 
         return $this;
     }
@@ -192,7 +193,20 @@ class Article
         return $this->contentIndexable;
     }
 
-    public function setContentIndexable(?string $contentIndexable): self
+    /**
+     * return a text that can be indexed for search purposes
+     */
+    private function JSONToText($json) : string
+    {
+        $text = "";
+        $json = json_decode($json, true);
+        foreach ($json["pageContent"] as $key => $value) {
+            $text .= " ".$value["Content"];
+        };
+        return urldecode($text);
+    }
+
+    private function setContentIndexable(?string $contentIndexable): self
     {
         $this->contentIndexable = $contentIndexable;
 

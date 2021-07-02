@@ -88,9 +88,11 @@ class ArticleRepository extends ServiceEntityRepository
         {
             $conn = $this->getEntityManager()->getConnection();
 
-            $sql = 'SELECT path_title FROM article
-            WHERE MATCH(title, description, content_indexable) AGAINST(:searchValue) 
-            ORDER BY MATCH(title, description, content_indexable) AGAINST(:searchValue) DESC';
+            $sql = 'SELECT path_title, image.path, article.title, description, date.date FROM article
+            JOIN image ON thumbnail_id = image.id
+            JOIN date ON publication_date_id = date.id
+            WHERE MATCH(article.title, description, content_indexable) AGAINST(:searchValue) 
+            ORDER BY MATCH(article.title, description, content_indexable) AGAINST(:searchValue) DESC LIMIT 10';
 
             $stmt = $conn->prepare($sql);
             $resultset = $stmt->executeQuery([':searchValue' => $searchValue]);
