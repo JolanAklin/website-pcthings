@@ -33,7 +33,7 @@ class ArticleController extends AbstractController
     public function editPage($pathTitle, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
-        try {
+        //try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
                 $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
@@ -66,9 +66,9 @@ class ArticleController extends AbstractController
                     throw $this->createNotFoundException('The page does not exist');
                 }
             }
-        } catch (\Throwable $th) {
-            throw $this->createNotFoundException('The page does not exist');
-        }
+        //} catch (\Throwable $th) {
+        //    throw $this->createNotFoundException('The page does not exist');
+        //}
     }
 
     public function addPage(Request $request)
@@ -126,6 +126,25 @@ class ArticleController extends AbstractController
                 return $this->json(['code' => 404, 'message' => 'not found'], 404);
             }
             return $this->json(['code' => 200, 'imageLink' => $image->GetPath()], 200);
+        }
+        return $this->json(['code' => 404, 'message' => 'not found'], 404);
+    }
+
+    /**
+     * Search articles
+     */
+    public function SearchArticle ($searchWord) : Response
+    {
+        $articles = $this->getDoctrine()->getRepository(Article::class)->Search($searchWord);
+        if($articles !== null)
+        {
+            for ($i=0; $i < count($articles); $i++) { 
+                $date = new \DateTime($articles[$i]["date"]);
+                $formatDate = $date->format('d m Y');
+                $formatDate = str_replace(" ", "/", $formatDate);
+                $articles[$i]["date"] = $formatDate;
+            }
+            return $this->json(['code' => 200, 'message' => count($articles), 'articles' => json_encode($articles)], 200);
         }
         return $this->json(['code' => 404, 'message' => 'not found'], 404);
     }

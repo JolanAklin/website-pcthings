@@ -17,8 +17,7 @@ Pages
 
 {% block mainText %}
 {{ include('template_fragment/_search.html.twig') }}
-{{ include('template_fragment/_tag_filter.html.twig') }}
-
+<div class="search-results v-container"></div>
 <div class="v-container all-width">
     {% if is_granted('ROLE_WRITER') %}
         <a class="button-slicker" href={{ path('add_page') }}>Add article</a>
@@ -32,6 +31,79 @@ Pages
     {% endif %}
     
 </div>
-{{ include('template_fragment/_search.html.twig') }}
 {{ include('template_fragment/_page_navigation.html.twig', {pages: nbPages, currentPage: currentPage, baseLink: baseLink}) }}
+{% endblock %}
+{% block javascripts %}
+<script>
+const searchBar = document.querySelector("div.search-bar").querySelector("input#search");
+const searchResults = document.querySelector("div.search-results");
+const searchButton = document.querySelector("div.search-bar").querySelector("button");
+
+searchButton.addEventListener("click", function(e) {
+    searchBar.dispatchEvent(new KeyboardEvent('keydown',{'code':'Enter'}));
+});
+
+searchBar.addEventListener("keydown", function(e) {
+    if(e.code == "Enter")
+    {
+        if(this.value.length >= 1)
+        {
+            searchResults.innerHTML = "";
+            var p = document.createElement("P");
+            p.innerText = "Results :";
+            searchResults.appendChild(p);
+            axios.post('/pages/search/'+this.value).then(function(response) {
+                var articles = JSON.parse(response.data.articles);
+                articles.forEach(result => {
+                    searchResults.appendChild(CreateLinkElement(result.path_title, result.title, result.path, result.description, result.date));
+                });
+            });
+        }
+    }
+    if(e.code == "Backspace")
+    {
+        if(this.value.length <= 1)
+        {
+            searchResults.innerHTML = "";
+        }
+    }
+});
+
+function CreateLinkElement (url, title, imageUrl, description, date) {
+    var link = document.createElement("A");
+    link.href = "/pages/" + url;
+    link.className = "post-link";
+    
+    var mainDiv = document.createElement("DIV");
+    mainDiv.className = "post-link-content";
+
+    var image = document.createElement("IMG");
+    image.src = imageUrl;
+    mainDiv.appendChild(image);
+
+    var divTitleDesc = document.createElement("DIV");
+    var p = document.createElement("P");
+    p.innerText = title;
+    divTitleDesc.appendChild(p);
+
+    var p = document.createElement("P");
+    p.innerText = description;
+    divTitleDesc.appendChild(p);
+
+    mainDiv.appendChild(divTitleDesc);
+    var p = document.createElement("P");
+    p.innerText = date;
+    mainDiv.appendChild(p);
+
+    link.appendChild(mainDiv);
+
+    var arrowDiv = document.createElement("DIV");
+    arrowDiv.className = "arrow";
+    arrowDiv.innerText = "»";
+
+    link.appendChild(arrowDiv);
+
+    return link;
+}
+</script>
 {% endblock %}

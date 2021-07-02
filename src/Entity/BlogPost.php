@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\BlogPostRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass=BlogPostRepository::class)
+ * @ORM\Table(indexes={@Index(name="search_index_blogpost", fields={"title", "contentIndexable"}, flags={"fulltext"})})
  */
 class BlogPost
 {
@@ -45,6 +47,11 @@ class BlogPost
      */
     private $writer;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $contentIndexable;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +77,7 @@ class BlogPost
     public function setContent(string $content): self
     {
         $this->content = $content;
+        $this->setContentIndexable($this->JSONToText($content));
 
         return $this;
     }
@@ -106,6 +114,31 @@ class BlogPost
     public function setWriter(?User $writer): self
     {
         $this->writer = $writer;
+
+        return $this;
+    }
+
+    public function getContentIndexable(): ?string
+    {
+        return $this->contentIndexable;
+    }
+
+    /**
+     * return a text that can be indexed for search purposes
+     */
+    private function JSONToText($json) : string
+    {
+        $text = "";
+        $json = json_decode($json, true);
+        foreach ($json["pageContent"] as $key => $value) {
+            $text .= " ".$value["Content"];
+        };
+        return urldecode($text);
+    }
+
+    private function setContentIndexable(?string $contentIndexable): self
+    {
+        $this->contentIndexable = $contentIndexable;
 
         return $this;
     }

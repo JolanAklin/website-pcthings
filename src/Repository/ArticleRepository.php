@@ -57,14 +57,12 @@ class ArticleRepository extends ServiceEntityRepository
         if($page !== null && $page !== false)
         {
             $offset = $page * 10;
-            return $this->createQueryBuilder('a')
-                ->innerJoin('App\Entity\Date', 'd')
-                ->orderBy('d.date', 'DESC')
-                ->setFirstResult($offset)
-                ->setMaxResults(10)
-                ->getQuery()
-                ->getResult()
-            ;
+            $query = $this->getEntityManager()->createQuery('SELECT a FROM App\Entity\Article a
+                JOIN a.publicationDate d
+                ORDER BY d.date DESC');
+            $query->setFirstResult($offset);
+            $query->setMaxResults(10);
+            return $query->getResult();
         }else
         {
             return null;
@@ -78,6 +76,27 @@ class ArticleRepository extends ServiceEntityRepository
             return $query->getResult();
         } catch (\Throwable $th) {
             return null;
+        }
+    }
+
+    public function Search($searchValue)
+    {
+        $searchValue = filter_var($searchValue, FILTER_SANITIZE_STRING);
+        if($searchValue !== null && $searchValue !== false)
+        {
+            $conn = $this->getEntityManager()->getConnection();
+
+            $sql = 'SELECT path_title, image.path, article.title, description, date.date FROM article
+            JOIN image ON thumbnail_id = image.id
+            JOIN date ON publication_date_id = date.id
+            WHERE MATCH(article.title, description, content_indexable) AGAINST(:searchValue) 
+            ORDER BY MATCH(article.title, description, content_indexable) AGAINST(:searchValue) DESC LIMIT 10';
+
+            $stmt = $conn->prepare($sql);
+            $resultset = $stmt->executeQuery([':searchValue' => $searchValue]);
+
+            // returns an array of arrays (i.e. a raw data set)
+            return $stmt->fetchAllAssociative();
         }
     }
     
