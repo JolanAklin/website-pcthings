@@ -683,6 +683,9 @@ footer {
 .search-results p:first-child {
 	margin: 5px 0px 5px 0px;
 }
+.search-results .rounded {
+	border-radius: 100%;
+}
 
 .search-bar {
 	display: flex;

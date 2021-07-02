@@ -43,6 +43,27 @@ class BlogPostRepository extends ServiceEntityRepository
             die();
         }
     }
+
+    public function Search($searchValue)
+    {
+        $searchValue = filter_var($searchValue, FILTER_SANITIZE_STRING);
+        if($searchValue !== null && $searchValue !== false)
+        {
+            $conn = $this->getEntityManager()->getConnection();
+
+            $sql = 'SELECT blog_post.id, title, user.username, user.profil_pic, date.date FROM blog_post
+                JOIN user ON writer_id = user.id
+                JOIN date ON publication_date_id = date.id
+                WHERE MATCH(blog_post.title, content_indexable) AGAINST(:searchValue) 
+                ORDER BY MATCH(blog_post.title, content_indexable) AGAINST(:searchValue) DESC LIMIT 10';
+
+            $stmt = $conn->prepare($sql);
+            $resultset = $stmt->executeQuery([':searchValue' => $searchValue]);
+
+            // returns an array of arrays (i.e. a raw data set)
+            return $stmt->fetchAllAssociative();
+        }
+    }
     
     public function findBlogByDate()
     {

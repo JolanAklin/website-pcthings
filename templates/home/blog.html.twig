@@ -17,7 +17,7 @@ Blog
 
 {% block mainText %}
 {{ include('template_fragment/_search.html.twig') }}
-{{ include('template_fragment/_tag_filter.html.twig') }}
+<div class="search-results v-container"></div>
 
 <div class="v-container all-width">
     {% if is_granted('ROLE_WRITER') %}
@@ -33,6 +33,85 @@ Blog
 
     {#{{ include('template_fragment/_splitter.html.twig', {splitterText: "Yesterday"}) }}#}
 </div>
-{{ include('template_fragment/_search.html.twig') }}
 {{ include('template_fragment/_page_navigation.html.twig', {pages: nbPages, currentPage: currentPage, baseLink: baseLink}) }}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+const searchBar = document.querySelector("div.search-bar").querySelector("input#search");
+const searchResults = document.querySelector("div.search-results");
+const searchButton = document.querySelector("div.search-bar").querySelector("button");
+
+searchButton.addEventListener("click", function(e) {
+    searchBar.dispatchEvent(new KeyboardEvent('keydown',{'code':'Enter'}));
+});
+
+searchBar.addEventListener("keydown", function(e) {
+    if(e.code == "Enter")
+    {
+        if(this.value.length >= 1)
+        {
+            searchResults.innerHTML = "";
+            var p = document.createElement("P");
+            p.innerText = "Results :";
+            searchResults.appendChild(p);
+            axios.post('/blog-post/search/'+this.value).then(function(response) {
+                var articles = JSON.parse(response.data.articles);
+                console.log(articles);
+                articles.forEach(result => {
+                    searchResults.appendChild(CreateLinkElement("/blog-post/" + result.id, result.title, "images/profile_pictures/" + result.profil_pic, result.username, result.date));
+                });
+            });
+        }
+    }
+    if(e.code == "Backspace")
+    {
+        if(this.value.length <= 1)
+        {
+            searchResults.innerHTML = "";
+        }
+    }
+});
+
+function CreateLinkElement (url, title, imageUrl, description, date) {
+    var link = document.createElement("A");
+    link.href = url;
+    link.className = "post-link";
+    
+    var mainDiv = document.createElement("DIV");
+    mainDiv.className = "post-link-content";
+
+    var image = document.createElement("IMG");
+    image.src = imageUrl;
+    image.className = "rounded";
+    image.addEventListener("error", function(e) {
+        this.src='/images/icons/no_pic_user.png'
+    });
+    mainDiv.appendChild(image);
+
+    var divTitleDesc = document.createElement("DIV");
+    var p = document.createElement("P");
+    p.innerText = title;
+    divTitleDesc.appendChild(p);
+
+    var p = document.createElement("P");
+    p.innerText = description;
+    divTitleDesc.appendChild(p);
+
+    mainDiv.appendChild(divTitleDesc);
+    var p = document.createElement("P");
+    p.innerText = date;
+    mainDiv.appendChild(p);
+
+    link.appendChild(mainDiv);
+
+    var arrowDiv = document.createElement("DIV");
+    arrowDiv.className = "arrow";
+    arrowDiv.innerText = "»";
+
+    link.appendChild(arrowDiv);
+
+    return link;
+}
+</script>
 {% endblock %}

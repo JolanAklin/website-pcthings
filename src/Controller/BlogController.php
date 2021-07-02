@@ -9,6 +9,7 @@ use App\Entity\Date;
 use App\Form\NewBlogPostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -150,5 +151,21 @@ class BlogController extends AbstractController
         } else {
             throw $this->createNotFoundException('An error occured');
         }
+    }
+
+    public function Search($searchWord) : Response
+    {
+        $blog = $this->getDoctrine()->getRepository(BlogPost::class)->Search($searchWord);
+        if($blog !== null)
+        {
+            for ($i=0; $i < count($blog); $i++) { 
+                $date = new \DateTime($blog[$i]["date"]);
+                $formatDate = $date->format('d m Y');
+                $formatDate = str_replace(" ", "/", $formatDate);
+                $blog[$i]["date"] = $formatDate;
+            }
+            return $this->json(['code' => 200, 'message' => count($blog), 'articles' => json_encode($blog)], 200);
+        }
+        return $this->json(['code' => 404, 'message' => 'not found'], 404);
     }
 }

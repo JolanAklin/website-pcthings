@@ -62,6 +62,11 @@ user_blog_add:
   path: /blog-post/add
   controller: App\Controller\BlogController::AddBlogPost
 
+search_blog_ajax:
+  path: /blog-post/search/{searchWord}
+  controller: App\Controller\BlogController::Search
+  methods: POST
+
 #--------------------------------------------------
 # End of BlogController's routes
 #--------------------------------------------------

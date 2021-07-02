@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
- * @ORM\Table(indexes={@Index(name="search_index", fields={"title", "description", "contentIndexable"}, flags={"fulltext"})})
+ * @ORM\Table(indexes={@Index(name="search_index_articles", fields={"title", "description", "contentIndexable"}, flags={"fulltext"})})
  */
 class Article
 {
