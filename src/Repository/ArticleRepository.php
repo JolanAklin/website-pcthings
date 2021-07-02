@@ -57,14 +57,12 @@ class ArticleRepository extends ServiceEntityRepository
         if($page !== null && $page !== false)
         {
             $offset = $page * 10;
-            return $this->createQueryBuilder('a')
-                ->innerJoin('App\Entity\Date', 'd')
-                ->orderBy('d.date', 'DESC')
-                ->setFirstResult($offset)
-                ->setMaxResults(10)
-                ->getQuery()
-                ->getResult()
-            ;
+            $query = $this->getEntityManager()->createQuery('SELECT a FROM App\Entity\Article a
+                JOIN a.publicationDate d
+                ORDER BY d.date DESC');
+            $query->setFirstResult($offset);
+            $query->setMaxResults(10);
+            return $query->getResult();
         }else
         {
             return null;

@@ -55,10 +55,8 @@ searchBar.addEventListener("keydown", function(e) {
             axios.post('/pages/search/'+this.value).then(function(response) {
                 var articles = JSON.parse(response.data.articles);
                 articles.forEach(result => {
-                    console.log(result);
                     searchResults.appendChild(CreateLinkElement(result.path_title, result.title, result.path, result.description, result.date));
                 });
-                console.log(articles);
             });
         }
     }
