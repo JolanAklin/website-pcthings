@@ -233,6 +233,20 @@ footer {
 	padding: 0px;
 }
 
+.image {
+	display: block;
+    max-width: 600px;
+    width: 80%;
+    margin: 10px auto 10px auto;
+    height: auto;
+}
+
+.image-title {
+    font-family: "ABeeZee";
+    text-align: center;
+    font-size: 1em;
+}
+
 a {
 	font-family: "QuickSand";
 	font-size: var(--text-size);

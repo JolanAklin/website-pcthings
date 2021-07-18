@@ -146,6 +146,23 @@ class ArticleController extends AbstractController
     }
 
     /**
+     * Get the image from it's id
+     */
+    public function GetImage($imageId) : Response
+    {
+        $imageId = filter_var($imageId, FILTER_SANITIZE_NUMBER_INT);
+        if ($imageId !== null && $imageId !== false) {
+            $image = $this->getDoctrine()->getRepository(Image::class)->findOneBy(['id' => $imageId]);
+            if($image == null)
+            {
+                return $this->json(['code' => 404, 'message' => 'not found'], 404);
+            }
+            return $this->json(['code' => 200, 'image' => $image->ToJson()], 200);
+        }
+        return $this->json(['code' => 404, 'message' => 'not found'], 404);
+    }
+
+    /**
      * Search articles
      */
     public function SearchArticle ($searchWord) : Response

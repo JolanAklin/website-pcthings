@@ -216,9 +216,24 @@ class Article
         $text = "";
         $json = json_decode($json, true);
         foreach ($json["pageContent"] as $key => $value) {
-            $text .= " ".$value["Content"];
+            $text .= $this->ArrayToText($value["Content"]);
         };
         return urldecode($text);
+    }
+
+    private function ArrayToText($value) : string
+    {
+        $text = "";
+        if(is_array($value))
+        {
+            foreach ($value as $key => $value) {
+                $text .= $this->ArrayToText($value);
+            }
+        }else
+        {
+            $text .= " ".$value;
+        }
+        return $text;
     }
 
     private function setContentIndexable(?string $contentIndexable): self

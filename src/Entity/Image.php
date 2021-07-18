@@ -19,6 +19,7 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Json;
 
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
@@ -91,5 +92,15 @@ class Image
     public function __toString()
     {
         return (string) $this->getPath();
+    }
+    
+    public function ToJson() : string
+    {
+        $imagejson = [];
+        $imagejson["title"] = $this->title;
+        $imagejson["alt"] = $this->alt;
+        $imagejson["path"] = $this->path;
+
+        return json_encode($imagejson);
     }
 }

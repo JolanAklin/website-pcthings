@@ -117,6 +117,39 @@ class ImportController extends AbstractController
         ]);
     }
 
+    public function ChooseImage($page)
+    {
+        $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
+        $pagesTot = ceil($countImage[0]['count']/8);
+        if($pagesTot != 0)
+        {
+            if($page > $pagesTot || $page <= 0)
+            {
+                return $this->redirectToRoute('import_picture');
+            }
+        }else
+        {
+            if($page != 1)
+            {
+                return $this->redirectToRoute('import_picture');
+            }
+        }
+
+        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf8($page);
+        $pages = [];
+        for ($i=1; $i <= $pagesTot; $i++)
+        { 
+            array_push($pages, ['numero' => $i]);
+        }
+
+        return $this->render('import/choose_picture.html.twig', [
+            'images' => $images,
+            'pages' => $pages,
+            'currentPage' => $page,
+            'baseLink' => '/import-picture/',
+        ]);
+    }
+
     public function modifyPicture ($imageId, Request $request)
     {
         $this->denyAccessUnlessGranted("ROLE_IMPORT");

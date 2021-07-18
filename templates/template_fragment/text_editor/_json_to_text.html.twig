@@ -51,9 +51,14 @@ SOFTWARE.
         <div class="code_container">
             <div>
             <div>{{ pageElement.Content[0].Title }}</div>
-            <button>Copy</button>
+                <button>Copy</button>
             </div>
             <pre><code>{{ TwigHelper.URLDecode(pageElement.Content[1].Content) }}</code></pre>
+        </div>
+    {% elseif pageElement.Type == "img" %}
+        <div class="image_element">
+            <img class="image" src={{ pageElement.Content.src }} alt={{ pageElement.Content.alt }}>
+            <p class="image-title">{{ pageElement.Content.imageTitle }}</p>
         </div>
     {% endif %}
     

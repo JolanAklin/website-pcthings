@@ -95,6 +95,15 @@ get_image_path_in_page_edit_ajax:
   requirements:
     imageId: '\d+'
 
+get_image_ajax:
+  path: /images/get/{imageId}
+  controller: App\Controller\ArticleController::GetImage
+  methods: POST
+  defaults:
+    imageId: 0
+  requirements:
+    imageId: '\d+'
+
 search_ajax:
   path: /pages/search/{searchWord}
   controller: App\Controller\ArticleController::SearchArticle
@@ -119,6 +128,14 @@ edit_user:
 import_picture:
   path: /import-picture/{page}
   controller: App\Controller\ImportController::importPicture
+  defaults:
+    page: 1
+  requirements:
+    page: '\d+'
+
+choose_picture:
+  path: /choose-picture/{page}
+  controller: App\Controller\ImportController::ChooseImage
   defaults:
     page: 1
   requirements:

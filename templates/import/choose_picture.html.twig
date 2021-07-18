@@ -1,0 +1,51 @@
+{#
+Copyright 2021 Jolan Aklin and Yohan Zbinden
+
+This website is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+This website is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this software.  If not, see <https://www.gnu.org/licenses/>.
+#}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+		<link rel="stylesheet" href="{{ asset("/css/style.css") }}">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="icon" type="image/png" href="{{ asset("images/logos/logo_pcthings_small.png") }}" />
+    </head>
+    <body style="background-color: var(--color);">
+        <div class="image-grid">
+            <div class="image-grid-row">
+                {% for image in images %}
+                <div class="image-grid-col" onclick='SetImage("{{ image.getId }}")'>
+                    <div style="background-image: url('{{ image.getPath }}')"><img src="/images/placeholder.png"></div>
+                    <p>{{ image.getTitle }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div style="width: 90%; margin-left: auto; margin-right: auto;">
+            {{ include('template_fragment/_page_navigation.html.twig', {pages: pages, currentPage: currentPage, baseLink: baseLink}) }}
+        </div>
+        <script>
+            this.elementId = 0;
+            function SetImage(imageId) {
+                window.close();
+                window.opener.ImageCallback(imageId, elementId);
+            }
+
+            function SetElementId(id) {
+                this.elementId = id;
+            }
+        </script>
+    </body>
+</html>
+
