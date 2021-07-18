@@ -178,7 +178,7 @@ function ValidateForm() {
 window.ImageCallback = function (imageId, elementId) {
   axios.post('/images/get/'+imageId).then(function(response) {
     const jsonImage = JSON.parse(response.data.image);
-    const imageElement = contentEditables[elementId];
+    const imageElement = contentEditables.find(obj => obj.id == elementId);
     imageElement.image.src = jsonImage.path;
     imageElement.image.alt = jsonImage.alt;
     imageElement.imageId = imageId;
