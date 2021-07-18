@@ -883,6 +883,7 @@ form {
 }
 
 .alert {
+	box-sizing: border-box;
 	border-radius: 5px;
 	padding:10px;
 	margin-top: 5px;
