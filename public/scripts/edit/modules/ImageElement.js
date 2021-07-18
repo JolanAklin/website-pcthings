@@ -55,18 +55,18 @@ export function Image(idPosition, id, destroyFunction, moveElement) {
   };
 
   Image.prototype.ToJson = function () {
-    return { Type:"img", Content: this.imageId };
+    return { Type:"img", Content: { imageId: this.imageId, src: this.image.src, alt: this.image.alt, imageTitle: this.imageTitle.innerText } };
   };
 
   Image.prototype.FromJson = function (json) {
-    var imageId = json.Content;
+    var imageId = json.Content.imageId;
     var imgObject = this;
     axios.post('/images/get/'+imageId).then(function(response) {
       const jsonImage = JSON.parse(response.data.image);
       imgObject.image.src = jsonImage.path;
       imgObject.image.alt = jsonImage.alt;
       imgObject.imageId = imageId;
-      imgObject.imageTitle.innerHTML = jsonImage.title;
+      imgObject.imageTitle.innerText = jsonImage.title;
     });
   };
 

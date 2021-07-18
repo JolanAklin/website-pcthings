@@ -182,6 +182,6 @@ window.ImageCallback = function (imageId, elementId) {
     imageElement.image.src = jsonImage.path;
     imageElement.image.alt = jsonImage.alt;
     imageElement.imageId = imageId;
-    imageElement.imageTitle.innerHTML = jsonImage.title;
+    imageElement.imageTitle.innerText = jsonImage.title;
   });
 }
