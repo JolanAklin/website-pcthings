@@ -26,6 +26,7 @@ import { Title } from "./modules/TitleElement.js";
 import { Title2 } from "./modules/Title2Element.js";
 import { Quote } from "./modules/QuoteElement.js";
 import { Code } from "./modules/CodeElement.js";
+import { Image } from "./modules/ImageElement.js";
 
 var id = 0;
 var contentEditables = [];
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("AddTitle").addEventListener("click", AddTitle);
   document.getElementById("AddTitle2").addEventListener("click", AddTitle2);
   document.getElementById("AddQuote").addEventListener("click", AddQuote);
+  document.getElementById("AddImage").addEventListener("click", AddImage);
   document.getElementById("AddCode").addEventListener("click", AddCode);
 
   document.getElementById("ValidateForm").addEventListener("click", ValidateForm);
@@ -62,6 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
         break;
         case "code":
           AddCode().FromJson(element);
+        break;
+        case "img":
+          AddImage().FromJson(element);
         break;
       
         default:
@@ -91,6 +96,13 @@ function AddTitle2() {
   contentEditables.push(h2);
   id = id + 1;
   return h2;
+}
+
+function AddImage() {
+  var image = new Image("edit", id, Remove, MoveElement);
+  contentEditables.push(image);
+  id = id + 1;
+  return image;
 }
 
 function AddQuote() {
@@ -161,4 +173,15 @@ function ValidateForm() {
   var fillsWithJSON = document.getElementsByClassName("fillWithJSON");
   fillsWithJSON[0].value = ConvertToJSON();
   editForms[0].submit();
+}
+
+window.ImageCallback = function (imageId, elementId) {
+  axios.post('/images/get/'+imageId).then(function(response) {
+    const jsonImage = JSON.parse(response.data.image);
+    const imageElement = contentEditables[elementId];
+    imageElement.image.src = jsonImage.path;
+    imageElement.image.alt = jsonImage.alt;
+    imageElement.imageId = imageId;
+    imageElement.imageTitle.innerHTML = jsonImage.title;
+  });
 }

@@ -200,3 +200,17 @@ SOFTWARE.
 .page-element-input.input-quote:after {
 	content: ' "';
 }
+
+.page-element.image-element > img {
+    display: block;
+    max-width: 600px;
+    width: 80%;
+    margin: 10px auto 10px auto;
+    height: auto;
+}
+
+.image-title {
+    font-family: "ABeeZee";
+    text-align: center;
+    font-size: 1em;
+}

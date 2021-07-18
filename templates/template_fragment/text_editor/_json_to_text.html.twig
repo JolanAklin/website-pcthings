@@ -55,6 +55,8 @@ SOFTWARE.
             </div>
             <pre><code>{{ TwigHelper.URLDecode(pageElement.Content[1].Content) }}</code></pre>
         </div>
+    {% elseif pageElement.Type == "img" %}
+        
     {% endif %}
     
 {% endfor %}
