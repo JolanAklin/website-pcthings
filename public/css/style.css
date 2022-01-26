@@ -1244,6 +1244,10 @@ form {
 	.h-container-to-vertical {
 		flex-direction: column;
 	}
+	.image {
+		width: calc(100% - 20px);
+		margin: 10px;
+	}
 }
 
 @keyframes anim-target-blog-post {
