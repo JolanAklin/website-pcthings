@@ -249,7 +249,6 @@ footer {
 
 a {
 	font-family: "QuickSand";
-	font-size: var(--text-size);
 	color: white;
 	text-decoration: none;
 }
