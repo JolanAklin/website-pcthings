@@ -17,17 +17,18 @@ security:
             security: false
         main:
             lazy: true
+            provider: app_user_provider
             login_throttling:
                 max_attempts: 5
                 interval: '15 minutes'
-            provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
+
+            form_login:
+                login_path: login
+                check_path: login
+                enable_csrf: true
+
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
