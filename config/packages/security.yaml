@@ -11,12 +11,6 @@ security:
                 class: App\Entity\User
                 property: email
         # used to reload user from session & other features (e.g. switch_user)
-    password_hashers:
-        # use your user class name here
-        App\Entity\User:
-            # Use native password hasher, which auto-selects the best
-            # possible hashing algorithm (starting from Symfony 5.3 this is "bcrypt")
-            algorithm: auto
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
