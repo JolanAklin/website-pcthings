@@ -1,7 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{# ... #}
-
+{#{% extends 'base.html.twig' %}
 {% block mainText %}
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -17,8 +14,64 @@
         {# If you want to control the URL the user is redirected to on success
             <input type="hidden" name="_target_path" value="/account"/> #}
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        {#<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <button type="submit">login</button>
     </form>
+{% endblock %}#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+PCThings | Log in
+{% endblock %}
+
+{% block pageTitle %}
+Log in!
+{% endblock %}
+
+{% block bgImage %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+{% block bgImageAff %}
+{{ asset("images/page_header/home_image_header.jpg")}}
+{% endblock %}
+
+{% block mainText %}
+    {% if app.user %}
+        <div>
+            <p>You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a></p>
+        </div>
+    {% else %}
+        <h1>Please sign in</h1>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+
+        <form action="{{ path('login') }}" method="post">
+            <div class="h-container h-container-to-vertical">
+                <div class="v-container w-xl all-width-when-small-screen">
+                    <label for="username">Email:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="input" id="inputUsername" required autofocus/>
+                </div>
+                <div class="v-container w-xl all-width-when-small-screen">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" class="input" id="inputPassword" required/>
+                </div>
+            </div>
+    
+            {# If you want to control the URL the user is redirected to on success
+                <input type="hidden" name="_target_path" value="/account"/> #}
+    
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    
+            <button type="submit" class="btn btn-lg btn-primary">login</button>
+        </form>
+
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html
+        #}
+    {% endif %}
 {% endblock %}

@@ -126,7 +126,7 @@ login:
 
 edit_user:
   path: /modify-account
-  controller: App\Controller\SecurityController::editUserSelf
+  controller: App\Controller\LoginController::editUserSelf
 #--------------------------------------------------
 # End of LoginController's routes
 #--------------------------------------------------
