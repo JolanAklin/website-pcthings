@@ -1,3 +1,7 @@
+app_logout:
+  path: /logout
+  methods: GET
+
 #--------------------------------------------------
 # Start of HomeController's routes
 #--------------------------------------------------
@@ -7,7 +11,7 @@ index:
 
 pages:
     path: /pages/{page}
-    controller: App\Controller\HomeController::pages
+    controller: App\Controller\HomeController::Pages
     defaults:
         page: 1
     requirements: 
@@ -15,7 +19,7 @@ pages:
 
 blog:
     path: /blog/{page}
-    controller: App\Controller\HomeController::blog
+    controller: App\Controller\HomeController::Blog
     defaults:
         page: 1
     requirements: 
@@ -23,7 +27,7 @@ blog:
 
 contact:
   path: /contact
-  controller: App\Controller\HomeController::contact
+  controller: App\Controller\HomeController::Contact
 
 #--------------------------------------------------
 # End of HomeController's routes
@@ -113,13 +117,18 @@ search_ajax:
 #--------------------------------------------------
 
 #--------------------------------------------------
-# Start of SecurityController's routes
+# Start of LoginController's routes
 #--------------------------------------------------
+login:
+  path: /login
+  controller: App\Controller\LoginController::index
+
+
 edit_user:
   path: /modify-account
   controller: App\Controller\SecurityController::editUserSelf
 #--------------------------------------------------
-# End of SecurityController's routes
+# End of LoginController's routes
 #--------------------------------------------------
 
 #--------------------------------------------------

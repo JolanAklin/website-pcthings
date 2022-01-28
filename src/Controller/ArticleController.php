@@ -25,14 +25,16 @@ use App\Form\NewArticleType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use Doctrine\Persistence\ManagerRegistry;
+
 class ArticleController extends AbstractController
 {
-    public function showPage($pathTitle)
+    public function showPage(ManagerRegistry $doctrine, $pathTitle)
     {
         try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
-                $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
+                $page = $doctrine->getRepository(Article::class)->findOneByPathTitle($pathTitle);
                 if ($page !== null) {
                     return $this->render('article/page.html.twig', [
                         'page' => $page,
@@ -45,13 +47,14 @@ class ArticleController extends AbstractController
             throw $this->createNotFoundException('The page does not exist');
         }
     }
-    public function editPage($pathTitle, Request $request)
+
+    public function editPage(ManagerRegistry $doctrine, $pathTitle, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
         //try {
             $pathTitle = filter_var($pathTitle, FILTER_SANITIZE_STRING);
             if ($pathTitle != "" && $pathTitle !== null && $pathTitle !== false) {
-                $page = $this->getDoctrine()->getRepository(Article::class)->findOneByPathTitle($pathTitle);
+                $page = $doctrine->getRepository(Article::class)->findOneByPathTitle($pathTitle);
                 //checking if that user is the author or not
                 if ($page->getWriter() !== $this->getUser()) {
                     throw $this->createAccessDeniedException();
@@ -66,7 +69,7 @@ class ArticleController extends AbstractController
                     $page = $form->getData();
 
                     //persist the user entity
-                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager = $doctrine->getManager();
                     $entityManager->persist($page);
                     $entityManager->flush();
                 }
@@ -86,7 +89,7 @@ class ArticleController extends AbstractController
         //}
     }
 
-    public function addPage(Request $request)
+    public function addPage(ManagerRegistry $doctrine, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
         
@@ -100,7 +103,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $page = $form->getData();
             
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
 
             $date = new Date();
             $date->setDate(new \DateTime());
@@ -131,11 +134,11 @@ class ArticleController extends AbstractController
     /**
      * get the image link to show it. Used in the page-edit form
      */
-    public function GetImageLink ($imageId) : Response
+    public function GetImageLink (ManagerRegistry $doctrine, $imageId) : Response
     {
         $imageId = filter_var($imageId, FILTER_SANITIZE_NUMBER_INT);
         if ($imageId !== null && $imageId !== false) {
-            $image = $this->getDoctrine()->getRepository(Image::class)->findOneBy(['id' => $imageId]);
+            $image = $doctrine->getRepository(Image::class)->findOneBy(['id' => $imageId]);
             if($image == null)
             {
                 return $this->json(['code' => 404, 'message' => 'not found'], 404);
@@ -148,11 +151,11 @@ class ArticleController extends AbstractController
     /**
      * Get the image from it's id
      */
-    public function GetImage($imageId) : Response
+    public function GetImage(ManagerRegistry $doctrine, $imageId) : Response
     {
         $imageId = filter_var($imageId, FILTER_SANITIZE_NUMBER_INT);
         if ($imageId !== null && $imageId !== false) {
-            $image = $this->getDoctrine()->getRepository(Image::class)->findOneBy(['id' => $imageId]);
+            $image = $doctrine->getRepository(Image::class)->findOneBy(['id' => $imageId]);
             if($image == null)
             {
                 return $this->json(['code' => 404, 'message' => 'not found'], 404);
@@ -165,9 +168,9 @@ class ArticleController extends AbstractController
     /**
      * Search articles
      */
-    public function SearchArticle ($searchWord) : Response
+    public function SearchArticle (ManagerRegistry $doctrine, $searchWord) : Response
     {
-        $articles = $this->getDoctrine()->getRepository(Article::class)->Search($searchWord);
+        $articles = $doctrine->getRepository(Article::class)->Search($searchWord);
         if($articles !== null)
         {
             for ($i=0; $i < count($articles); $i++) { 

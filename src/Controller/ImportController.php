@@ -30,14 +30,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Doctrine\Persistence\ManagerRegistry;
 
 class ImportController extends AbstractController
 {
-    public function importPicture($page, Request $request)
+    public function importPicture(ManagerRegistry $doctrine, $page, Request $request)
     {
         $this->denyAccessUnlessGranted("ROLE_IMPORT");
 
-        $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
+        $countImage = $doctrine->getRepository(Image::class)->CountImages();
         $pagesTot = ceil($countImage[0]['count']/8);
         if($pagesTot != 0)
         {
@@ -54,7 +55,7 @@ class ImportController extends AbstractController
         }
 
         $image = new Image();
-        $form = $this->get('form.factory')->createNamed('ImportPicture', ImportPictureFormType::class, $image);
+        $form = $this->createForm(ImportPictureFormType::class, $image);
         $errors = [];
         $form->handleRequest($request);
         try {
@@ -80,7 +81,7 @@ class ImportController extends AbstractController
                 }
     
                 //persist the image entity
-                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager = $doctrine->getManager();
                 $entityManager->persist($image);
                 $entityManager->flush();
     
@@ -101,7 +102,7 @@ class ImportController extends AbstractController
             array_push($errors, "An error occured at the reading of the form fields");
         }
 
-        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf8($page);
+        $images = $doctrine->getRepository(Image::class)->findByGroupOf8($page);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 
@@ -117,9 +118,9 @@ class ImportController extends AbstractController
         ]);
     }
 
-    public function ChooseImage($page)
+    public function ChooseImage(ManagerRegistry $doctrine, $page)
     {
-        $countImage = $this->getDoctrine()->getRepository(Image::class)->CountImages();
+        $countImage = $doctrine->getRepository(Image::class)->CountImages();
         $pagesTot = ceil($countImage[0]['count']/8);
         if($pagesTot != 0)
         {
@@ -135,7 +136,7 @@ class ImportController extends AbstractController
             }
         }
 
-        $images = $this->getDoctrine()->getRepository(Image::class)->findByGroupOf8($page);
+        $images = $doctrine->getRepository(Image::class)->findByGroupOf8($page);
         $pages = [];
         for ($i=1; $i <= $pagesTot; $i++)
         { 
@@ -150,14 +151,14 @@ class ImportController extends AbstractController
         ]);
     }
 
-    public function modifyPicture ($imageId, Request $request)
+    public function modifyPicture (ManagerRegistry $doctrine, $imageId, Request $request)
     {
         $this->denyAccessUnlessGranted("ROLE_IMPORT");
 
-        $image = $this->getDoctrine()->getRepository(Image::class)->find($imageId);
+        $image = $doctrine->getRepository(Image::class)->find($imageId);
         if($image !== null)
         {
-            $form = $this->get('form.factory')->createNamed('ImportPicture', ModifyPictureFormType::class, $image);
+            $form = $this->createForm(ModifyPictureFormType::class, $image);
             $errors = [];
             $form->handleRequest($request);
             try {
@@ -167,7 +168,7 @@ class ImportController extends AbstractController
                     $image = $form->getData();
         
                     //persist the image entity
-                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager = $doctrine->getManager();
                     $entityManager->persist($image);
                     $entityManager->flush();
         

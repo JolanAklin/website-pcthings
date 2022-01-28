@@ -24,14 +24,16 @@ use App\Entity\BlogPost;
 use App\Entity\User;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use Doctrine\Persistence\ManagerRegistry;
+
 class About extends AbstractController
 {
-    public function AboutUser(string $username)
+    public function AboutUser(ManagerRegistry $doctrine, string $username)
     {
         $username = filter_var($username, FILTER_SANITIZE_STRING);
         if ($username != "" && $username !== null && $username !== false)
         {
-            $user = $this->getDoctrine()->getRepository(User::class)->findOneByUserName($username);
+            $user = $doctrine->getRepository(User::class)->findOneByUserName($username);
             if($user)
             {
                 return $this->render('about_user.html.twig', [
