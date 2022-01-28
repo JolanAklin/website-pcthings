@@ -17,11 +17,10 @@ along with this software.  If not, see <https://www.gnu.org/licenses/>.
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\BlogPost;
 use App\Entity\Article;
-use App\Entity\Date;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 class HomeController extends AbstractController
 {
@@ -31,9 +30,9 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function Pages($page)
+    public function Pages(ManagerRegistry $doctrine, $page)
     {
-        $countArticle = $this->getDoctrine()->getRepository(Article::class)->CountArticle();
+        $countArticle = $doctrine->getRepository(Article::class)->CountArticle();
         $pagesTot = ceil($countArticle[0]['count']/10);
         if($pagesTot != 0)
         {
@@ -54,7 +53,7 @@ class HomeController extends AbstractController
             array_push($pagesArray, ['numero' => $i]);
         }
 
-        $pages = $this->getDoctrine()->getRepository(Article::class)->findByGroupOf10($page);
+        $pages = $doctrine->getRepository(Article::class)->findByGroupOf10($page);
         return $this->render('home/pages.html.twig', [
             'pages' => $pages,
             'nbPages' => $pagesArray,
@@ -63,9 +62,9 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function Blog($page)
+    public function Blog(ManagerRegistry $doctrine, $page)
     {
-        $countBlogPost = $this->getDoctrine()->getRepository(BlogPost::class)->CountBlogPostWriter();
+        $countBlogPost = $doctrine->getRepository(BlogPost::class)->CountBlogPostWriter();
         $pagesTot = ceil($countBlogPost[0]['count']/10);
         if($pagesTot != 0)
         {
@@ -86,7 +85,7 @@ class HomeController extends AbstractController
             array_push($pagesArray, ['numero' => $i]);
         }
 
-        $blogPostLinks = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriterJoined($page);
+        $blogPostLinks = $doctrine->getRepository(BlogPost::class)->findByWriterJoined($page);
         return $this->render('home/blog.html.twig', [
             'blogPostLinks' => $blogPostLinks,
             'nbPages' => $pagesArray,

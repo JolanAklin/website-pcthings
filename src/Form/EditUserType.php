@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints\Email;
 
 class EditUserType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('displayedNickName', TextType::class, [

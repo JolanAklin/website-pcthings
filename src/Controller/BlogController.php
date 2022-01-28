@@ -28,14 +28,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use Doctrine\Persistence\ManagerRegistry;
+
 class BlogController extends AbstractController
 {
-    public function ShowBlog($username, $page)
+    public function ShowBlog(ManagerRegistry $doctrine, $username, $page)
     {
             $username = filter_var($username, FILTER_SANITIZE_STRING);
             if($username != "" && $username !== null && $username !== false)
             {
-                $countBlogPost = $this->getDoctrine()->getRepository(BlogPost::class)->CountBlogPostByUser($username);
+                $countBlogPost = $doctrine->getRepository(BlogPost::class)->CountBlogPostByUser($username);
                 $pagesTot = ceil($countBlogPost[0]['count']/10);
                 if($pagesTot != 0)
                 {
@@ -56,10 +58,10 @@ class BlogController extends AbstractController
                     array_push($pagesArray, ['numero' => $i]);
                 }
 
-                $user = $this->getDoctrine()->getRepository(User::class)->findOneByUserName($username);
+                $user = $doctrine->getRepository(User::class)->findOneByUserName($username);
                 if($user !== null)
                 {
-                    $blogPosts = $this->getDoctrine()->getRepository(BlogPost::class)->findByWriter($user->getId(), $page);
+                    $blogPosts = $doctrine->getRepository(BlogPost::class)->findByWriter($user->getId(), $page);
                     return $this->render('blog/user_blog.html.twig', [
                         'user' => $user,
                         'blogPosts' => $blogPosts,
@@ -77,12 +79,12 @@ class BlogController extends AbstractController
             }
     }
 
-    public function ShowBlogId($blogId)
+    public function ShowBlogId(ManagerRegistry $doctrine, $blogId)
     {
         $blogId = filter_var($blogId, FILTER_SANITIZE_STRING);
         if($blogId !== null && $blogId !== false)
         {
-            $blogPost = $this->getDoctrine()->getRepository(BlogPost::class)->find($blogId);
+            $blogPost = $doctrine->getRepository(BlogPost::class)->find($blogId);
             if($blogId !== null)
             {
                 return $this->render('blog/blog_post.html.twig', [
@@ -92,13 +94,13 @@ class BlogController extends AbstractController
         }
     }
 
-    public function EditBlogPost($blogId, Request $request)
+    public function EditBlogPost(ManagerRegistry $doctrine, $blogId, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
         $blogId = filter_var($blogId, FILTER_SANITIZE_STRING);
         if($blogId !== null && $blogId !== false)
         {
-            $blogPost = $this->getDoctrine()->getRepository(BlogPost::class)->find($blogId);
+            $blogPost = $doctrine->getRepository(BlogPost::class)->find($blogId);
 
             if ($blogPost->getWriter() !== $this->getUser()) {
                 throw $this->createAccessDeniedException();
@@ -113,7 +115,7 @@ class BlogController extends AbstractController
                 $blogPost = $form->getData();
 
                 //persist the user entity
-                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager = $doctrine->getManager();
                 $entityManager->persist($blogPost);
                 $entityManager->flush();
             }
@@ -128,7 +130,7 @@ class BlogController extends AbstractController
         }
     }
 
-    public function AddBlogPost(Request $request)
+    public function AddBlogPost(ManagerRegistry $doctrine, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_WRITER',null,'User tried to access a page without having the right permission');
         
@@ -142,7 +144,7 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $blogPost = $form->getData();
             
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $doctrine->getManager();
 
             $date = new Date();
             $date->setDate(new \DateTime());
@@ -168,9 +170,9 @@ class BlogController extends AbstractController
         }
     }
 
-    public function Search($searchWord) : Response
+    public function Search(ManagerRegistry $doctrine, $searchWord) : Response
     {
-        $blog = $this->getDoctrine()->getRepository(BlogPost::class)->Search($searchWord);
+        $blog = $doctrine->getRepository(BlogPost::class)->Search($searchWord);
         if($blog !== null)
         {
             for ($i=0; $i < count($blog); $i++) { 

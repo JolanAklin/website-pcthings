@@ -20,31 +20,30 @@ namespace App\Controller;
 use App\Entity\BlogPost;
 use App\Entity\Article;
 use App\Entity\Category;
-use phpDocumentor\Reflection\PseudoTypes\False_;
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+
+use Doctrine\Persistence\ManagerRegistry;
 
 class CategoryController extends AbstractController
 {
-    public function index()
+    public function index(ManagerRegistry $doctrine)
     {
         return $this->render('category/index.html.twig', [
-            'categories' => $this->getDoctrine()->getRepository(Category::class)->findall(),
+            'categories' => $doctrine->getRepository(Category::class)->findall(),
         ]);
     }
 
-    public function categoryList($name)
+    public function categoryList(ManagerRegistry $doctrine, $name)
     {
         $name = filter_var($name, FILTER_SANITIZE_STRING);
         if($name !== null && $name !== false)
         {
-            $category = $this->getDoctrine()->getRepository(Category::class)->findOneBy(['name' => $name]);
+            $category = $doctrine->getRepository(Category::class)->findOneBy(['name' => $name]);
             if($category !== null)
             {
                 return $this->render('category/list.html.twig', [
-                    'articles' => $this->getDoctrine()->getRepository(Article::class)->findBy(['category' => $category]),
-                    'blogPosts' => $this->getDoctrine()->getRepository(BlogPost::class)->findBy(['category' => $category]),
+                    'articles' => $doctrine->getRepository(Article::class)->findBy(['category' => $category]),
+                    'blogPosts' => $doctrine->getRepository(BlogPost::class)->findBy(['category' => $category]),
                     'category' => $category,
                 ]);
             }
